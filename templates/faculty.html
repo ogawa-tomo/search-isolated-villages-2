@@ -2,9 +2,22 @@
 {% block content %}
 
 
+<meta name="twitter:card" content="summary" />
+<!--<meta name="twitter:site" content="@ユーザー名" /> /*②*/-->
+<!--<meta property="og:url" content="記事のURL" /> /*③*/-->
+<meta property="og:title" content="秘境{{ faculty_ja }}探索ツール" />
+<meta property="og:description" content="秘境{{ faculty_ja }}を探索し、秘境度順にランキングで出力します。" />
+{% if faculty == "post_office" %}
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/post_office.png" />
+{% elif faculty == "elementary_school" %}
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/school.png" />
+{% endif %}
+
+<title>秘境{{ faculty_ja }}探索ツール</title>
+
 <h1>秘境{{ faculty_ja }}探索ツール</h1>
 <br>
-<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="秘境{{ faculty_ja }}探索ツール" data-hashtags="秘境{{ faculty_ja }}探索ツール" data-size="large" data-show-count="false">Tweet</a>
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="秘境{{ faculty_ja }}探索ツール" data-size="large">Tweet</a>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <br>
 秘境{{ faculty_ja }}を探索し、秘境度が高い順にランキングで出力します。<br>
