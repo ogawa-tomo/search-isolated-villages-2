@@ -115,7 +115,7 @@ input_data/
 raw_data/
 
 # output
-static/output/
+# static/output/
 
 #pyc
 *.pyc
