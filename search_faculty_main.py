@@ -22,7 +22,7 @@ def main(faculty_setting):
     faculties = extract_faculties(faculty_points, faculty_setting)
 
     # 結果
-    result = Result(faculties, faculty_setting)
+    result = Result(faculties, faculty_setting, OUTPUT_HTML_NUM)
 
     return result
 
@@ -71,7 +71,8 @@ class Result(object):
     """
     結果を記録するクラス
     """
-    def __init__(self, faculties, setting):
+    def __init__(self, faculties, setting, num):
         self.faculties = faculties
         self.setting = setting
         self.region = setting.region
+        self.num = num

@@ -32,6 +32,9 @@ DIST_PARAM = 2
 # マップ出力の最大点数
 OUTPUT_MAP_NUM = 100
 
+# 結果のページに出す集落数
+OUTPUT_HTML_NUM = 1000
+
 # 同一座標とみなす閾値
 SAME_COORDINATE_THRESHOLD = 0.0001
 
