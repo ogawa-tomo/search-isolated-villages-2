@@ -131,7 +131,7 @@
                 {% if setting %}
                     {{ setting.village_pop_lower_limit }}
                 {% else %}
-                    <input type="number" name="village_pop_lower_limit" id="village_pop_lower_limit" style="width: 4em" value="1" min="1" required>
+                    <input type="number" name="village_pop_lower_limit" id="village_pop_lower_limit" style="width: 5em" value="1" min="1" required>
                 {% endif %}
             </td>
         </tr>
@@ -141,27 +141,30 @@
                 {% if setting %}
                     {{ setting.village_pop_upper_limit }}
                 {% else %}
-                    <input type="number" name="village_pop_upper_limit" id="village_pop_upper_limit" style="width: 4em" value="10000" min="1" required>
+                    <input type="number" name="village_pop_upper_limit" id="village_pop_upper_limit" style="width: 5em" value="100000" min="1" required>
                 {% endif %}
             </td>
         </tr>
         <tr>
-            <td>集落メッシュ数下限</td>
+            <td>集落範囲下限</td>
             <td>
                 {% if setting %}
-                    {{ setting.village_size_lower_limit }}
+                    {{ setting.village_size_lower_limit }}メッシュ
                 {% else %}
-                    <input type="number" name="village_size_lower_limit" id="village_size_lower_limit" style="width: 4em" value="1" min="1" max="100" required>
+                    <input type="number" name="village_size_lower_limit" id="village_size_lower_limit" style="width: 5em" value="1" min="1" max="100" required>メッシュ
                 {% endif %}
             </td>
         </tr>
         <tr>
-            <td>集落メッシュ数上限</td>
+            <td>集落範囲上限</td>
             <td>
                 {% if setting %}
-                    {{ setting.village_size_upper_limit }}
+                    {{ setting.village_size_upper_limit }}メッシュ
                 {% else %}
-                    <input type="number" name="village_size_upper_limit" id="village_size_upper_limit" style="width: 4em" size="3" value="100" min="1" max="100" required>
+                    <input type="number" name="village_size_upper_limit" id="village_size_upper_limit" style="width: 5em" size="3" value="100" min="1" max="100" required>メッシュ
+                    <!--<font size="-1">-->
+                        <!--※最大値は100-->
+                    <!--</font>-->
                 {% endif %}
             </td>
         </tr>
@@ -171,13 +174,17 @@
                 {% if setting %}
                     {{ setting.key_words }}
                 {% else %}
-                    <input type="text" name="key_words" id="key_words" size="15" value="">
+                    <input type="text" name="key_words" id="key_words" size="25" value="">
                 {% endif %}
             </td>
         </tr>
     </table>
     {% if setting %}
     {% else %}
+        <font size="-1">
+            ※1メッシュはおよそ250m四方<br>
+            ※集落範囲上限の最大値は100
+        </font>
         <br><br>
         <button type="submit" class="btn btn-default">探索</button>
     {% endif %}
