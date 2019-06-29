@@ -52,9 +52,9 @@ def extract_faculties(faculty_points, fs):
             if f.pref != fs.region:
                 continue
 
-        # 島チェック
-        if ic.is_island(f):
-            continue
+        # 島チェック（データ生成で済）
+        # if ic.is_island(f):
+        #     continue
 
         # キーワードチェック
         if fs.key_words != "":

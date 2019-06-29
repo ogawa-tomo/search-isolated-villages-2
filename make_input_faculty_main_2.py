@@ -6,6 +6,7 @@ from library.point_dao import PopPointDAO
 from library.json_data_reader import *
 from library.faculty_dao import FacultyDAO, CorrectFacultyDAO
 from tqdm import tqdm
+from library.island_checker import IslandChecker
 
 
 def main():
@@ -96,6 +97,7 @@ class FacultyPointManager(object):
         """
 
         print("最も近い人口点とその住所を登録")
+        ic = IslandChecker(fp.island_data_file)
         for point in tqdm(self.faculty_points):
 
             min_dist = 0
@@ -121,6 +123,10 @@ class FacultyPointManager(object):
                 point.pref = nearest_pop_point.pref
                 point.city = nearest_pop_point.city
                 point.district = nearest_pop_point.district
+
+                # 島チェック
+                if ic.is_island(point):
+                    continue
 
                 # ポイントを登録（セグメントごとも含む）
                 calc_segment = RegionSetting.get_calc_segment_by_pref(point.pref)
@@ -148,6 +154,7 @@ class FacultyPointManager(object):
 
         # 各Pointごとに、一番近い小地域ポイントの住所を登録
         print("孤立点に住所登録")
+        ic = IslandChecker(fp.island_data_file)
         for point in tqdm(self.isolated_points):
 
             min_dist = 0
@@ -165,8 +172,11 @@ class FacultyPointManager(object):
             point.city = nearest_region_point.city
             point.district = nearest_region_point.district
 
-            # ポイントを人口点として登録（セグメントごとも含む）
-            # self.pop_points.append(point)
+            # 島チェック
+            if ic.is_island(point):
+                continue
+
+            # ポイントを登録（セグメントごとも含む）
             calc_segment = RegionSetting.get_calc_segment_by_pref(point.pref)
             self.faculty_points_by_calc_segment[calc_segment].append(point)
 
