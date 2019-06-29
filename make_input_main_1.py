@@ -26,10 +26,6 @@ def shp_dir_to_json_dir(shp_dir, json_dir):
     :return:
     """
 
-    # jsonディレクトリがなければ作成
-    if not os.path.isdir(json_dir):
-        os.makedirs(json_dir)
-
     # jsonディレクトリ内を削除
     json_files = glob.glob(os.path.join(json_dir, "*.txt"))
     for file in json_files:

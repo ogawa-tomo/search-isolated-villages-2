@@ -94,14 +94,6 @@ class VillagePointManager(object):
 
                 for p in self.pop_points_by_calc_segment[calc_segment]:
 
-                    # # ----集落中心の都会度（集落内メッシュも計算に含む）
-                    # # 集落中心点からの距離
-                    # dist = v.center_point.get_distance(p)
-                    # # 集落中心点だったら無視
-                    # if dist == 0:
-                    #     continue
-                    # v.urban_point += cf.calc_urban_point(p.population, dist)
-
                     # -----集落周縁からの都会度（集落内メッシュを計算に含めず、最短距離で計算）
                     if p in v.points:
                         continue

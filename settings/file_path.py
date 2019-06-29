@@ -6,7 +6,7 @@ import time
 raw_mesh_shp_dir = os.path.join("./raw_data", "mesh_shp")
 
 # 人口jsonデータ格納ディレクトリ
-raw_mesh_json_dir = os.path.join("./input_data", "mesh_json")
+raw_mesh_json_dir = os.path.join("./input_data", "population_json")
 
 # 小地域shpデータ格納ディレクトリ
 raw_region_shp_dir = os.path.join("./raw_data", "region_shp")
@@ -15,7 +15,7 @@ raw_region_shp_dir = os.path.join("./raw_data", "region_shp")
 raw_region_json_dir = os.path.join("./input_data", "region_json")
 
 # 人口データ格納ディレクトリ
-raw_pop_dir = os.path.join("./raw_data", "population")
+raw_pop_dir = os.path.join("./raw_data", "population_json")
 
 # 島データファイル
 island_data_file = os.path.join("./settings", "islands.csv")

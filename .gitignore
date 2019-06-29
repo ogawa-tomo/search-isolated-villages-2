@@ -104,18 +104,23 @@ venv.bak/
 .mypy_cache/
 
 # input_data
-input_data/
-!input_data/villages.csv
-!input_data/post_offices.csv
-!input_data/elementary_schools.csv
+input_data/*
+!input_data/population_json/.gitkeep
+!villages.csv
+!post_offices.csv
+!elementary_schools.csv
 
 .idea/
 
 # raw_data
 raw_data/
+!.gitkeep
 
 # output
 static/output/
 
-#pyc
+# pyc
 *.pyc
+
+# gitkeep
+!.gitkeep
