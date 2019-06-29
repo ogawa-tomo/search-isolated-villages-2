@@ -22,7 +22,7 @@ def main(s):
     output_map.output_map(villages, OUTPUT_MAP_NUM)
 
     # 結果
-    result = Result(villages, s, OUTPUT_HTML_NUM)
+    result = Result(villages, s, OUTPUT_HTML_NUM, map_file)
 
     return result
 
@@ -80,8 +80,9 @@ class Result(object):
     """
     結果を記録するクラス
     """
-    def __init__(self, sorted_villages, setting, num):
+    def __init__(self, sorted_villages, setting, num, map_file):
         self.sorted_villages = sorted_villages
         self.setting = setting
         self.region = setting.region
         self.num = num
+        self.map_file = map_file

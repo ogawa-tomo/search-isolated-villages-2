@@ -3,6 +3,8 @@ import settings.file_path as fp
 from settings.constants import *
 from library.island_checker import IslandChecker
 from library.setting import RegionSetting
+from library.output_map import OutputMap
+import time
 
 
 def main(faculty_setting):
@@ -21,8 +23,13 @@ def main(faculty_setting):
     # 施設を条件に従って抽出
     faculties = extract_faculties(faculty_points, faculty_setting)
 
+    # マップ出力
+    map_file = os.path.join(fp.output_dir, "map_" + str(time.time()).replace(".", "") + ".html")
+    output_map = OutputMap(map_file)
+    output_map.output_map(faculties, OUTPUT_MAP_NUM)
+
     # 結果
-    result = Result(faculties, faculty_setting, OUTPUT_HTML_NUM)
+    result = Result(faculties, faculty_setting, OUTPUT_HTML_NUM, map_file)
 
     return result
 
@@ -71,8 +78,9 @@ class Result(object):
     """
     結果を記録するクラス
     """
-    def __init__(self, faculties, setting, num):
+    def __init__(self, faculties, setting, num, map_file):
         self.faculties = faculties
         self.setting = setting
         self.region = setting.region
         self.num = num
+        self.map_file = map_file
