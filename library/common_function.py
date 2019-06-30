@@ -37,11 +37,7 @@ def calc_urban_point(pop, dist):
     :param dist:
     :return:
     """
-    try:
-        return (pop ** POP_PARAM) / (dist ** DIST_PARAM)
-    except ZeroDivisionError:
-        print("ZeroDivisionError")
-        return 0
+    return (pop ** POP_PARAM) / (dist ** DIST_PARAM)
 
 
 class TooBigVillageException(Exception):

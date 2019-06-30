@@ -25,10 +25,10 @@ class IslandChecker(object):
 
         for island in self.islands:
 
-            if island.pref == point.pref and island.city == point.city:
+            if island.pref == point.pref:
 
-                if point.district.startswith(island.district):
-                    # 地区名が島データの地区名から始まるまたは空欄なら
+                if point.city.startswith(island.city) and point.district.startswith(island.district):
+                    # 市町村名と地区名が島データの地区名から始まるまたは空欄なら
 
                     if island.latitude is None and island.longitude is None:
                         # 座標指定がなければTrue

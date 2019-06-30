@@ -65,7 +65,7 @@ class PopPointManager(object):
 
         print("メッシュ人口データ読み込み")
         # 1次メッシュ区分ごとに処理
-        i = 0
+        # i = 0
         mesh_files = glob.glob(os.path.join(raw_mesh_json_dir, "*.txt"))
         for mesh_file in tqdm(mesh_files):
 
@@ -85,8 +85,8 @@ class PopPointManager(object):
                 for d in pop_data:
                     if point.key_code == d.get_key_code():
                         point.population = d.get_population()
-                        point.id = i
-                        i += 1
+                        # point.id = i
+                        # i += 1
                         self.all_points.append(point)
                         break
 
@@ -108,6 +108,7 @@ class PopPointManager(object):
         # 各Pointごとに、一番近い小地域ポイントの住所を登録
         print("住所登録")
         ic = IslandChecker(fp.island_data_file)
+        j = 0
         for point in tqdm(self.all_points):
 
             min_dist = 0
@@ -130,6 +131,8 @@ class PopPointManager(object):
                 continue
 
             # ポイントを人口点として登録（セグメントごとも含む）
+            point.id = j  # 島でないと分かった段階でID振る
+            j += 1
             self.pop_points.append(point)
             calc_segment = RegionSetting.get_calc_segment_by_pref(point.pref)
             self.pop_points_by_calc_segment[calc_segment].append(point)
