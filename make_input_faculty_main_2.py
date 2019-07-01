@@ -36,7 +36,7 @@ def main():
     # 施設データ修正
     cf_dao = CorrectFacultyDAO(fp.correct_faculty_file)
     correct_faculty_data = cf_dao.read_data()
-    correct_faculty = CorrectFaculty(fpm.faculty_points, correct_faculty_data)
+    correct_faculty = CorrectFaculty(fpm.all_faculty_points, correct_faculty_data)
     correct_faculty.correct_faculty()
 
     # 施設データにそれが含まれる人口点データとその住所登録（なければ登録しない）
@@ -65,7 +65,8 @@ class FacultyPointManager(object):
 
         self.faculty_type = faculty_type
 
-        self.faculty_points = []
+        self.all_faculty_points = []  # 島含む
+        self.faculty_points = []  # 島含まない
         self.faculty_points_by_calc_segment = {}
         for calc_segment in RegionSetting.get_calc_segments():
             self.faculty_points_by_calc_segment[calc_segment] = []
@@ -88,7 +89,7 @@ class FacultyPointManager(object):
         :return:
         """
         fdr = JsonFacultyPointDataReader(faculty_json_file, self.faculty_type)
-        self.faculty_points = fdr.get_points()
+        self.all_faculty_points = fdr.get_points()
 
     def register_in_pop_point(self):
         """
@@ -98,7 +99,7 @@ class FacultyPointManager(object):
 
         print("最も近い人口点とその住所を登録")
         ic = IslandChecker(fp.island_data_file)
-        for point in tqdm(self.faculty_points):
+        for point in tqdm(self.all_faculty_points):
 
             min_dist = 0
             nearest_pop_point = None
@@ -129,6 +130,7 @@ class FacultyPointManager(object):
                     continue
 
                 # ポイントを登録（セグメントごとも含む）
+                self.faculty_points.append(point)
                 calc_segment = RegionSetting.get_calc_segment_by_pref(point.pref)
                 self.faculty_points_by_calc_segment[calc_segment].append(point)
 
@@ -177,6 +179,7 @@ class FacultyPointManager(object):
                 continue
 
             # ポイントを登録（セグメントごとも含む）
+            self.faculty_points.append(point)
             calc_segment = RegionSetting.get_calc_segment_by_pref(point.pref)
             self.faculty_points_by_calc_segment[calc_segment].append(point)
 

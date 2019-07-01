@@ -12,6 +12,10 @@ class OutputMap(object):
 
     def output_map(self, points, num):
 
+        # 集落なしなら表示なし
+        if len(points) == 0:
+            return
+
         # 地図の中心点
         lat_list = []
         lon_list = []
