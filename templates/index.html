@@ -131,9 +131,9 @@
             <td>集落人口下限</td>
             <td>
                 {% if setting %}
-                    {{ setting.village_pop_lower_limit }}
+                    {{ setting.village_pop_lower_limit }}人
                 {% else %}
-                    <input type="number" name="village_pop_lower_limit" id="village_pop_lower_limit" style="width: 4em" value="1" min="1" required>
+                    <input type="number" name="village_pop_lower_limit" id="village_pop_lower_limit" style="width: 4em" value="1" min="1" required>人
                 {% endif %}
             </td>
         </tr>
@@ -141,9 +141,9 @@
             <td>集落人口上限</td>
             <td>
                 {% if setting %}
-                    {{ setting.village_pop_upper_limit }}
+                    {{ setting.village_pop_upper_limit }}人
                 {% else %}
-                    <input type="number" name="village_pop_upper_limit" id="village_pop_upper_limit" style="width: 4em" value="10000" min="1" required>
+                    <input type="number" name="village_pop_upper_limit" id="village_pop_upper_limit" style="width: 4em" value="10000" min="1" required>人
                 {% endif %}
             </td>
         </tr>
@@ -188,7 +188,7 @@
             ※集落範囲上限の最大値は100
         </font>
         <br><br>
-        <button type="submit" class="btn btn-default">探索</button>
+        <button type="submit" class="btn btn-primary">探索</button>
     {% endif %}
 </form>
 <br>
@@ -206,7 +206,7 @@
             <th>地区</th>
             <th>Google Map</th>
             <th>人口</th>
-            <th>メッシュ数</th>
+            <th>範囲</th>
             <!--<th>海岸距離(km)</th>-->
             <th>都会度</th>
 
@@ -214,15 +214,15 @@
         </tr>
         {% for v in result.sorted_villages[:result.num] %}
             <tr>
-                <td>{{ loop.index }}</td>
+                <td>{{ loop.index }}<font size="-1">位</font></td>
                 <td>{{ v.pref }}</td>
                 <td>{{ v.city }}</td>
                 <td>{{ v.district }}</td>
                 <td>
                     <a href="{{ v.get_google_map_url() }}" target="_blank">{{ v.latitude_round }},{{ v.longitude_round }}</a>
                 </td>
-                <td>{{ v.population }}</td>
-                <td>{{ v.size  }}</td>
+                <td>{{ v.population }}<font size="-1">人</font></td>
+                <td>{{ v.size  }}<font size="-1">メッシュ</font></td>
                 <!--<td>{{ v.coast_distance_round }}</td>-->
                 <td>{{ v.urban_point_round }}</td>
 
@@ -251,22 +251,15 @@
         <!--&lt;!&ndash;<li>集落の中心点から最寄りの海岸線までの距離が「海岸距離下限」以上のもの</li>&ndash;&gt;-->
     <!--</ul>-->
 
-    <br>例えば下図のような地域があれば、赤丸で示す7集落が定義される。<br>
+    <br>たとえば下図のような地域があれば、赤丸で示す7集落が定義される。<br>
 
     <img src="/static/shiiba.png" width="500"><br>
 
-    <!--メッシュ人口下限の100人を超えるメッシュは赤色で示した3つであり、これらは隣接している。<br>-->
-    <!--これらのメッシュの合計人口は540人となり、集落人口下限とメッシュ数上限の制約を満たすため、これは集落として抽出される。<br>-->
     <font size="-1">
-        <!--※実際にはさらに海岸からの距離条件を検討するがここでは省略<br>-->
         ※図の四角はメッシュ、メッシュ内の数字は人口を示している。<br>
         ※メッシュが縦横だけでなく斜めに接している場合も隣接しているとみなす。<br>
         ※人口を持つメッシュが100個より多く隣接している場合は集落とみなさない。<br>
     </font>
-    <!--<br>-->
-
-    <!--パラメタを調整することにより、集落の規模を指定して抽出することができる。<br>-->
-    <!--たとえばメッシュ人口下限を大きくすれば大規模集落が、小さくすれば小規模集落や孤立した一軒家を抽出することができる。<br>-->
 
     <br>
     <h4>秘境の定義</h4>
@@ -296,7 +289,6 @@
     <br><br>
     つまり、より近くにより多くの人口があれば都会であり、その逆であれば秘境である。<br>
     <font size="-1">
-        <!--※集落外メッシュとの距離は集落の最大人口メッシュの中心点から計測する。<br>-->
         ※集落外メッシュとの距離は集落の各メッシュからの距離のうち最短のものを採用する。<br>
         ※計算セグメントを北海道・本州・四国・九州・沖縄の5つにわけ、集落の都会度はセグメント内のメッシュのみを用いて評価する。
     </font>
@@ -315,7 +307,27 @@
         <li>九州：福岡県、佐賀県、長崎県、熊本県、大分県、宮崎県、鹿児島県</li>
         <li>沖縄：沖縄県</li>
     </ul>
-    離島は除外しているが、本土と橋で繋がっている島は含んでいる。
+    本土と橋で繋がっていない離島は除外している。<br>
+    離島に関してはたとえば以下のページが参考になる。<br>
+    ・<a href="http://ritokei.com/" target="_blank">ritokei</a><br>
+    ・<a href="https://www.ritorengo.com/" target="_blank">リトレンゴ</a>
+    <br><br>
+
+    <h2>ver.1からの変更点</h2>
+    <a href="https://search-isolated-villages.herokuapp.com/" target="_blank">ver.1</a>からの主な変更点は以下の通り。
+    <ul>
+        <li>使用データを3次メッシュから5次メッシュに変更</li>
+        <li>メッシュデータの変更に伴い集落の定義を変更</li>
+        <li>探索条件からメッシュ人口を廃止し、人口の上限とメッシュ数の下限を追加</li>
+        <li>都道府県別探索機能の追加</li>
+        <li>キーワード絞り込み機能の追加</li>
+        <li>フォーム入力値チェック機能の追加</li>
+        <li>沖縄の追加</li>
+        <li>離島判定の厳格化（本土と橋で繋がっていない離島は全て対象外に）</li>
+        <li>マップ出力機能の追加</li>
+        <li>ツイートボタンの追加</li>
+        <li>ツイッターカード設定（URLツイート時の画像表示）</li>
+    </ul>
 
 {% endif %}
 

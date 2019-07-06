@@ -1,6 +1,6 @@
 import os
 
-# 集落範囲上限
+# 抽出する集落範囲上限
 VILLAGE_SIZE_UPPER_LIMIT = 150  # 5次メッシュ
 
 # 隣接判定の緯度閾値
@@ -14,8 +14,8 @@ NEIGHBOR_THRESHOLD_LAT = 0.003  # 5次メッシュ
 NEIGHBOR_THRESHOLD_LON = 0.0045  # 5次メッシュ
 
 # メッシュ内にあると判定する閾値
-IS_IN_MESH_THRESHOLD_LAT = 0.0012  # 5次メッシュ
-IS_IN_MESH_THRESHOLD_LON = 0.0018  # 5次メッシュ
+IS_IN_MESH_THRESHOLD_LAT = 0.0011  # 5次メッシュ
+IS_IN_MESH_THRESHOLD_LON = 0.0016  # 5次メッシュ
 
 # 緯度1度あたりの距離（km）
 LAT_DISTANCE = 111
