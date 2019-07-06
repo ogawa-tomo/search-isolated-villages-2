@@ -42,5 +42,9 @@ ELEMENTARY_SCHOOL = "elementary_school"
 
 POST_OFFICE = "post_office"
 
+# 離島設定
+EXCLUDE_ISLANDS = "離島を含まない"
+INCLUDE_ISLANDS = "離島を含む"
+ONLY_ISLANDS = "離島のみ"
 
 

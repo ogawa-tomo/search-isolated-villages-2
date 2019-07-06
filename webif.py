@@ -26,15 +26,16 @@ def post():
         village_pop_upper_limit = int(request.form["village_pop_upper_limit"])
         village_size_lower_limit = int(request.form["village_size_lower_limit"])
         village_size_upper_limit = int(request.form["village_size_upper_limit"])
+        island_setting = request.form["island_setting"]
         key_words = request.form["key_words"]
 
         setting = Setting(
             region,
-            # point_pop_lower_limit,
             village_pop_lower_limit,
             village_pop_upper_limit,
             village_size_lower_limit,
             village_size_upper_limit,
+            island_setting,
             key_words
         )
 

@@ -36,7 +36,6 @@ def extract_villages(villages, s):
     """
 
     extracted_villages = []
-    # ic = IslandChecker(fp.island_data_file)
     for v in villages:
 
         # 地域チェック
@@ -50,10 +49,23 @@ def extract_villages(villages, s):
             # 都道府県指定のとき
             if v.pref != s.region:
                 continue
+        else:
+            raise Exception("地域が不正です")
 
-        # 島チェック（人口点読み込み側で済）
-        # if ic.is_island(v):
-        #     continue
+        # 島チェック
+        if s.island_setting == INCLUDE_ISLANDS:
+            # どちらでも通す
+            pass
+        elif s.island_setting == EXCLUDE_ISLANDS:
+            if v.is_island:
+                # 島だったら通さない
+                continue
+        elif s.island_setting == ONLY_ISLANDS:
+            if not v.is_island:
+                # 本土だったら通さない
+                continue
+        else:
+            raise Exception("離島設定が不正です")
 
         # キーワードチェック
         if s.key_words != "":
