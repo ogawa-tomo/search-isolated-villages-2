@@ -38,9 +38,19 @@ OUTPUT_HTML_NUM = 1000
 # 同一座標とみなす閾値
 SAME_COORDINATE_THRESHOLD = 0.0001
 
+# 緯度経度を丸める数字
+LAT_LON_ROUND = 5
+
+# 都会度を丸める数字
+URBAN_POINT_ROUND = 2
+
 ELEMENTARY_SCHOOL = "elementary_school"
 
 POST_OFFICE = "post_office"
 
+# 離島設定
+EXCLUDE_ISLANDS = "離島を含まない"
+INCLUDE_ISLANDS = "離島を含む"
+ONLY_ISLANDS = "離島のみ"
 
 

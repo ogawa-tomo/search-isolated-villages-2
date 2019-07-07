@@ -16,6 +16,7 @@ class PopPointDAO(object):
             "population",
             "latitude",
             "longitude",
+            "is_island"
             # "coast",
             # "coast_distance",
             # "urban_point",
@@ -30,6 +31,7 @@ class PopPointDAO(object):
         self.pop_idx = self.columns.index("population")
         self.lat_idx = self.columns.index("latitude")
         self.lon_idx = self.columns.index("longitude")
+        self.is_island_idx = self.columns.index("is_island")
         # self.coast_idx = self.columns.index("coast")
         # self.coast_distance_idx = self.columns.index("coast_distance")
         # self.urban_point_idx = self.columns.index("urban_point")
@@ -63,6 +65,7 @@ class PopPointDAO(object):
                 row[self.pop_idx] = p.population
                 row[self.lat_idx] = p.latitude
                 row[self.lon_idx] = p.longitude
+                row[self.is_island_idx] = p.is_island
                 # row[self.coast_idx] = p.coast
                 # row[self.coast_distance_idx] = p.coast_distance
                 # row[self.urban_point_idx] = p.urban_point
@@ -85,8 +88,8 @@ class PopPointDAO(object):
                 if i == 0:
                     continue
 
-                # MeshPointを作る
-                p = MeshPoint()
+                # 人口Pointを作る
+                p = PopPoint()
 
                 p.key_code = line[self.key_idx]
                 if line[self.neighbors_idx] != "":
@@ -99,6 +102,10 @@ class PopPointDAO(object):
                 p.population = int(line[self.pop_idx])
                 p.latitude = float(line[self.lat_idx])
                 p.longitude = float(line[self.lon_idx])
+                if line[self.is_island_idx] == "True":
+                    p.is_island = True
+                else:
+                    p.is_island = False
                 # if line[self.coast_idx] == "True":
                 #     p.coast = True
                 # else:

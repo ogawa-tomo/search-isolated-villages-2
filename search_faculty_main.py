@@ -37,7 +37,6 @@ def main(faculty_setting):
 def extract_faculties(faculty_points, fs):
 
     extracted_faculties = []
-    ic = IslandChecker(fp.island_data_file)
     for f in faculty_points:
 
         # 地域チェック
@@ -52,9 +51,18 @@ def extract_faculties(faculty_points, fs):
             if f.pref != fs.region:
                 continue
 
-        # 島チェック（データ生成で済）
-        # if ic.is_island(f):
-        #     continue
+        # 島チェック
+        if fs.island_setting == INCLUDE_ISLANDS:
+            # どちらでも通す
+            pass
+        elif fs.island_setting == EXCLUDE_ISLANDS:
+            if f.is_island:
+                # 島だったら通さない
+                continue
+        elif fs.island_setting == ONLY_ISLANDS:
+            if not f.is_island:
+                # 本土だったら通さない
+                continue
 
         # キーワードチェック
         if fs.key_words != "":

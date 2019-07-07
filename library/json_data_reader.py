@@ -75,7 +75,7 @@ class JsonMeshPointDataReader(JsonPointDataReader):
             jsonデータから全ポイントデータのリストを生成
             """
 
-            p = MeshPoint()
+            p = PopPoint()
 
             data = JsonPointData(raw_data)
             # p.population = data.get_population()

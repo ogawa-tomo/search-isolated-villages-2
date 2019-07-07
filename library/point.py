@@ -10,7 +10,7 @@ class Point(object):
         self.pref = ""
         self.city = ""
         self.district = ""
-        self.len_district = 0
+        # self.len_district = 0
 
     def get_distance(self, p):
         """
@@ -32,7 +32,7 @@ class FacultyPoint(Point):
     def __init__(self):
         super().__init__()
         self.name = ""
-        self.in_mesh_point = "None"
+        self.in_mesh_point = None
         self.longitude_round = None
         self.latitude_round = None
         self.urban_point = 0
@@ -67,7 +67,7 @@ class RegionPoint(Point):
         self.len_district = len(self.district)
 
 
-class MeshPoint(Point):
+class PopPoint(Point):
     """
     人口メッシュポイントデータクラス
     """
@@ -79,9 +79,10 @@ class MeshPoint(Point):
         self.coast = False
         self.neighbors = []
         self.neighbor_ids = ""
-        self.coast_distance = 0
-        self.urban_point = 0
-        self.is_village_point = True
+        self.is_island = None
+        # self.coast_distance = 0
+        # self.urban_point = 0
+        # self.is_village_point = True
 
     def add_neighbor(self, p):
         self.neighbors.append(p)
@@ -155,6 +156,9 @@ class Village(object):
         self.urban_point = 0
         self.urban_point_round = 0  # html表示用
 
+        # 離島かどうか
+        self.is_island = None
+
     def make_village(self, mesh_points):
 
         # 人口・サイズ
@@ -171,13 +175,16 @@ class Village(object):
         self.center_point = self.get_center_point()
         self.latitude = self.center_point.latitude
         self.longitude = self.center_point.longitude
-        self.latitude_round = round(self.latitude, 4)  # html表示用
-        self.longitude_round = round(self.longitude, 4)  # html表示用
+        self.latitude_round = round(self.latitude, LAT_LON_ROUND)  # html表示用
+        self.longitude_round = round(self.longitude, LAT_LON_ROUND)  # html表示用
 
         # 住所
         self.pref = self.center_point.pref
         self.city = self.center_point.city
         self.district = self.center_point.district
+
+        # 離島かどうか
+        self.is_island = self.center_point.is_island
 
     def calc_pop(self):
         population = 0

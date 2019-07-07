@@ -171,6 +171,18 @@
             </td>
         </tr>
         <tr>
+            <td>離島の扱い</td>
+            <td>
+                {% if setting %}
+                    {{ setting.island_setting }}
+                {% else %}
+                    <label><input type="radio" name="island_setting" value="離島を含まない" checked>含まない</label>
+                    <label><input type="radio" name="island_setting" value="離島を含む">含む</label>
+                    <label><input type="radio" name="island_setting" value="離島のみ">離島のみ</label>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
             <td>キーワード絞り込み</td>
             <td>
                 {% if setting %}

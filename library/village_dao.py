@@ -15,6 +15,7 @@ class VillageDAO(object):
             "population",
             "size",
             "urban_point",
+            "is_island",
             "point_keys"
         ]
 
@@ -26,6 +27,7 @@ class VillageDAO(object):
         self.pop_idx = self.columns.index("population")
         self.size_idx = self.columns.index("size")
         self.urban_point_idx = self.columns.index("urban_point")
+        self.is_island_idx = self.columns.index("is_island")
         self.point_keys_idx = self.columns.index("point_keys")
 
     def make_village_data(self, villages):
@@ -56,6 +58,7 @@ class VillageDAO(object):
                 row[self.lon_idx] = v.longitude
                 row[self.size_idx] = v.size
                 row[self.urban_point_idx] = v.urban_point
+                row[self.is_island_idx] = v.is_island
                 row[self.point_keys_idx] = v.points
 
                 writer.writerow(row)
@@ -82,12 +85,16 @@ class VillageDAO(object):
                 v.population = int(line[self.pop_idx])
                 v.latitude = float(line[self.lat_idx])
                 v.longitude = float(line[self.lon_idx])
-                v.latitude_round = round(v.latitude, 4)
-                v.longitude_round = round(v.longitude, 4)
+                v.latitude_round = round(v.latitude, LAT_LON_ROUND)
+                v.longitude_round = round(v.longitude, LAT_LON_ROUND)
                 v.size = int(line[self.size_idx])
                 v.urban_point = float(line[self.urban_point_idx])
-                v.urban_point_round = round(v.urban_point, 4)
+                v.urban_point_round = round(v.urban_point, URBAN_POINT_ROUND)
                 v.point_keys = line[self.point_keys_idx]
+                if line[self.is_island_idx] == "True":
+                    v.is_island = True
+                else:
+                    v.is_island = False
 
                 villages.append(v)
 

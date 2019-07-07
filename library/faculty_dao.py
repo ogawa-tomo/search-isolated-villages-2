@@ -1,5 +1,6 @@
 import csv
 from library.point import FacultyPoint
+from settings.constants import *
 
 
 class FacultyDAO(object):
@@ -14,7 +15,8 @@ class FacultyDAO(object):
             "latitude",
             "longitude",
             "urban_point",
-            "in_mesh_point"
+            "in_mesh_point",
+            "is_island"
         ]
         self.name_idx = self.columns.index("name")
         self.pref_idx = self.columns.index("pref")
@@ -24,6 +26,7 @@ class FacultyDAO(object):
         self.lon_idx = self.columns.index("longitude")
         self.urban_point_idx = self.columns.index("urban_point")
         self.in_mesh_point_idx = self.columns.index("in_mesh_point")
+        self.is_island_idx = self.columns.index("is_island")
 
     def make_faculty_point_data(self, faculty_points):
         """
@@ -53,6 +56,7 @@ class FacultyDAO(object):
                 row[self.lon_idx] = p.longitude
                 row[self.urban_point_idx] = p.urban_point
                 row[self.in_mesh_point_idx] = p.in_mesh_point
+                row[self.is_island_idx] = p.is_island
 
                 writer.writerow(row)
 
@@ -80,11 +84,15 @@ class FacultyDAO(object):
                 p.latitude = float(line[self.lat_idx])
                 p.longitude = float(line[self.lon_idx])
                 p.urban_point = float(line[self.urban_point_idx])
+                if line[self.is_island_idx] == "True":
+                    p.is_island = True
+                else:
+                    p.is_island = False
 
                 # html出力用
-                p.latitude_round = round(p.latitude, 4)
-                p.longitude_round = round(p.longitude, 4)
-                p.urban_point_round = round(p.urban_point, 4)
+                p.latitude_round = round(p.latitude, LAT_LON_ROUND)
+                p.longitude_round = round(p.longitude, LAT_LON_ROUND)
+                p.urban_point_round = round(p.urban_point, URBAN_POINT_ROUND)
 
                 # リストに登録
                 faculty_points.append(p)

@@ -10,6 +10,7 @@ class Setting(object):
             village_pop_upper_limit,
             village_size_lower_limit,
             village_size_upper_limit,
+            island_setting,
             key_words,
     ):
         self.region = region
@@ -17,15 +18,8 @@ class Setting(object):
         self.village_pop_upper_limit = village_pop_upper_limit
         self.village_size_lower_limit = village_size_lower_limit
         self.village_size_upper_limit = village_size_upper_limit
+        self.island_setting = island_setting
         self.key_words = key_words
-        # self.region_kanji = RegionSetting.get_region_kanji(region)
-        self.setting = {
-            # "region_shp": self.region_kanji,
-            "village_pop_lower_limit": village_pop_lower_limit,
-            "village_pop_upper_limit": village_pop_upper_limit,
-            "village_size_lower_limit": village_size_lower_limit,
-            "village_size_upper_limit": village_size_upper_limit
-        }
 
 
 class FacultySetting(object):
@@ -33,9 +27,10 @@ class FacultySetting(object):
     施設探索の設定クラス
     """
 
-    def __init__(self, region, faculty, key_words):
+    def __init__(self, region, faculty, island_setting, key_words):
         self.region = region
         self.faculty = faculty
+        self.island_setting = island_setting
         self.key_words = key_words
 
 
