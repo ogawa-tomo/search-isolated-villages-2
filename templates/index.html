@@ -159,7 +159,13 @@
             </td>
         </tr>
         <tr>
-            <td>集落範囲上限<sup>*2</sup></td>
+            <td>
+                集落範囲上限
+                {% if setting %}
+                {% else %}
+                    <sup>*2</sup>
+                {% endif %}
+            </td>
             <td>
                 {% if setting %}
                     {{ setting.village_size_upper_limit }}メッシュ
@@ -172,7 +178,13 @@
             </td>
         </tr>
         <tr>
-            <td>離島設定<sup>*3</sup></td>
+            <td>
+                離島設定
+                {% if setting %}
+                {% else %}
+                    <sup>*3</sup>
+                {% endif %}
+            </td>
             <td>
                 {% if setting %}
                     {{ setting.island_setting }}
