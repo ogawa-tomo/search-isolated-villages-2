@@ -32,7 +32,7 @@ class FacultyPoint(Point):
     def __init__(self):
         super().__init__()
         self.name = ""
-        self.in_mesh_point = "None"
+        self.in_mesh_point = None
         self.longitude_round = None
         self.latitude_round = None
         self.urban_point = 0
@@ -175,8 +175,8 @@ class Village(object):
         self.center_point = self.get_center_point()
         self.latitude = self.center_point.latitude
         self.longitude = self.center_point.longitude
-        self.latitude_round = round(self.latitude, 4)  # html表示用
-        self.longitude_round = round(self.longitude, 4)  # html表示用
+        self.latitude_round = round(self.latitude, LAT_LON_ROUND)  # html表示用
+        self.longitude_round = round(self.longitude, LAT_LON_ROUND)  # html表示用
 
         # 住所
         self.pref = self.center_point.pref

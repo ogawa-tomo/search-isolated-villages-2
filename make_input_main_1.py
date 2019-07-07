@@ -31,7 +31,7 @@ def extract_zip(directory):
     :param directory:
     :return:
     """
-    files = glob.glob(directory + "*.zip")
+    files = glob.glob(os.path.join(directory, "*.zip"))
     for file in files:
         with zipfile.ZipFile(file, "r") as f:
             f.extractall(directory)

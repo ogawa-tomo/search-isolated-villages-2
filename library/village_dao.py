@@ -85,11 +85,11 @@ class VillageDAO(object):
                 v.population = int(line[self.pop_idx])
                 v.latitude = float(line[self.lat_idx])
                 v.longitude = float(line[self.lon_idx])
-                v.latitude_round = round(v.latitude, 4)
-                v.longitude_round = round(v.longitude, 4)
+                v.latitude_round = round(v.latitude, LAT_LON_ROUND)
+                v.longitude_round = round(v.longitude, LAT_LON_ROUND)
                 v.size = int(line[self.size_idx])
                 v.urban_point = float(line[self.urban_point_idx])
-                v.urban_point_round = round(v.urban_point, 4)
+                v.urban_point_round = round(v.urban_point, URBAN_POINT_ROUND)
                 v.point_keys = line[self.point_keys_idx]
                 if line[self.is_island_idx] == "True":
                     v.is_island = True

@@ -58,8 +58,9 @@ def index_post_office():
 def result_post_office():
     faculty = POST_OFFICE
     region = request.form["region"]
+    island_setting = request.form["island_setting"]
     key_words = request.form["key_words"]
-    fs = FacultySetting(region, faculty, key_words)
+    fs = FacultySetting(region, faculty, island_setting, key_words)
     result = search_faculty_main.main(fs)
     return render_template("faculty.html", faculty=POST_OFFICE, setting=fs, faculty_ja="郵便局", result=result)
 
@@ -73,8 +74,9 @@ def index_elementary_school():
 def result_elementary_school():
     faculty = ELEMENTARY_SCHOOL
     region = request.form["region"]
+    island_setting = request.form["island_setting"]
     key_words = request.form["key_words"]
-    fs = FacultySetting(region, faculty, key_words)
+    fs = FacultySetting(region, faculty, island_setting, key_words)
     result = search_faculty_main.main(fs)
     return render_template("faculty.html", faculty=ELEMENTARY_SCHOOL, setting=fs, faculty_ja="小学校", result=result)
 

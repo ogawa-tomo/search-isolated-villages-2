@@ -25,7 +25,7 @@ class OutputMap(object):
         lat = (min(lat_list) + max(lat_list)) / 2
         lon = (min(lon_list) + max(lon_list)) / 2
 
-        map_ = folium.Map(location=[lat, lon])
+        map_ = folium.Map(location=[lat, lon], tiles="stamenterrain")
 
         for i, p in enumerate(points[:num]):
             marker = self.get_marker(p, i + 1)
