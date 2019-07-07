@@ -25,7 +25,15 @@ class OutputMap(object):
         lat = (min(lat_list) + max(lat_list)) / 2
         lon = (min(lon_list) + max(lon_list)) / 2
 
-        map_ = folium.Map(location=[lat, lon], tiles="stamenterrain")
+        copyright_osm = '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        copyright_stamen = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>,' \
+                           ' under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. ' \
+                           'Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, ' \
+                           'under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+
+        map_ = folium.Map(location=[lat, lon], tiles="Stamen Terrain", attr=copyright_stamen)
+        map_.add_tile_layer("OpenStreetMap", attr=copyright_osm)
+        folium.LayerControl().add_to(map_)
 
         for i, p in enumerate(points[:num]):
             marker = self.get_marker(p, i + 1)
@@ -45,11 +53,17 @@ class OutputMap(object):
             raise Exception
         desc = "".join([str(rank), "位：", name])
 
-        lat_lon = ", ".join([str(p.latitude_round), str(p.longitude_round)])
-        popup = " ".join([desc, lat_lon])
+        # lat_lon = ", ".join([str(p.latitude_round), str(p.longitude_round)])
+        # popup = " ".join([desc, lat_lon])
 
         # url = p.get_google_map_url()
         # popup = " ".join([desc, url])
+
+        lat_lon = ",".join([str(p.latitude_round), str(p.longitude_round)])
+        url = p.get_google_map_url()
+        a_tag = "<a href=\"" + url + "\" target=_blank>" + lat_lon + "</a>"
+        # popup = " ".join([desc, a_tag])
+        popup = "<br>".join([desc, a_tag])
 
         marker = folium.Marker([p.latitude, p.longitude], popup=popup,
                                icon=folium.Icon(icon="home", prefix="fa"))

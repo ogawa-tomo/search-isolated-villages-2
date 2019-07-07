@@ -34,7 +34,8 @@
 {% endif %}
 <br><br>
 
-<form action="/{{ faculty }}/result" method="post">
+<!--<form action="/{{ faculty }}/result" method="post">-->
+<form action="/{{ faculty }}/result#result" method="post">
     <table class="table table-responsive">
         <tr>
             <th>探索条件</th>
@@ -116,13 +117,13 @@
             </td>
         </tr>
         <tr>
-            <td>離島の扱い</td>
+            <td>離島設定</td>
             <td>
                 {% if setting %}
                     {{ setting.island_setting }}
                 {% else %}
-                    <label><input type="radio" name="island_setting" value="離島を含まない" checked>含まない</label>
-                    <label><input type="radio" name="island_setting" value="離島を含む">含む</label>
+                    <label><input type="radio" name="island_setting" value="離島を含まない" checked>離島を含まない</label>
+                    <label><input type="radio" name="island_setting" value="離島を含む">離島を含む</label>
                     <label><input type="radio" name="island_setting" value="離島のみ">離島のみ</label>
                 {% endif %}
             </td>
@@ -146,7 +147,7 @@
 <br>
 
 {% if result %}
-<h2>探索結果</h2>
+<h2 id="result">探索結果</h2>
     <br>
         <a href="../{{ result.map_file }}" target="_blank">マップ表示（上位100件まで）</a>
     <br><br>
@@ -162,7 +163,7 @@
         </tr>
         {% for f in result.faculties[:result.num] %}
             <tr>
-                <td>{{ loop.index }}</td>
+                <td>{{ loop.index }}<font size="-1">位</font></td>
                 <td>{{ f.name }}</td>
                 <td>{{ f.pref }}</td>
                 <td>{{ f.city }}</td>

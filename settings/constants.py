@@ -44,8 +44,8 @@ LAT_LON_ROUND = 5
 # 都会度を丸める数字
 URBAN_POINT_ROUND = 2
 
+ZENKOKU = "全国"
 ELEMENTARY_SCHOOL = "elementary_school"
-
 POST_OFFICE = "post_office"
 
 # 離島設定

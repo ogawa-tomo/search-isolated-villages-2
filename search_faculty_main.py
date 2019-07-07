@@ -40,7 +40,7 @@ def extract_faculties(faculty_points, fs):
     for f in faculty_points:
 
         # 地域チェック
-        if fs.region == "全国":
+        if fs.region == ZENKOKU:
             pass
         elif RegionSetting.is_region(fs.region):
             # 地域指定のとき

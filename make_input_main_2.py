@@ -126,6 +126,8 @@ def register_neighbors(point_container):
                 if p.get_is_adjacent(tp):
                     p.add_neighbor(tp)
                     tp.add_neighbor(p)
+                    if len(p.neighbors) >= 8:
+                        break
 
 
 if __name__ == "__main__":

@@ -23,7 +23,8 @@
 <img src="/static/village.png" width="350">
 <br><br>
 
-<form action="/result" method="post">
+<!--<form action="/result" method="post">-->
+<form action="/result#result" method="post">
     <table class="table table-responsive">
         <tr>
             <th>探索条件</th>
@@ -153,17 +154,17 @@
                 {% if setting %}
                     {{ setting.village_size_lower_limit }}メッシュ
                 {% else %}
-                    <input type="number" name="village_size_lower_limit" id="village_size_lower_limit" style="width: 4em" value="1" min="1" max="100" required>メッシュ
+                    <input type="number" name="village_size_lower_limit" id="village_size_lower_limit" style="width: 4em" value="1" min="1" max="100" required>メッシュ<sup>*1</sup>
                 {% endif %}
             </td>
         </tr>
         <tr>
-            <td>集落範囲上限</td>
+            <td>集落範囲上限<sup>*2</sup></td>
             <td>
                 {% if setting %}
                     {{ setting.village_size_upper_limit }}メッシュ
                 {% else %}
-                    <input type="number" name="village_size_upper_limit" id="village_size_upper_limit" style="width: 4em" size="3" value="100" min="1" max="100" required>メッシュ
+                    <input type="number" name="village_size_upper_limit" id="village_size_upper_limit" style="width: 4em" size="3" value="100" min="1" max="100" required>メッシュ<sup>*1</sup>
                     <!--<font size="-1">-->
                         <!--※最大値は100-->
                     <!--</font>-->
@@ -171,13 +172,13 @@
             </td>
         </tr>
         <tr>
-            <td>離島の扱い</td>
+            <td>離島設定<sup>*3</sup></td>
             <td>
                 {% if setting %}
                     {{ setting.island_setting }}
                 {% else %}
-                    <label><input type="radio" name="island_setting" value="離島を含まない" checked>含まない</label>
-                    <label><input type="radio" name="island_setting" value="離島を含む">含む</label>
+                    <label><input type="radio" name="island_setting" value="離島を含まない" checked>離島を含まない</label>
+                    <label><input type="radio" name="island_setting" value="離島を含む">離島を含む</label>
                     <label><input type="radio" name="island_setting" value="離島のみ">離島のみ</label>
                 {% endif %}
             </td>
@@ -196,8 +197,9 @@
     {% if setting %}
     {% else %}
         <font size="-1">
-            ※1メッシュはおよそ250m四方<br>
-            ※集落範囲上限の最大値は100
+            *1: 1メッシュはおよそ250m四方<br>
+            *2: 集落範囲上限の最大値は100<br>
+            *3: 本土と橋で繋がっていない島を離島とする
         </font>
         <br><br>
         <button type="submit" class="btn btn-primary">探索</button>
@@ -206,7 +208,7 @@
 <br>
 
 {% if result %}
-    <h2>探索結果</h2>
+    <h2 id="result">探索結果</h2>
     <br>
     <a href="{{ result.map_file }}" target="_blank">マップ表示（上位100件まで）</a>
     <br><br>
@@ -302,7 +304,8 @@
     つまり、より近くにより多くの人口があれば都会であり、その逆であれば秘境である。<br>
     <font size="-1">
         ※集落外メッシュとの距離は集落の各メッシュからの距離のうち最短のものを採用する。<br>
-        ※計算セグメントを北海道・本州・四国・九州・沖縄の5つにわけ、集落の都会度はセグメント内のメッシュのみを用いて評価する。
+        ※計算セグメントを北海道・本州・四国・九州・沖縄の5つにわけ、集落の都会度はセグメント内のメッシュのみを用いて評価する。<br>
+        ※本土の都会度計算に離島のメッシュは含めず、離島の都会度計算には本土のメッシュを含んでいる
     </font>
     <br><br>
 
@@ -319,10 +322,10 @@
         <li>九州：福岡県、佐賀県、長崎県、熊本県、大分県、宮崎県、鹿児島県</li>
         <li>沖縄：沖縄県</li>
     </ul>
-    本土と橋で繋がっていない離島は除外している。<br>
-    離島に関してはたとえば以下のページが参考になる。<br>
-    ・<a href="http://ritokei.com/" target="_blank">ritokei</a><br>
-    ・<a href="https://www.ritorengo.com/" target="_blank">リトレンゴ</a>
+    本土を北海道・本州・四国・九州・沖縄本島とし、本土と橋で繋がっていない島を離島と定義する。
+    <!--離島に関してはたとえば以下のページが参考になる。<br>-->
+    <!--・<a href="http://ritokei.com/" target="_blank">ritokei</a><br>-->
+    <!--・<a href="https://www.ritorengo.com/" target="_blank">リトレンゴ</a>-->
     <br><br>
 
     <h2>ver.1からの変更点</h2>
@@ -330,12 +333,12 @@
     <ul>
         <li>使用データを3次メッシュから5次メッシュに変更</li>
         <li>メッシュデータの変更に伴い集落の定義を変更</li>
-        <li>探索条件からメッシュ人口を廃止し、人口の上限とメッシュ数の下限を追加</li>
+        <li>集落の定義の変更に伴い探索条件を変更</li>
         <li>都道府県別探索機能の追加</li>
+        <li>離島機能の追加</li>
         <li>キーワード絞り込み機能の追加</li>
-        <li>フォーム入力値チェック機能の追加</li>
         <li>沖縄の追加</li>
-        <li>離島判定の厳格化（本土と橋で繋がっていない離島は全て対象外に）</li>
+        <li>フォーム入力値チェック機能の追加</li>
         <li>マップ出力機能の追加</li>
         <li>ツイートボタンの追加</li>
         <li>ツイッターカード設定（URLツイート時の画像表示）</li>

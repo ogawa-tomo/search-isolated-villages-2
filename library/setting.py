@@ -1,4 +1,5 @@
 from settings.regions import *
+from settings.constants import *
 
 
 class Setting(object):
@@ -46,7 +47,7 @@ class RegionSetting(object):
 
     @classmethod
     def get_region_prefs(cls, region):
-        if region == "全国":
+        if region == ZENKOKU:
             return cls.get_all_prefs()
         else:
             return cls.region_prefs[region]

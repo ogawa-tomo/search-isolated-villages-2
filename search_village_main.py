@@ -39,7 +39,7 @@ def extract_villages(villages, s):
     for v in villages:
 
         # 地域チェック
-        if s.region == "全国":
+        if s.region == ZENKOKU:
             pass
         elif RegionSetting.is_region(s.region):
             # 地域指定のとき
