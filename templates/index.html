@@ -12,7 +12,7 @@
 
 <h1>秘境集落探索ツール（ver.2）</h1>
 <br>
-<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="秘境集落探索ツール（ver.2）" data-size="large">Tweet</a>
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-url="https://search-isolated-villages-2.herokuapp.com/" data-text="秘境集落探索ツール（ver.2）" data-size="large">Tweet</a>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <br>
 秘境集落を探索し、秘境度が高い順にランキングで出力します。<br>
@@ -208,13 +208,15 @@
     </table>
     {% if setting %}
     {% else %}
+        <!--<button type="submit" class="btn btn-primary btn-lg">探索</button>-->
+        <button type="submit" class="btn btn-primary">探索</button>
+        <br><br>
         <font size="-1">
             *1: 1メッシュはおよそ250m四方<br>
             *2: 集落範囲上限の最大値は100メッシュ<br>
             *3: 本土と橋で繋がっていない島を離島とする
         </font>
-        <br><br>
-        <button type="submit" class="btn btn-primary">探索</button>
+        <br>
     {% endif %}
 </form>
 <br>
