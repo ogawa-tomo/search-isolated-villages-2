@@ -13,6 +13,8 @@
     <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/school.png" />
 {% elif faculty == "new_town" %}
     <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/new_town.png" />
+{% elif faculty == "michinoeki" %}
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/michinoeki.png" />
 {% endif %}
 
 <title>秘境{{ faculty_ja }}探索ツール</title>
@@ -28,15 +30,23 @@
 {% if faculty == "post_office" %}
     ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>
     <img src="/static/post_office.png" width="250" style="margin-left: 30px">
 {% elif faculty == "elementary_school" %}
     ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>
     <img src="/static/school.png" width="350">
 {% elif faculty == "new_town" %}
     ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>
     <img src="/static/new_town.png" width="350">
+{% elif faculty == "michinoeki" %}
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
+    <img src="/static/michinoeki.png" width="350">
 {% endif %}
 <br><br>
 

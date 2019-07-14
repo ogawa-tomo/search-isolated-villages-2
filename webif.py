@@ -21,7 +21,6 @@ def post():
         start = time.time()
 
         region = request.form["region"]
-        # point_pop_lower_limit = int(request.form["point_pop_lower_limit"])
         village_pop_lower_limit = int(request.form["village_pop_lower_limit"])
         village_pop_upper_limit = int(request.form["village_pop_upper_limit"])
         village_size_lower_limit = int(request.form["village_size_lower_limit"])
@@ -95,6 +94,22 @@ def result_new_town():
     fs = FacultySetting(region, faculty, island_setting, key_words)
     result = search_faculty_main.main(fs)
     return render_template("faculty.html", faculty=NEW_TOWN, setting=fs, faculty_ja="ニュータウン", result=result)
+
+
+@app.route("/michinoeki")
+def index_michinoeki():
+    return render_template("faculty.html", faculty="michinoeki", faculty_ja="道の駅")
+
+
+@app.route("/michinoeki/result", methods=["GET", "POST"])
+def result_michinoeki():
+    faculty = MICHINOEKI
+    region = request.form["region"]
+    island_setting = request.form["island_setting"]
+    key_words = request.form["key_words"]
+    fs = FacultySetting(region, faculty, island_setting, key_words)
+    result = search_faculty_main.main(fs)
+    return render_template("faculty.html", faculty=MICHINOEKI, setting=fs, faculty_ja="道の駅", result=result)
 
 
 if __name__ == "__main__":

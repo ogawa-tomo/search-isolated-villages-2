@@ -53,6 +53,15 @@ new_town_json_file = os.path.join("./input_data", "new_towns_json.txt")
 # ニュータウンcsvデータファイル
 new_town_file = os.path.join("./input_data", "new_towns.csv")
 
+# 道の駅生データファイル
+michinoeki_shp_dir = os.path.join("./raw_data", "michinoeki_shp")
+
+# 道の駅jsonデータファイル
+michinoeki_json_file = os.path.join("./input_data", "michinoeki_json.txt")
+
+# 道の駅csvデータファイル
+michinoeki_file = os.path.join("./input_data", "michinoeki.csv")
+
 # 施設修正データファイル
 correct_faculty_file = os.path.join("./settings", "correct_faculty.csv")
 

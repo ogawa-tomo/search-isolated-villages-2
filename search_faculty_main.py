@@ -15,6 +15,8 @@ def main(faculty_setting):
         input_file = fp.post_office_file
     elif faculty_setting.faculty == NEW_TOWN:
         input_file = fp.new_town_file
+    elif faculty_setting.faculty == MICHINOEKI:
+        input_file = fp.michinoeki_file
     else:
         raise Exception("施設タイプ名が不正です")
 
