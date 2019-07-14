@@ -4,6 +4,7 @@ from tqdm import tqdm
 from library.point import *
 from library import common_function as cf
 from settings.constants import *
+from abc import ABCMeta, abstractmethod
 
 
 class JsonPointDataReader(object):
@@ -69,8 +70,8 @@ class JsonMeshPointDataReader(JsonPointDataReader):
         :return:
         """
 
-        # print("人口点の読み込み中")
-        for raw_data in self.raw_data_set:
+        print("人口点の読み込み中")
+        for raw_data in tqdm(self.raw_data_set):
             """
             jsonデータから全ポイントデータのリストを生成
             """
@@ -96,17 +97,20 @@ class JsonFacultyPointDataReader(JsonPointDataReader):
     geojson形式の施設点データを読み込むクラス
     """
 
-    def __init__(self, file, faculty_type):
+    # def __init__(self, file, faculty_type):
+    def __init__(self, file, data_class):
         super().__init__(file)
         self.points = []
-        self.faculty_type = faculty_type
+        # self.faculty_type = faculty_type
 
-        if self.faculty_type == ELEMENTARY_SCHOOL:
-            self.data_class = JsonElementarySchoolData
-        elif self.faculty_type == POST_OFFICE:
-            self.data_class = JsonPostOfficeData
-        else:
-            raise Exception("施設タイプ名が不正です")
+        self.data_class = data_class
+
+        # if self.faculty_type == ELEMENTARY_SCHOOL:
+        #     self.data_class = JsonElementarySchoolData
+        # elif self.faculty_type == POST_OFFICE:
+        #     self.data_class = JsonPostOfficeData
+        # else:
+        #     raise Exception("施設タイプ名が不正です")
 
         self.read_points()
 
@@ -116,35 +120,22 @@ class JsonFacultyPointDataReader(JsonPointDataReader):
         :return:
         """
 
-        # print("人口点の読み込み中")
-        for raw_data in self.raw_data_set:
+        print("施設点の読み込み中")
+        for raw_data in tqdm(self.raw_data_set):
             """
             jsonデータから全ポイントデータのリストを生成
             """
 
             p = FacultyPoint()
 
-            # if self.faculty_type == "school":
-            #     data = JsonSchoolData(raw_data)
-            # elif self.faculty_type == "post_office":
-            #     data = JsonPostOfficeData(raw_data)
-            # else:
-            #     raise Exception("施設タイプ名が不正です")
-
             try:
                 data = self.data_class(raw_data)
             except NotTargetFacultyException:
                 continue
-            # if self.faculty_type == "school":
-            #     if not data.get_is_elementary_school():
-            #         continue
 
-            # p.key_code = data.get_key_code()
             p.name = data.get_name()
             p.latitude = data.get_latitude()
             p.longitude = data.get_longitude()
-            # p.first_mesh_code = self.first_mesh_code
-            # p.coast = data.get_coast()
 
             self.points.append(p)
 
@@ -198,14 +189,21 @@ class JsonRegionPointData(JsonPointData):
             return data
 
 
-class JsonPostOfficeData(JsonPointData):
+class JsonFacultyData(JsonPointData, metaclass=ABCMeta):
+
+    @abstractmethod
+    def get_name(self):
+        pass
+
+
+class JsonPostOfficeData(JsonFacultyData):
 
     def get_name(self):
         name = self.data["properties"]["P30_005"]
         return name
 
 
-class JsonElementarySchoolData(JsonPointData):
+class JsonElementarySchoolData(JsonFacultyData):
 
     def __init__(self, data):
         super().__init__(data)
@@ -217,12 +215,17 @@ class JsonElementarySchoolData(JsonPointData):
         name = self.data["properties"]["P29_005"]
         return name
 
-    # def get_is_elementary_school(self):
-    #     school_type = self.data["properties"]["P29_004"]
-    #     if school_type == "16001":
-    #         return True
-    #     else:
-    #         return False
+
+class JsonNewTownData(JsonFacultyData):
+
+    def get_name(self):
+
+        name = self.data["properties"]["P26_005"]
+        if name is None:
+            name = self.data["properties"]["P26_006"]
+            if name is None:
+                name = self.data["properties"]["P26_004"]
+        return name
 
 
 class NotTargetFacultyException(Exception):

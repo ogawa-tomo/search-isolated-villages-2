@@ -109,6 +109,7 @@ input_data/
 !villages.csv
 !post_offices.csv
 !elementary_schools.csv
+!new_towns.csv
 
 .idea/
 

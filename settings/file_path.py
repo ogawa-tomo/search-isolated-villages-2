@@ -27,7 +27,7 @@ pop_point_file = os.path.join("./input_data", "pop_points.csv")
 villages_file = os.path.join("./input_data", "villages.csv")
 
 # 学校生データファイル
-elementary_schools_shp_file = os.path.join("./raw_data", "elementary_school_shp", "P29-13.shp")
+elementary_schools_shp_dir = os.path.join("./raw_data", "elementary_school_shp")
 
 # 学校jsonデータファイル
 elementary_schools_json_file = os.path.join("./input_data", "elementary_schools_json.txt")
@@ -36,13 +36,22 @@ elementary_schools_json_file = os.path.join("./input_data", "elementary_schools_
 elementary_schools_file = os.path.join("./input_data", "elementary_schools.csv")
 
 # 郵便局生データファイル
-post_office_shp_file = os.path.join("./raw_data", "post_office_shp", "P30-13.shp")
+post_office_shp_dir = os.path.join("./raw_data", "post_office_shp")
 
 # 郵便局jsonデータファイル
 post_office_json_file = os.path.join("./input_data", "post_offices_json.txt")
 
 # 郵便局csvデータファイル
 post_office_file = os.path.join("./input_data", "post_offices.csv")
+
+# ニュータウン生データファイル
+new_town_shp_dir = os.path.join("./raw_data", "new_town_shp")
+
+# ニュータウンjsonデータファイル
+new_town_json_file = os.path.join("./input_data", "new_towns_json.txt")
+
+# ニュータウンcsvデータファイル
+new_town_file = os.path.join("./input_data", "new_towns.csv")
 
 # 施設修正データファイル
 correct_faculty_file = os.path.join("./settings", "correct_faculty.csv")

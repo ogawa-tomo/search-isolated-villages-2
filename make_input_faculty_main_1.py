@@ -1,28 +1,35 @@
-import glob
-import geopandas as gpd
-import os
-from tqdm import tqdm
 import settings.file_path as fp
 import sys
-import make_input_main_1
 from settings.constants import *
+import library.shp_functions as sf
 
 
 def main():
 
-    print("shpデータをjsonに変換")
-
     faculty_type = sys.argv[1]
     if faculty_type == ELEMENTARY_SCHOOL:
-        input_file = fp.elementary_schools_shp_file
+        input_dir = fp.elementary_schools_shp_dir
         output_file = fp.elementary_schools_json_file
     elif faculty_type == POST_OFFICE:
-        input_file = fp.post_office_shp_file
+        input_dir = fp.post_office_shp_dir
         output_file = fp.post_office_json_file
+    elif faculty_type == NEW_TOWN:
+        input_dir = fp.new_town_shp_dir
+        output_file = fp.new_town_json_file
     else:
         raise Exception("施設タイプ名が不正です")
 
-    json_data = make_input_main_1.convert_polygon_shp_to_point_json(input_file)
+    print("zipファイルを展開")
+    sf.extract_zip(input_dir)
+
+    print("フォルダ内のファイルを展開")
+    sf.extract_files(input_dir)
+
+    print("shpファイルを結合")
+    merged_data = sf.merge_shp(input_dir)
+
+    print("jsonに変換して吐き出し")
+    json_data = merged_data.to_json()
     with open(output_file, "w", encoding="utf8") as f:
         f.write(json_data)
 

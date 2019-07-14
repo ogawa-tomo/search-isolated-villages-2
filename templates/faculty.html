@@ -11,6 +11,8 @@
     <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/post_office.png" />
 {% elif faculty == "elementary_school" %}
     <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/school.png" />
+{% elif faculty == "new_town" %}
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/new_town.png" />
 {% endif %}
 
 <title>秘境{{ faculty_ja }}探索ツール</title>
@@ -24,13 +26,17 @@
 <!--秘境集落探索ツール→<a href="https://search-isolated-villages-2.herokuapp.com/" target="_blank">https://search-isolated-villages-2.herokuapp.com/</a><br>-->
 ・<a href="https://search-isolated-villages-2.herokuapp.com/" target="_blank">秘境集落探索ツール</a><br>
 {% if faculty == "post_office" %}
-    <!--秘境小学校探索ツール→<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">https://search-isolated-villages-2.herokuapp.com/elementary_school</a><br>-->
     ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
     <img src="/static/post_office.png" width="250" style="margin-left: 30px">
 {% elif faculty == "elementary_school" %}
-    <!--秘境郵便局探索ツール→<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">https://search-isolated-villages-2.herokuapp.com/post_office</a><br>-->
     ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
     <img src="/static/school.png" width="350">
+{% elif faculty == "new_town" %}
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>
+    <img src="/static/new_town.png" width="350">
 {% endif %}
 <br><br>
 
@@ -154,10 +160,10 @@
     <table class="table table-responsive">
         <tr>
             <th>順位</th>
-            <th>{{ faculty_ja }}名</th>
+            <th width="250">{{ faculty_ja }}名</th>
             <th>都道府県</th>
             <th>市町村</th>
-            <th>地区</th>
+            <th width="200">地区</th>
             <th>Google Map</th>
             <th>都会度</th>
         </tr>

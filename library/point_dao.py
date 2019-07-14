@@ -1,5 +1,6 @@
 import csv
 from library.point import *
+from tqdm import tqdm
 
 
 class PopPointDAO(object):
@@ -80,10 +81,11 @@ class PopPointDAO(object):
         """
 
         pop_points = []
+        print("人口点を読み込み中")
 
         with open(self.path, "r", encoding="utf8") as f:
             reader = csv.reader(f)
-            for i, line in enumerate(reader):
+            for i, line in tqdm(enumerate(reader)):
 
                 if i == 0:
                     continue
@@ -106,16 +108,6 @@ class PopPointDAO(object):
                     p.is_island = True
                 else:
                     p.is_island = False
-                # if line[self.coast_idx] == "True":
-                #     p.coast = True
-                # else:
-                #     p.coast = False
-                # p.coast_distance = float(line[self.coast_distance_idx])
-                # p.urban_point = float(line[self.urban_point_idx])
-                # if line[self.is_village_point_idx] == "True":
-                #     p.is_village_point = True
-                # else:
-                #     p.is_village_point = False
 
                 # リストに登録
                 pop_points.append(p)

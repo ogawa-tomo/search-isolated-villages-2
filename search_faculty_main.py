@@ -13,6 +13,8 @@ def main(faculty_setting):
         input_file = fp.elementary_schools_file
     elif faculty_setting.faculty == POST_OFFICE:
         input_file = fp.post_office_file
+    elif faculty_setting.faculty == NEW_TOWN:
+        input_file = fp.new_town_file
     else:
         raise Exception("施設タイプ名が不正です")
 

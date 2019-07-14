@@ -20,10 +20,16 @@ def main():
     faculty_type = sys.argv[1]
     if faculty_type == ELEMENTARY_SCHOOL:
         input_file = fp.elementary_schools_json_file
+        data_class = JsonElementarySchoolData
         output_file = fp.elementary_schools_file
     elif faculty_type == POST_OFFICE:
         input_file = fp.post_office_json_file
+        data_class = JsonPostOfficeData
         output_file = fp.post_office_file
+    elif faculty_type == NEW_TOWN:
+        input_file = fp.new_town_json_file
+        data_class = JsonNewTownData
+        output_file = fp.new_town_file
     else:
         raise Exception("施設タイプ名が不正です")
 
@@ -36,7 +42,7 @@ def main():
     # fpm.read_faculty_data(input_file)
 
     # 施設データ読み込み
-    faculty_points = read_faculty_data(input_file, faculty_type)
+    faculty_points = read_faculty_data(input_file, data_class)
 
     # 施設データ修正
     cf_dao = CorrectFacultyDAO(fp.correct_faculty_file)
