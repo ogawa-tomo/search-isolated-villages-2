@@ -32,7 +32,7 @@ class OutputMap(object):
                            'under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
 
         map_ = folium.Map(location=[lat, lon], tiles="Stamen Terrain", attr=copyright_stamen)
-        map_.add_tile_layer("OpenStreetMap", attr=copyright_osm)
+        # map_.add_tile_layer("OpenStreetMap", attr=copyright_osm)
         folium.LayerControl().add_to(map_)
 
         for i, p in enumerate(points[:num]):
