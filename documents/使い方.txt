@@ -1,17 +1,29 @@
 〇施設データの用意
 ・小学校データの用意
 	1．国土数値情報ダウンロードサービスhttp://nlftp.mlit.go.jp/ksj/より、学校を選択
-	2．全て選択してダウンロード
-	3．ダウンロードしたファイルを解凍し、raw_data/elementary_school_shpディレクトリに格納
+	2．全国を選択してダウンロード
+	3．ダウンロードしたファイルをraw_data/elementary_school_shpディレクトリに格納
 ・郵便局データの用意
 	1．国土数値情報ダウンロードサービスhttp://nlftp.mlit.go.jp/ksj/より、郵便局を選択
-	2．全て選択してダウンロード
-	3．ダウンロードしたファイルを解凍し、raw_data/post_office_shpディレクトリに格納
+	2．全国を選択してダウンロード
+	3．ダウンロードしたファイルをraw_data/post_office_shpディレクトリに格納
+・ニュータウンデータの用意
+	1．国土数値情報ダウンロードサービスhttp://nlftp.mlit.go.jp/ksj/より、ニュータウンを選択
+	2．全国を選択してダウンロード
+	3．ダウンロードしたファイルをraw_data/new_town_shpディレクトリに格納
+・道の駅データの用意
+	1．国土数値情報ダウンロードサービスhttp://nlftp.mlit.go.jp/ksj/より、道の駅を選択
+	2．全国を選択してダウンロード
+	3．ダウンロードしたファイルをraw_data/michinoeki_shpディレクトリに格納
+・駅データの用意
+	1．国土数値情報ダウンロードサービスhttp://nlftp.mlit.go.jp/ksj/より、鉄道を選択
+	2．全国を選択してダウンロード
+	3．ダウンロードしたファイルをraw_data/station_shpディレクトリに格納
+※人口データ・メッシュ境界データ・小地域データは自動ダウンロード
 
 〇データ生成
 make_input.batを実行する
 	4,5時間くらいかかる
-make_input_faculty.batを実行する
 ※pypy実行環境が必要
 inputディレクトリ下にcsvファイルが生成されていればOK
 	これはgitに登録しておく
