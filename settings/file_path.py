@@ -62,6 +62,15 @@ michinoeki_json_file = os.path.join("./input_data", "michinoeki_json.txt")
 # 道の駅csvデータファイル
 michinoeki_file = os.path.join("./input_data", "michinoeki.csv")
 
+# 駅生データファイル
+station_shp_dir = os.path.join("./raw_data", "station_shp")
+
+# 駅jsonデータファイル
+station_json_file = os.path.join("./input_data", "station_json.txt")
+
+# 駅csvデータファイル
+station_file = os.path.join("./input_data", "station.csv")
+
 # 施設修正データファイル
 correct_faculty_file = os.path.join("./settings", "correct_faculty.csv")
 

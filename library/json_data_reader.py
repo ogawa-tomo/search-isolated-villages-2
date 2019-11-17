@@ -70,8 +70,8 @@ class JsonMeshPointDataReader(JsonPointDataReader):
         :return:
         """
 
-        print("人口点の読み込み中")
-        for raw_data in tqdm(self.raw_data_set):
+        # print("人口点の読み込み中")
+        for raw_data in self.raw_data_set:
             """
             jsonデータから全ポイントデータのリストを生成
             """
