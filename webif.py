@@ -112,5 +112,21 @@ def result_michinoeki():
     return render_template("faculty.html", faculty=MICHINOEKI, setting=fs, faculty_ja="道の駅", result=result)
 
 
+@app.route("/station")
+def index_station():
+    return render_template("faculty.html", faculty="station", faculty_ja="駅")
+
+
+@app.route("/station/result", methods=["GET", "POST"])
+def result_station():
+    faculty = STATION
+    region = request.form["region"]
+    island_setting = request.form["island_setting"]
+    key_words = request.form["key_words"]
+    fs = FacultySetting(region, faculty, island_setting, key_words)
+    result = search_faculty_main.main(fs)
+    return render_template("faculty.html", faculty=STATION, setting=fs, faculty_ja="駅", result=result)
+
+
 if __name__ == "__main__":
     app.run()

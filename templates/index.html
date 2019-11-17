@@ -20,6 +20,7 @@
 ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
 ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
 ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>
+・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>
 <img src="/static/village.png" width="350">
 <br><br>
 
@@ -257,7 +258,7 @@
             </tr>
         {% endfor %}
     </table>
-{% else %}
+{% endif %}
     <br><br>
     <h2>探索方法について</h2>
     <br>
@@ -357,7 +358,5 @@
         <li>ツイートボタンの追加</li>
         <li>ツイッターカード設定（URLツイート時の画像表示）</li>
     </ul>
-
-{% endif %}
 
 {% endblock %}

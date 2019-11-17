@@ -237,7 +237,7 @@ class JsonMichinoekiData(JsonFacultyData):
 class JsonStationData(JsonFacultyData):
 
     def get_name(self):
-        return self.data["properties"]["N02_005"]
+        return self.data["properties"]["N02_003"] + " " + self.data["properties"]["N02_005"] + "駅"
 
 
 class NotTargetFacultyException(Exception):
