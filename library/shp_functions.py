@@ -83,6 +83,6 @@ def merge_shp(directory):
             merged_data = gpd.read_file(file)
             continue
         data = gpd.read_file(file)
-        merged_data = pd.concat([merged_data, data])
+        merged_data = pd.concat([merged_data, data], sort=True)
     return merged_data
 

@@ -49,6 +49,7 @@ ELEMENTARY_SCHOOL = "elementary_school"
 POST_OFFICE = "post_office"
 NEW_TOWN = "new_town"
 MICHINOEKI = "michinoeki"
+STATION = "station"
 
 # 離島設定
 EXCLUDE_ISLANDS = "離島を含まない"

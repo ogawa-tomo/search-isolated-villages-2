@@ -234,6 +234,12 @@ class JsonMichinoekiData(JsonFacultyData):
         return self.data["properties"]["P35_006"]
 
 
+class JsonStationData(JsonFacultyData):
+
+    def get_name(self):
+        return self.data["properties"]["N02_005"]
+
+
 class NotTargetFacultyException(Exception):
     """
     対象施設でないとき吐く例外（例：小学校でない）

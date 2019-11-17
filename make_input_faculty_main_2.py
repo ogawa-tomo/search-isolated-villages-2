@@ -34,6 +34,10 @@ def main():
         input_file = fp.michinoeki_json_file
         data_class = JsonMichinoekiData
         output_file = fp.michinoeki_file
+    elif faculty_type == STATION:
+        input_file = fp.station_json_file
+        data_class = JsonStationData
+        output_file = fp.station_file
     else:
         raise Exception("施設タイプ名が不正です")
 
