@@ -110,6 +110,8 @@ input_data/
 !post_offices.csv
 !elementary_schools.csv
 !new_towns.csv
+!michinoeki.csv
+!station.csv
 
 .idea/
 
