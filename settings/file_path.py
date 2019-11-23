@@ -71,6 +71,15 @@ station_json_file = os.path.join("./input_data", "station_json.txt")
 # 駅csvデータファイル
 station_file = os.path.join("./input_data", "station.csv")
 
+# 駅時系列データファイル
+abandoned_station_shp_dir = os.path.join("./raw_data", "abandoned_station_shp")
+
+# 駅時系列jsonデータファイル
+abandoned_station_json_file = os.path.join("./input_data", "abandoned_station_json.txt")
+
+# 駅時系列csvデータファイル
+abandoned_station_file = os.path.join("./input_data", "abandoned_station.csv")
+
 # 施設修正データファイル
 correct_faculty_file = os.path.join("./settings", "correct_faculty.csv")
 

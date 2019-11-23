@@ -50,6 +50,7 @@ POST_OFFICE = "post_office"
 NEW_TOWN = "new_town"
 MICHINOEKI = "michinoeki"
 STATION = "station"
+ABANDONED_STATION = "abandoned_station"
 
 # 離島設定
 EXCLUDE_ISLANDS = "離島を含まない"

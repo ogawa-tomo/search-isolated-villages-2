@@ -5,6 +5,7 @@ from library.point import *
 from library import common_function as cf
 from settings.constants import *
 from abc import ABCMeta, abstractmethod
+import copy
 
 
 class JsonPointDataReader(object):
@@ -139,8 +140,72 @@ class JsonFacultyPointDataReader(JsonPointDataReader):
 
             self.points.append(p)
 
+        if self.data_class == JsonAbandonedStationData:
+            print("廃駅の重複を削除")
+            self.abandoned_station_deduplication()
+
     def get_points(self):
         return self.points
+
+    def abandoned_station_deduplication(self):
+        """
+        廃駅の重複を削除するメソッド
+        :return:
+        """
+        new_points = set()  # 追加する駅
+        points_copy = self.points.copy()
+        added_station_coordinates = set()
+        added_station_ids = set()
+        for p in tqdm(self.points):
+
+            # 自分が営業中のとき：なにもしない
+            if p.name["abandoned_year_1"] == "9999" or p.name["abandoned_year_1"] == "999":
+                continue
+
+            # 自分が廃駅のとき：同じ座標またはIDの駅を探す
+            register_abandoned_station = copy.copy(p)  # まずは自分が登録候補
+            # points_copy.pop(0)
+            for pc in points_copy:
+                # print(pc.name)
+                if self.is_same_station(p, pc):
+
+                    # 同じ駅が営業中のとき：登録候補をNoneにしてbreak
+                    if pc.name["abandoned_year_1"] == "9999" or pc.name["abandoned_year_1"] == "999":
+                        register_abandoned_station = None
+                        break
+                    # 同じ駅のほうが自分より新しいとき：相手が登録候補に
+                    elif int(register_abandoned_station.name["abandoned_year_1"]) < int(pc.name["abandoned_year_1"]):
+                        register_abandoned_station = copy.copy(pc)
+
+            if register_abandoned_station is not None:
+                # if register_abandoned_station.name.split("-")[2] not in added_station_ids:
+                # 同じ座標の駅も同じIDの駅も登録済みでなければ、登録
+                if register_abandoned_station.latitude + register_abandoned_station.longitude not in added_station_coordinates\
+                        and register_abandoned_station.name["id"] not in added_station_ids:
+                    added_station_coordinates.add(register_abandoned_station.latitude + register_abandoned_station.longitude)
+                    added_station_ids.add(register_abandoned_station.name["id"])
+                    register_abandoned_station.name = register_abandoned_station.name["name"] + " (~" \
+                                                      + str(int(register_abandoned_station.name["abandoned_year_1"]) + 1)\
+                                                      + ")"
+                    new_points.add(register_abandoned_station)
+        new_points = list(new_points)
+
+        self.points = new_points
+
+    @staticmethod
+    def is_same_station(s1, s2):
+        """
+        座標またはIDが一致していれば同じ駅（廃駅用のメソッド）
+        :param s1:
+        :param s2:
+        :return:
+        """
+        if s1.latitude == s2.latitude and s1.longitude == s2.longitude:
+            return True
+        elif s1.name["id"] == s2.name["id"]:
+            return True
+        else:
+            return False
 
 
 class JsonPointData(object):
@@ -238,6 +303,22 @@ class JsonStationData(JsonFacultyData):
 
     def get_name(self):
         return self.data["properties"]["N02_003"] + " " + self.data["properties"]["N02_005"] + "駅"
+
+
+class JsonAbandonedStationData(JsonFacultyData):
+
+    # def __init__(self, data):
+    #     super().__init__(data)
+    #     if self.data["properties"]["N05_005e"] == "9999" or self.data["properties"]["N05_005e"] == "999":
+    #         # 廃駅でないデータにはエラーを返す
+    #         raise NotTargetFacultyException
+
+    def get_name(self):
+        name = {"name": self.data["properties"]["N05_002"] + " " + self.data["properties"]["N05_011"] + "駅",
+                "abandoned_year_1": self.data["properties"]["N05_005e"],
+                "id": self.data["properties"]["N05_006"]}
+
+        return name
 
 
 class NotTargetFacultyException(Exception):

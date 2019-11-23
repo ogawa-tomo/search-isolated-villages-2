@@ -38,6 +38,10 @@ def main():
         input_file = fp.station_json_file
         data_class = JsonStationData
         output_file = fp.station_file
+    elif faculty_type == ABANDONED_STATION:
+        input_file = fp.abandoned_station_json_file
+        data_class = JsonAbandonedStationData
+        output_file = fp.abandoned_station_file
     else:
         raise Exception("施設タイプ名が不正です")
 

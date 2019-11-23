@@ -18,6 +18,8 @@
     <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/michinoeki.png" />
 {% elif faculty == "station" %}
     <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/station.png" />
+{% elif faculty == "abandoned_station" %}
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/abandoned_station" />
 {% endif %}
 
 <title>秘境{{ faculty_ja }}探索ツール</title>
@@ -35,31 +37,45 @@
     ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/abandoned_station" target="_blank">秘境廃駅探索ツール</a><br>
     <img src="/static/post_office.png" width="250" style="margin-left: 30px">
 {% elif faculty == "elementary_school" %}
     ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/abandoned_station" target="_blank">秘境廃駅探索ツール</a><br>
     <img src="/static/school.png" width="350">
 {% elif faculty == "new_town" %}
     ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/abandoned_station" target="_blank">秘境廃駅探索ツール</a><br>
     <img src="/static/new_town.png" width="350">
 {% elif faculty == "michinoeki" %}
     ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/abandoned_station" target="_blank">秘境廃駅探索ツール</a><br>
     <img src="/static/michinoeki.png" width="350">
 {% elif faculty == "station" %}
     ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
     ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/abandoned_station" target="_blank">秘境廃駅探索ツール</a><br>
     <img src="/static/station.png" width="350">
+{% elif faculty == "abandoned_station" %}
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>
+    ・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>
+    <br>
+    <img src="/static/abandoned_station.jpg" width="400">
+    <br>
 {% endif %}
 <br><br>
 
@@ -99,7 +115,6 @@
                             <option value="秋田県">秋田県</option>
                             <option value="山形県">山形県</option>
                             <option value="福島県">福島県</option>
-                            <option value="茨城県">茨城県</option>
                             <option value="茨城県">茨城県</option>
                             <option value="栃木県">栃木県</option>
                             <option value="群馬県">群馬県</option>
@@ -217,6 +232,12 @@
         ※国土をおよそ250m四方のメッシュに区切り、それぞれのメッシュに人口が入っているデータ
     </font>
     <br><br>
+    政府統計の総合窓口(e-Stat) 2015年度国勢調査小地域データ<br>
+    <font size="-1">
+    <a href="https://www.e-stat.go.jp/gis/statmap-search?type=2" target="_blank">https://www.e-stat.go.jp/gis/statmap-search?type=2</a><br>
+        ※施設と地名の紐づけに利用
+    </font>
+    <br><br>
     {% if faculty == "post_office" %}
         国土交通省国土政策局　国土数値情報（郵便局データ）<br>
     {% elif faculty == "elementary_school" %}
@@ -227,6 +248,8 @@
         国土交通省国土政策局　国土数値情報（道の駅データ）<br>
     {% elif faculty == "station" %}
         国土交通省国土政策局　国土数値情報（鉄道データ）<br>
+    {% elif faculty == "abandoned_station" %}
+        国土交通省国土政策局　国土数値情報（鉄道時系列データ）<br>
     {% endif %}
         <font size="-1">
             <a href="http://nlftp.mlit.go.jp/ksj/" target="_blank">http://nlftp.mlit.go.jp/ksj/</a><br>
