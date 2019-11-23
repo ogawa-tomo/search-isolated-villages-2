@@ -30,53 +30,114 @@
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <br>
 {{ faculty_ja }}の秘境度を人口分布データをもとに評価し、地域別にランキングで出力します。<br>
-<!--秘境集落探索ツール→<a href="https://search-isolated-villages-2.herokuapp.com/" target="_blank">https://search-isolated-villages-2.herokuapp.com/</a><br>-->
-・<a href="https://search-isolated-villages-2.herokuapp.com/" target="_blank">秘境集落探索ツール</a><br>
+<div class="dropdown">
+<!--    <a class="btn btn-default dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+    <button class="btn btn-light btn-sm dropdown-toggle border-dark" type="button" data-toggle="dropdown">
+        その他の秘境探索ツールを選択
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com">秘境集落探索ツール</a>
+        {% if faculty == "post_office" %}
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/elementary_school">秘境小学校探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/station">秘境駅探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/abandoned_station">秘境廃駅探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/michinoeki">秘境道の駅探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/new_town">秘境ニュータウン探索ツール</a>
+        {% elif faculty == "elementary_school" %}
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/post_office">秘境郵便局探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/station">秘境駅探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/abandoned_station">秘境廃駅探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/michinoeki">秘境道の駅探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/new_town">秘境ニュータウン探索ツール</a>
+        {% elif faculty == "station" %}
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/post_office">秘境郵便局探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/elementary_school">秘境小学校探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/abandoned_station">秘境廃駅探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/michinoeki">秘境道の駅探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/new_town">秘境ニュータウン探索ツール</a>
+        {% elif faculty == "abandoned_station" %}
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/post_office">秘境郵便局探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/elementary_school">秘境小学校探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/station">秘境駅探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/michinoeki">秘境道の駅探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/new_town">秘境ニュータウン探索ツール</a>
+        {% elif faculty == "michinoeki" %}
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/post_office">秘境郵便局探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/elementary_school">秘境小学校探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/station">秘境駅探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/abandoned_station">秘境廃駅探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/new_town">秘境ニュータウン探索ツール</a>
+        {% elif faculty == "new_town" %}
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/post_office">秘境郵便局探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/elementary_school">秘境小学校探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/station">秘境駅探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/abandoned_station">秘境廃駅探索ツール</a>
+            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/michinoeki">秘境道の駅探索ツール</a>
+        {% endif %}
+    </div>
+</div>
+
 {% if faculty == "post_office" %}
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/abandoned_station" target="_blank">秘境廃駅探索ツール</a><br>
-    <img src="/static/post_office.png" width="250" style="margin-left: 30px">
+    <img src="/static/post_office.png" width="250" style="margin-left: 30px">-->
 {% elif faculty == "elementary_school" %}
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/abandoned_station" target="_blank">秘境廃駅探索ツール</a><br>
     <img src="/static/school.png" width="350">
-{% elif faculty == "new_town" %}
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/abandoned_station" target="_blank">秘境廃駅探索ツール</a><br>
-    <img src="/static/new_town.png" width="350">
-{% elif faculty == "michinoeki" %}
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/abandoned_station" target="_blank">秘境廃駅探索ツール</a><br>
-    <img src="/static/michinoeki.png" width="350">
 {% elif faculty == "station" %}
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/abandoned_station" target="_blank">秘境廃駅探索ツール</a><br>
     <img src="/static/station.png" width="350">
 {% elif faculty == "abandoned_station" %}
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>
-    ・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>
-    <br>
     <img src="/static/abandoned_station.jpg" width="400">
-    <br>
+{% elif faculty == "michinoeki" %}
+    <img src="/static/michinoeki.png" width="350">
+{% elif faculty == "new_town" %}
+    <img src="/static/new_town.png" width="350">
 {% endif %}
+
+
+<!--・<a href="https://search-isolated-villages-2.herokuapp.com/" target="_blank">秘境集落探索ツール</a><br>-->
+<!--{% if faculty == "post_office" %}-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/abandoned_station" target="_blank">秘境廃駅探索ツール</a><br>-->
+<!--    <img src="/static/post_office.png" width="250" style="margin-left: 30px">-->
+<!--{% elif faculty == "elementary_school" %}-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/abandoned_station" target="_blank">秘境廃駅探索ツール</a><br>-->
+<!--    <img src="/static/school.png" width="350">-->
+<!--{% elif faculty == "new_town" %}-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/abandoned_station" target="_blank">秘境廃駅探索ツール</a><br>-->
+<!--    <img src="/static/new_town.png" width="350">-->
+<!--{% elif faculty == "michinoeki" %}-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/abandoned_station" target="_blank">秘境廃駅探索ツール</a><br>-->
+<!--    <img src="/static/michinoeki.png" width="350">-->
+<!--{% elif faculty == "station" %}-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/abandoned_station" target="_blank">秘境廃駅探索ツール</a><br>-->
+<!--    <img src="/static/station.png" width="350">-->
+<!--{% elif faculty == "abandoned_station" %}-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/post_office" target="_blank">秘境郵便局探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/elementary_school" target="_blank">秘境小学校探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/new_town" target="_blank">秘境ニュータウン探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/michinoeki" target="_blank">秘境道の駅探索ツール</a><br>-->
+<!--    ・<a href="https://search-isolated-villages-2.herokuapp.com/station" target="_blank">秘境駅探索ツール</a><br>-->
+<!--    <br>-->
+<!--    <img src="/static/abandoned_station.jpg" width="400">-->
+<!--    <br>-->
+<!--{% endif %}-->
 <br><br>
 
 <!--<form action="/{{ faculty }}/result" method="post">-->
