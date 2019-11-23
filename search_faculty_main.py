@@ -21,6 +21,8 @@ def main(faculty_setting):
         input_file = fp.station_file
     elif faculty_setting.faculty == ABANDONED_STATION:
         input_file = fp.abandoned_station_file
+    elif faculty_setting.faculty == BUS_STOP:
+        input_file = fp.bus_stop_file
     else:
         raise Exception("施設タイプ名が不正です")
 

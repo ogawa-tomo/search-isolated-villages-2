@@ -80,6 +80,15 @@ abandoned_station_json_file = os.path.join("./input_data", "abandoned_station_js
 # 駅時系列csvデータファイル
 abandoned_station_file = os.path.join("./input_data", "abandoned_station.csv")
 
+# バス停データファイル
+bus_stop_shp_dir = os.path.join("./raw_data", "bus_stop_shp")
+
+# バス停jsonデータファイル
+bus_stop_json_file = os.path.join("./input_data", "bus_stop_json.txt")
+
+# バス停csvデータファイル
+bus_stop_file = os.path.join("./input_data", "bus_stop.csv")
+
 # 施設修正データファイル
 correct_faculty_file = os.path.join("./settings", "correct_faculty.csv")
 

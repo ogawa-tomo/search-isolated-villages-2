@@ -51,6 +51,7 @@ NEW_TOWN = "new_town"
 MICHINOEKI = "michinoeki"
 STATION = "station"
 ABANDONED_STATION = "abandoned_station"
+BUS_STOP = "bus_stop"
 
 # 離島設定
 EXCLUDE_ISLANDS = "離島を含まない"

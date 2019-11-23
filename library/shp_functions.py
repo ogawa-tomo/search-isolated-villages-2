@@ -14,7 +14,7 @@ def extract_zip(directory):
     :return:
     """
     files = glob.glob(os.path.join(directory, "*.zip"))
-    for file in files:
+    for file in tqdm(files):
         with zipfile.ZipFile(file, "r") as f:
             f.extractall(directory)
 
@@ -62,7 +62,7 @@ def extract_files(directory):
     :param directory:
     :return:
     """
-    for folder_name in glob.glob(os.path.join(directory, "*")):
+    for folder_name in tqdm(glob.glob(os.path.join(directory, "*"))):
         if os.path.isdir(folder_name):
             files = glob.glob(os.path.join(folder_name, "*"))
             for file in files:
@@ -78,7 +78,7 @@ def merge_shp(directory):
     """
     files = glob.glob(os.path.join(directory, "*shp"))
     merged_data = None
-    for i, file in enumerate(files):
+    for i, file in tqdm(enumerate(files)):
         if i == 0:
             merged_data = gpd.read_file(file)
             continue
