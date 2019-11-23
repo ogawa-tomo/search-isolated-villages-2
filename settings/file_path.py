@@ -80,6 +80,15 @@ abandoned_station_json_file = os.path.join("./input_data", "abandoned_station_js
 # 駅時系列csvデータファイル
 abandoned_station_file = os.path.join("./input_data", "abandoned_station.csv")
 
+# 医療機関データファイル
+hospitals_shp_dir = os.path.join("./raw_data", "hospital_shp")
+
+# 医療機関jsonデータファイル
+hospitals_json_file = os.path.join("./input_data", "hospital_json.txt")
+
+# 医療機関csvデータファイル
+hospitals_file = os.path.join("./input_data", "hospital.csv")
+
 # 施設修正データファイル
 correct_faculty_file = os.path.join("./settings", "correct_faculty.csv")
 

@@ -321,6 +321,12 @@ class JsonAbandonedStationData(JsonFacultyData):
         return name
 
 
+class JsonHospitalData(JsonFacultyData):
+
+    def get_name(self):
+        return self.data["properties"]["P04_002"]
+
+
 class NotTargetFacultyException(Exception):
     """
     対象施設でないとき吐く例外（例：小学校でない）

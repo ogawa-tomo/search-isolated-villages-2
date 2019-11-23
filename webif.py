@@ -144,5 +144,21 @@ def result_abandoned_station():
     return render_template("faculty.html", faculty=ABANDONED_STATION, setting=fs, faculty_ja="廃駅", result=result)
 
 
+@app.route("/hospital")
+def index_hospital():
+    return render_template("faculty.html", faculty="hospital", faculty_ja="医療機関")
+
+
+@app.route("/hospital/result", methods=["GET", "POST"])
+def result_hospital():
+    faculty = HOSPITAL
+    region = request.form["region"]
+    island_setting = request.form["island_setting"]
+    key_words = request.form["key_words"]
+    fs = FacultySetting(region, faculty, island_setting, key_words)
+    result = search_faculty_main.main(fs)
+    return render_template("faculty.html", faculty=HOSPITAL, setting=fs, faculty_ja="医療機関", result=result)
+
+
 if __name__ == "__main__":
     app.run()
