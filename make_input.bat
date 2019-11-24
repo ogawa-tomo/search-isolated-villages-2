@@ -21,3 +21,6 @@ pypy3 make_input_faculty_main_2.py station
 
 python make_input_faculty_main_1.py abandoned_station
 pypy3 make_input_faculty_main_2.py abandoned_station
+
+python make_input_faculty_main_1.py research_institute
+pypy3 make_input_faculty_main_2.py research_institute
