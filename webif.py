@@ -144,5 +144,21 @@ def result_abandoned_station():
     return render_template("faculty.html", faculty=ABANDONED_STATION, setting=fs, faculty_ja="廃駅", result=result)
 
 
+@app.route("/" + RESEARCH_INSTITUTE)
+def index_research_institute():
+    return render_template("faculty.html", faculty=RESEARCH_INSTITUTE, faculty_ja="研究機関")
+
+
+@app.route("/" + RESEARCH_INSTITUTE + "/result", methods=["GET", "POST"])
+def result_research_institute():
+    faculty = RESEARCH_INSTITUTE
+    region = request.form["region"]
+    island_setting = request.form["island_setting"]
+    key_words = request.form["key_words"]
+    fs = FacultySetting(region, faculty, island_setting, key_words)
+    result = search_faculty_main.main(fs)
+    return render_template("faculty.html", faculty=RESEARCH_INSTITUTE, setting=fs, faculty_ja="研究機関", result=result)
+
+
 if __name__ == "__main__":
     app.run()

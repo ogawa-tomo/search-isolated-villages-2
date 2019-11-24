@@ -26,59 +26,87 @@ pop_point_file = os.path.join("./input_data", "pop_points.csv")
 # 集落データファイル
 villages_file = os.path.join("./input_data", "villages.csv")
 
-# 学校生データファイル
-elementary_schools_shp_dir = os.path.join("./raw_data", "elementary_school_shp")
+# # 学校生データファイル
+# elementary_schools_shp_dir = os.path.join("./raw_data", "elementary_school_shp")
+#
+# # 学校jsonデータファイル
+# elementary_schools_json_file = os.path.join("./input_data", "elementary_schools_json.txt")
+#
+# # 学校csvデータファイル
+# elementary_schools_file = os.path.join("./input_data", "elementary_schools.csv")
+#
+# # 郵便局生データファイル
+# post_office_shp_dir = os.path.join("./raw_data", "post_office_shp")
+#
+# # 郵便局jsonデータファイル
+# post_office_json_file = os.path.join("./input_data", "post_offices_json.txt")
+#
+# # 郵便局csvデータファイル
+# post_office_file = os.path.join("./input_data", "post_offices.csv")
+#
+# # ニュータウン生データファイル
+# new_town_shp_dir = os.path.join("./raw_data", "new_town_shp")
+#
+# # ニュータウンjsonデータファイル
+# new_town_json_file = os.path.join("./input_data", "new_towns_json.txt")
+#
+# # ニュータウンcsvデータファイル
+# new_town_file = os.path.join("./input_data", "new_towns.csv")
+#
+# # 道の駅生データファイル
+# michinoeki_shp_dir = os.path.join("./raw_data", "michinoeki_shp")
+#
+# # 道の駅jsonデータファイル
+# michinoeki_json_file = os.path.join("./input_data", "michinoeki_json.txt")
+#
+# # 道の駅csvデータファイル
+# michinoeki_file = os.path.join("./input_data", "michinoeki.csv")
+#
+# # 駅生データファイル
+# station_shp_dir = os.path.join("./raw_data", "station_shp")
+#
+# # 駅jsonデータファイル
+# station_json_file = os.path.join("./input_data", "station_json.txt")
+#
+# # 駅csvデータファイル
+# station_file = os.path.join("./input_data", "station.csv")
+#
+# # 駅時系列データファイル
+# abandoned_station_shp_dir = os.path.join("./raw_data", "abandoned_station_shp")
+#
+# # 駅時系列jsonデータファイル
+# abandoned_station_json_file = os.path.join("./input_data", "abandoned_station_json.txt")
+#
+# # 駅時系列csvデータファイル
+# abandoned_station_file = os.path.join("./input_data", "abandoned_station.csv")
 
-# 学校jsonデータファイル
-elementary_schools_json_file = os.path.join("./input_data", "elementary_schools_json.txt")
 
-# 学校csvデータファイル
-elementary_schools_file = os.path.join("./input_data", "elementary_schools.csv")
+def get_faculty_shp_dir(faculty_type):
+    """
+    施設生データファイル
+    :param faculty_type:
+    :return:
+    """
+    return os.path.join("./raw_data", faculty_type + "_shp")
 
-# 郵便局生データファイル
-post_office_shp_dir = os.path.join("./raw_data", "post_office_shp")
 
-# 郵便局jsonデータファイル
-post_office_json_file = os.path.join("./input_data", "post_offices_json.txt")
+def get_faculty_json_file(faculty_type):
+    """
+    施設jsonデータファイル
+    :param faculty_type:
+    :return:
+    """
+    return os.path.join("./input_data", faculty_type + "_json.txt")
 
-# 郵便局csvデータファイル
-post_office_file = os.path.join("./input_data", "post_offices.csv")
 
-# ニュータウン生データファイル
-new_town_shp_dir = os.path.join("./raw_data", "new_town_shp")
+def get_faculty_csv_file(faculty_type):
+    """
+    施設csvデータファイル
+    :param faculty_type:
+    :return:
+    """
+    return os.path.join("./input_data", faculty_type + ".csv")
 
-# ニュータウンjsonデータファイル
-new_town_json_file = os.path.join("./input_data", "new_towns_json.txt")
-
-# ニュータウンcsvデータファイル
-new_town_file = os.path.join("./input_data", "new_towns.csv")
-
-# 道の駅生データファイル
-michinoeki_shp_dir = os.path.join("./raw_data", "michinoeki_shp")
-
-# 道の駅jsonデータファイル
-michinoeki_json_file = os.path.join("./input_data", "michinoeki_json.txt")
-
-# 道の駅csvデータファイル
-michinoeki_file = os.path.join("./input_data", "michinoeki.csv")
-
-# 駅生データファイル
-station_shp_dir = os.path.join("./raw_data", "station_shp")
-
-# 駅jsonデータファイル
-station_json_file = os.path.join("./input_data", "station_json.txt")
-
-# 駅csvデータファイル
-station_file = os.path.join("./input_data", "station.csv")
-
-# 駅時系列データファイル
-abandoned_station_shp_dir = os.path.join("./raw_data", "abandoned_station_shp")
-
-# 駅時系列jsonデータファイル
-abandoned_station_json_file = os.path.join("./input_data", "abandoned_station_json.txt")
-
-# 駅時系列csvデータファイル
-abandoned_station_file = os.path.join("./input_data", "abandoned_station.csv")
 
 # 施設修正データファイル
 correct_faculty_file = os.path.join("./settings", "correct_faculty.csv")

@@ -9,20 +9,21 @@ import time
 
 def main(faculty_setting):
 
-    if faculty_setting.faculty == ELEMENTARY_SCHOOL:
-        input_file = fp.elementary_schools_file
-    elif faculty_setting.faculty == POST_OFFICE:
-        input_file = fp.post_office_file
-    elif faculty_setting.faculty == NEW_TOWN:
-        input_file = fp.new_town_file
-    elif faculty_setting.faculty == MICHINOEKI:
-        input_file = fp.michinoeki_file
-    elif faculty_setting.faculty == STATION:
-        input_file = fp.station_file
-    elif faculty_setting.faculty == ABANDONED_STATION:
-        input_file = fp.abandoned_station_file
-    else:
-        raise Exception("施設タイプ名が不正です")
+    input_file = fp.get_faculty_csv_file(faculty_setting.faculty)
+    # if faculty_setting.faculty == ELEMENTARY_SCHOOL:
+    #     input_file = fp.elementary_schools_file
+    # elif faculty_setting.faculty == POST_OFFICE:
+    #     input_file = fp.post_office_file
+    # elif faculty_setting.faculty == NEW_TOWN:
+    #     input_file = fp.new_town_file
+    # elif faculty_setting.faculty == MICHINOEKI:
+    #     input_file = fp.michinoeki_file
+    # elif faculty_setting.faculty == STATION:
+    #     input_file = fp.station_file
+    # elif faculty_setting.faculty == ABANDONED_STATION:
+    #     input_file = fp.abandoned_station_file
+    # else:
+    #     raise Exception("施設タイプ名が不正です")
 
     # 施設データを読み込み
     dao = FacultyDAO(input_file)

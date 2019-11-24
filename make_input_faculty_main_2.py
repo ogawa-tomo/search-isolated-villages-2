@@ -18,32 +18,51 @@ def main():
     """
 
     faculty_type = sys.argv[1]
+    input_file = fp.get_faculty_json_file(faculty_type)
+    output_file = fp.get_faculty_csv_file(faculty_type)
     if faculty_type == ELEMENTARY_SCHOOL:
-        input_file = fp.elementary_schools_json_file
         data_class = JsonElementarySchoolData
-        output_file = fp.elementary_schools_file
     elif faculty_type == POST_OFFICE:
-        input_file = fp.post_office_json_file
         data_class = JsonPostOfficeData
-        output_file = fp.post_office_file
     elif faculty_type == NEW_TOWN:
-        input_file = fp.new_town_json_file
         data_class = JsonNewTownData
-        output_file = fp.new_town_file
     elif faculty_type == MICHINOEKI:
-        input_file = fp.michinoeki_json_file
         data_class = JsonMichinoekiData
-        output_file = fp.michinoeki_file
     elif faculty_type == STATION:
-        input_file = fp.station_json_file
         data_class = JsonStationData
-        output_file = fp.station_file
     elif faculty_type == ABANDONED_STATION:
-        input_file = fp.abandoned_station_json_file
         data_class = JsonAbandonedStationData
-        output_file = fp.abandoned_station_file
+    elif faculty_type == RESEARCH_INSTITUTE:
+        data_class = JsonResearchInstituteData
     else:
         raise Exception("施設タイプ名が不正です")
+
+    # if faculty_type == ELEMENTARY_SCHOOL:
+    #     input_file = fp.elementary_schools_json_file
+    #     data_class = JsonElementarySchoolData
+    #     output_file = fp.elementary_schools_file
+    # elif faculty_type == POST_OFFICE:
+    #     input_file = fp.post_office_json_file
+    #     data_class = JsonPostOfficeData
+    #     output_file = fp.post_office_file
+    # elif faculty_type == NEW_TOWN:
+    #     input_file = fp.new_town_json_file
+    #     data_class = JsonNewTownData
+    #     output_file = fp.new_town_file
+    # elif faculty_type == MICHINOEKI:
+    #     input_file = fp.michinoeki_json_file
+    #     data_class = JsonMichinoekiData
+    #     output_file = fp.michinoeki_file
+    # elif faculty_type == STATION:
+    #     input_file = fp.station_json_file
+    #     data_class = JsonStationData
+    #     output_file = fp.station_file
+    # elif faculty_type == ABANDONED_STATION:
+    #     input_file = fp.abandoned_station_json_file
+    #     data_class = JsonAbandonedStationData
+    #     output_file = fp.abandoned_station_file
+    # else:
+    #     raise Exception("施設タイプ名が不正です")
 
     # 人口データ読み込み
     p_dao = PopPointDAO(fp.pop_point_file)

@@ -14,7 +14,7 @@ def extract_zip(directory):
     :return:
     """
     files = glob.glob(os.path.join(directory, "*.zip"))
-    for file in files:
+    for file in tqdm(files):
         with zipfile.ZipFile(file, "r") as f:
             f.extractall(directory)
 
@@ -62,7 +62,7 @@ def extract_files(directory):
     :param directory:
     :return:
     """
-    for folder_name in glob.glob(os.path.join(directory, "*")):
+    for folder_name in tqdm(glob.glob(os.path.join(directory, "*"))):
         if os.path.isdir(folder_name):
             files = glob.glob(os.path.join(folder_name, "*"))
             for file in files:
@@ -70,19 +70,26 @@ def extract_files(directory):
                 shutil.copyfile(file, os.path.join(directory, name))
 
 
-def merge_shp(directory):
+def merge_shp(directory, encoding=None):
     """
     ディレクトリ内のshpを結合したデータを返す
     :param directory:
+    :param encoding: エンコーディング指定。指定しない場合はデフォルト
     :return:
     """
     files = glob.glob(os.path.join(directory, "*shp"))
     merged_data = None
-    for i, file in enumerate(files):
+    for i, file in tqdm(enumerate(files)):
         if i == 0:
-            merged_data = gpd.read_file(file)
+            if encoding is not None:
+                merged_data = gpd.read_file(file, encoding=encoding)
+            else:
+                merged_data = gpd.read_file(file)
             continue
-        data = gpd.read_file(file)
+        if encoding is not None:
+            data = gpd.read_file(file, encoding=encoding)
+        else:
+            data = gpd.read_file(file)
         merged_data = pd.concat([merged_data, data], sort=True)
     return merged_data
 

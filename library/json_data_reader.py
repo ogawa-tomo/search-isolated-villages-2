@@ -307,18 +307,25 @@ class JsonStationData(JsonFacultyData):
 
 class JsonAbandonedStationData(JsonFacultyData):
 
-    # def __init__(self, data):
-    #     super().__init__(data)
-    #     if self.data["properties"]["N05_005e"] == "9999" or self.data["properties"]["N05_005e"] == "999":
-    #         # 廃駅でないデータにはエラーを返す
-    #         raise NotTargetFacultyException
-
     def get_name(self):
+        # {"name": [路線名] [駅名]駅, "abandoned_year_1": [廃止年-1], "id": [id]}
         name = {"name": self.data["properties"]["N05_002"] + " " + self.data["properties"]["N05_011"] + "駅",
                 "abandoned_year_1": self.data["properties"]["N05_005e"],
                 "id": self.data["properties"]["N05_006"]}
 
         return name
+
+
+class JsonResearchInstituteData(JsonFacultyData):
+
+    def __init__(self, data):
+        super().__init__(data)
+        if self.data["properties"]["P16_002"] == 6:
+            # 企業研究施設は除く
+            raise NotTargetFacultyException
+
+    def get_name(self):
+        return self.data["properties"]["P16_001"]
 
 
 class NotTargetFacultyException(Exception):
