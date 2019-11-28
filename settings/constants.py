@@ -52,6 +52,7 @@ MICHINOEKI = "michinoeki"
 STATION = "station"
 ABANDONED_STATION = "abandoned_station"
 RESEARCH_INSTITUTE = "research_institute"
+CULTURAL_PROPERTY = "cultural_property"
 
 # 離島設定
 EXCLUDE_ISLANDS = "離島を含まない"

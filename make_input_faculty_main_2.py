@@ -34,6 +34,8 @@ def main():
         data_class = JsonAbandonedStationData
     elif faculty_type == RESEARCH_INSTITUTE:
         data_class = JsonResearchInstituteData
+    elif faculty_type == CULTURAL_PROPERTY:
+        data_class = JsonCulturalPropertyData
     else:
         raise Exception("施設タイプ名が不正です")
 

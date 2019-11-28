@@ -328,6 +328,19 @@ class JsonResearchInstituteData(JsonFacultyData):
         return self.data["properties"]["P16_001"]
 
 
+class JsonCulturalPropertyData(JsonFacultyData):
+
+    def __init__(self, data):
+        super().__init__(data)
+        not_include = [4, 5, 9]
+        if int(self.data["properties"]["P32_009"]) in not_include:
+            # 市区町村レベルまでの位置しかわかっていないものは除く
+            raise NotTargetFacultyException
+
+    def get_name(self):
+        return self.data["properties"]["P32_006"]
+
+
 class NotTargetFacultyException(Exception):
     """
     対象施設でないとき吐く例外（例：小学校でない）

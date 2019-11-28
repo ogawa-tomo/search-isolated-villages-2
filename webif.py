@@ -160,5 +160,21 @@ def result_research_institute():
     return render_template("faculty.html", faculty=RESEARCH_INSTITUTE, setting=fs, faculty_ja="研究機関", result=result)
 
 
+@app.route("/" + CULTURAL_PROPERTY)
+def index_cultural_property():
+    return render_template("faculty.html", faculty=CULTURAL_PROPERTY, faculty_ja="文化財")
+
+
+@app.route("/" + CULTURAL_PROPERTY + "/result", methods=["GET", "POST"])
+def result_cultural_property():
+    faculty = CULTURAL_PROPERTY
+    region = request.form["region"]
+    island_setting = request.form["island_setting"]
+    key_words = request.form["key_words"]
+    fs = FacultySetting(region, faculty, island_setting, key_words)
+    result = search_faculty_main.main(fs)
+    return render_template("faculty.html", faculty=CULTURAL_PROPERTY, setting=fs, faculty_ja="文化財", result=result)
+
+
 if __name__ == "__main__":
     app.run()
