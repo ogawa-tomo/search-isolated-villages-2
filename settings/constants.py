@@ -53,6 +53,24 @@ STATION = "station"
 ABANDONED_STATION = "abandoned_station"
 RESEARCH_INSTITUTE = "research_institute"
 
+
+def get_faculty_ja(faculty):
+    if faculty == POST_OFFICE:
+        return "郵便局"
+    elif faculty == ELEMENTARY_SCHOOL:
+        return "小学校"
+    elif faculty == NEW_TOWN:
+        return "ニュータウン"
+    elif faculty == MICHINOEKI:
+        return "道の駅"
+    elif faculty == STATION:
+        return "駅"
+    elif faculty == ABANDONED_STATION:
+        return "廃駅"
+    elif faculty == RESEARCH_INSTITUTE:
+        return "研究機関"
+
+
 # 離島設定
 EXCLUDE_ISLANDS = "離島を含まない"
 INCLUDE_ISLANDS = "離島を含む"
