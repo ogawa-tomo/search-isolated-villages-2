@@ -93,6 +93,32 @@ class JsonMeshPointDataReader(JsonPointDataReader):
         return self.points
 
 
+class JsonMeshPolygonDataReader(JsonPointDataReader):
+    """
+    geojson形式の人口メッシュデータ（ポリゴン）を読み込むクラス
+    """
+    def __init__(self, file):
+        super().__init__(file)
+        self.polygons = []
+        self.read_polygons()
+
+    def read_polygons(self):
+        """
+        ポリゴンの読み込み
+        :return:
+        """
+        for raw_data in self.raw_data_set:
+            p = PopMeshPolygon()
+            data = JsonMeshPolygonData(raw_data)
+            p.key_code = data.get_key_code()
+            p.coordinates = data.get_coordinates()
+
+            self.polygons.append(p)
+
+    def get_polygons(self):
+        return self.polygons
+
+
 class JsonFacultyPointDataReader(JsonPointDataReader):
     """
     geojson形式の施設点データを読み込むクラス
@@ -227,6 +253,19 @@ class JsonPointData(object):
     def get_longitude(self):
         longitude = self.data["geometry"]["coordinates"][0]
         return longitude
+
+
+class JsonMeshPolygonData(object):
+    def __init__(self, data):
+        self.data = data
+
+    def get_key_code(self):
+        key_code = self.data["properties"]["KEY_CODE"]
+        return key_code
+
+    def get_coordinates(self):
+        coordinates = self.data["geometry"]["coordinates"]
+        return coordinates
 
 
 class JsonRegionPointData(JsonPointData):

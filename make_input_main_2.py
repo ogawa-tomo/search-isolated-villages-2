@@ -7,6 +7,7 @@ from library.island_checker import IslandChecker
 from tqdm import tqdm
 import settings.file_path as fp
 from library.point_dao import PopPointDAO
+from library.pop_polygon_dao import PopPolygonDAO
 # import library.common_function as cf
 import library.make_input_functions as mif
 from library.point_container import PointContainer
@@ -38,6 +39,9 @@ def main():
     # 人口データの作成
     dao = PopPointDAO(fp.pop_point_file)
     dao.make_pop_point_data(all_points)
+
+    # 人口ポリゴンデータの作成
+    make_mesh_polygon_data(fp.raw_mesh_json_polygon_dir, all_points, fp.pop_polygon_file)
 
 
 def read_pop_data(raw_mesh_json_dir, raw_pop_dir):
@@ -81,6 +85,63 @@ def read_pop_data(raw_mesh_json_dir, raw_pop_dir):
                     break
 
     return all_points
+
+
+def make_mesh_polygon_data(raw_mesh_json_polygon_dir, all_points, pop_polygon_file):
+    """
+    メッシュポリゴンのデータリストを返す
+    :param raw_mesh_json_polygon_dir:
+    :param all_points:
+    :param pop_polygon_file
+    :return:
+    """
+    print("メッシュポリゴンデータ作成")
+    polygon_dao = PopPolygonDAO(pop_polygon_file)
+    polygon_dao.clear_pop_polygon_data()
+
+    # 1次メッシュ区分ごとに処理しファイルに追記していく
+    mesh_files = glob.glob(os.path.join(raw_mesh_json_polygon_dir, "*.txt"))
+    matched_points = 0  # ポリゴンとマッチしたポイントの数
+    for mesh_file in tqdm(mesh_files):
+
+        all_polygons_in_pmesh = []
+
+        # メッシュデータ読み込み
+        mpd = JsonMeshPolygonDataReader(mesh_file)
+
+        # 人口ゼロも含めて全てのポリゴン
+        all_polygons_in_pmesh_including_zero = mpd.get_polygons()
+
+        # keyが一致するポリゴンを探し、ポリゴンに同じ値を格納する
+        points = all_points[matched_points:]  # すでにマッチしたポイントは除外して探索
+        searched_polygons = 0
+        for point in points:
+            polygons = all_polygons_in_pmesh_including_zero[searched_polygons:]  # 探し終わったポリゴンを除外して探索
+            for polygon in polygons:
+                searched_polygons += 1  # 探索したポリゴンの数
+                if polygon.key_code == point.key_code:
+
+                    # 同じkeycodeのポイントが見つかったら、同じ値を格納
+                    polygon.id = point.id
+                    polygon.population = point.population
+                    polygon.latitude = point.latitude
+                    polygon.longitude = point.longitude
+                    polygon.pref = point.pref
+                    polygon.city = point.city
+                    polygon.district = point.district
+
+                    # ポリゴンをリストに追加
+                    all_polygons_in_pmesh.append(polygon)
+
+                    # マッチしたポイントをカウント
+                    matched_points += 1
+                    break
+
+            # 一次メッシュ内の全てのポリゴンを探索したら、break
+            if searched_polygons >= len(all_polygons_in_pmesh_including_zero):
+                break
+
+        polygon_dao.add_pop_polygon_data(all_polygons_in_pmesh)
 
 
 def register_address(all_points, region_points):

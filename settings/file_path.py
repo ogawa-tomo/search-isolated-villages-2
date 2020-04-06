@@ -7,6 +7,11 @@ raw_mesh_shp_dir = os.path.join("./raw_data", "mesh_shp")
 
 # 境界jsonデータ格納ディレクトリ
 raw_mesh_json_dir = os.path.join("./input_data", "mesh_json")
+# raw_mesh_json_dir = os.path.join("./input_data", "mesh_json_test")
+
+# 境界jsonデータ（メッシュポリゴン）格納ディレクトリ
+raw_mesh_json_polygon_dir = os.path.join("./input_data", "mesh_json_polygon")
+# raw_mesh_json_polygon_dir = os.path.join("./input_data", "mesh_json_polygon_test")
 
 # 小地域shpデータ格納ディレクトリ
 raw_region_shp_dir = os.path.join("./raw_data", "region_shp")
@@ -16,12 +21,16 @@ raw_region_json_dir = os.path.join("./input_data", "region_json")
 
 # 人口データ格納ディレクトリ
 raw_pop_dir = os.path.join("./raw_data", "population")
+# raw_pop_dir = os.path.join("./raw_data", "population_test")
 
 # 島データファイル
 island_data_file = os.path.join("./settings", "islands.csv")
 
 # 隣接点つき人口データファイル
 pop_point_file = os.path.join("./input_data", "pop_points.csv")
+
+# 人口ポリゴンデータファイル
+pop_polygon_file = os.path.join("./input_data", "pop_polygons.csv")
 
 # 集落データファイル
 villages_file = os.path.join("./input_data", "villages.csv")

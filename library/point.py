@@ -130,6 +130,17 @@ class PopPoint(Point):
         return my_village_points
 
 
+class PopMeshPolygon(Point):
+    """
+    人口メッシュクラス
+    """
+    def __init__(self):
+        super().__init__()
+        self.id = 0
+        self.coordinates = []
+        self.population = 0
+
+
 class Village(object):
     """
     集落クラス（ポイントの集合）
