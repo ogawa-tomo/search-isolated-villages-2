@@ -1,6 +1,7 @@
 import csv
 from library.point import *
 from tqdm import tqdm
+import json
 
 
 class PopPolygonDAO(object):
@@ -16,7 +17,8 @@ class PopPolygonDAO(object):
             "pref",
             "city",
             "district",
-            "population"
+            "population",
+            "is_island"
         ]
         self.id_idx = self.columns.index("id")
         self.key_idx = self.columns.index("key")
@@ -27,6 +29,7 @@ class PopPolygonDAO(object):
         self.city_idx = self.columns.index("city")
         self.district_idx = self.columns.index("district")
         self.pop_idx = self.columns.index("population")
+        self.is_island_idx = self.columns.index("is_island")
 
     def clear_pop_polygon_data(self):
         """
@@ -37,14 +40,6 @@ class PopPolygonDAO(object):
             writer = csv.writer(f, lineterminator="\n")
             # ヘッダ
             writer.writerow(self.columns)
-
-    # def add_pop_polygon_data(self, pop_polygons):
-    #     """
-    #     人口メッシュポリゴンデータをcsvに追記する
-    #     :param pop_polygons:
-    #     :return:
-    #     """
-    #     self.make_pop_polygon_data(pop_polygons, "a")
 
     def add_pop_polygon_data(self, pop_polygons):
         """
@@ -74,6 +69,7 @@ class PopPolygonDAO(object):
                 row[self.city_idx] = p.city
                 row[self.district_idx] = p.district
                 row[self.pop_idx] = p.population
+                row[self.is_island_idx] = p.is_island
 
                 writer.writerow(row)
 
@@ -105,6 +101,10 @@ class PopPolygonDAO(object):
                 p.city = line[self.city_idx]
                 p.district = line[self.district_idx]
                 p.population = int(line[self.pop_idx])
+                if line[self.is_island_idx] == "True":
+                    p.is_island = True
+                else:
+                    p.is_island = False
 
                 pop_polygons.append(p)
 
@@ -124,39 +124,35 @@ class PopPolygonDAO(object):
     @staticmethod
     def make_coordinates(coordinates):
         # 形式→[[[122.971875, 24.4375], [122.96874999999999, 24.4375], [122.96874999999999, 24.43958333333333], [122.971875, 24.43958333333333], [122.971875, 24.4375]]]
-        data = "[" + str(coordinates) + "]"
+        data = [coordinates]
         return data
 
-    # @staticmethod
-    # def make_coordinates(coordinates):
-    #     """
-    #     座標をハイフンでつないだ文字列を返す
-    #     :param coordinates:
-    #     :return:
-    #     """
-    #     coordinates = ""
-    #     for i, c in enumerate(coordinates):
-    #         if i == 0:
-    #             neighbor_ids = str(c.coordinate)
-    #         else:
-    #             coordinates += "-" + str(n.id)
-    #     return neighbor_ids
+    def get_polygon_geojson_data(self, polygons):
+        """
+        ポリゴンのgeojsonデータを作る（座標とkeycodeだけでよい）
+        :param polygons:
+        :return:
+        """
+        geodict = {
+            "type": "FeatureCollection",
+            "features": []
+        }
 
+        for i, p in enumerate(polygons):
+            feature = {
+                "id": i,
+                "type": "Feature",
+                "properties": {},
+                "geometry":
+                    {
+                        "type": "Polygon",
+                        "coordinates": None
+                    }
+            }
+            feature["properties"]["KEY_CODE"] = p.key_code
+            feature["geometry"]["coordinates"] = self.make_coordinates(p.coordinates)
+            geodict["features"].append(feature)
 
-# if __name__ == "__main__":
-#     dao = PopPolygonDAO("pop_polygons.csv")
-#     polygons = dao.read_pop_polygon_data()
-#     for p in polygons:
-#         print(p.key_code)
-#         print(p.coordinates)
-#         print(p.coordinates[0])
-#         print(p.coordinates[0][0])
-#
-#     dao.make_pop_polygon_data(polygons)
-#     polygons = dao.read_pop_polygon_data()
-#     for p in polygons:
-#         print(p.key_code)
-#         print(p.coordinates)
-#         print(p.coordinates[0])
-#         print(p.coordinates[0][0])
+        geojson = json.dumps(geodict)
+        return geojson
 

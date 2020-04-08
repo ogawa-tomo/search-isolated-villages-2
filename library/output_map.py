@@ -2,13 +2,19 @@ import folium
 from library.point import Village, FacultyPoint
 import os
 import settings.file_path as fp
+from library.pop_polygon_dao import PopPolygonDAO
+import pandas as pd
+import csv
 
 
 class OutputMap(object):
 
     def __init__(self, path):
 
-        self.path = path
+        self.html_path = path
+        self.geojson_path = path.replace(".html", ".geojson")
+        self.csv_path = path.replace(".html", "csv")
+        self.map = None
 
     def output_map(self, points, num):
 
@@ -31,17 +37,17 @@ class OutputMap(object):
                            'Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, ' \
                            'under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
 
-        map_ = folium.Map(location=[lat, lon], tiles="Stamen Terrain", attr=copyright_stamen)
+        self.map = folium.Map(location=[lat, lon], tiles="Stamen Terrain", attr=copyright_stamen)
         # map_.add_tile_layer("OpenStreetMap", attr=copyright_osm)
-        folium.LayerControl().add_to(map_)
+        # folium.LayerControl().add_to(self.map)
 
         for i, p in enumerate(points[:num]):
             marker = self.get_marker(p, i + 1)
-            marker.add_to(map_)
+            marker.add_to(self.map)
 
         if not os.path.isdir(fp.output_dir):
             os.makedirs(fp.output_dir)
-        map_.save(self.path)
+        self.map.save(self.html_path)
 
     @staticmethod
     def get_marker(p, rank):
@@ -68,6 +74,54 @@ class OutputMap(object):
         marker = folium.Marker([p.latitude, p.longitude], popup=popup,
                                icon=folium.Icon(icon="home", prefix="fa"))
         return marker
+
+    def add_polygons(self, polygons):
+        """
+        ポリゴンのコロプレス図を追加する
+        :param polygons:
+        :return:
+        """
+        # ポリゴンのgeojsonを取得
+        dao = PopPolygonDAO("hoge")  # pathは関係ない
+        geojson_data = dao.get_polygon_geojson_data(polygons)
+        with open(self.geojson_path, "w", encoding="utf8") as f:
+            f.write(geojson_data)
+
+        # ポリゴンのpandasデータフレームを作る
+        with open(self.csv_path, "w", encoding="utf8") as f:
+            writer = csv.writer(f, lineterminator="\n")
+            writer.writerow(["key_code", "population"])
+            for p in polygons:
+                writer.writerow([p.key_code, p.population])
+        polygon_df = pd.read_csv(self.csv_path)
+        polygon_df["key_code"] = polygon_df["key_code"].astype("str")
+
+        # コロプレス図をつくる
+        folium.Choropleth(
+            geo_data=geojson_data,
+            name="choropleth",
+            data=polygon_df,
+            columns=["key_code", "population"],
+            key_on="feature.properties.KEY_CODE",
+            fill_color="OrRd",
+            threshold_scale=[0, 50, 100, 150, 200, 10000],
+            fill_opacity=0.7,
+            line_opacity=0.2,
+        ).add_to(self.map)
+
+        self.map.save(self.html_path)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

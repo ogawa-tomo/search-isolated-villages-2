@@ -139,6 +139,7 @@ class PopMeshPolygon(Point):
         self.id = 0
         self.coordinates = []
         self.population = 0
+        self.is_island = None
 
 
 class Village(object):

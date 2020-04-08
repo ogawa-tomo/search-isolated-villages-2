@@ -29,8 +29,8 @@ island_data_file = os.path.join("./settings", "islands.csv")
 # 隣接点つき人口データファイル
 pop_point_file = os.path.join("./input_data", "pop_points.csv")
 
-# 人口ポリゴンデータファイル
-pop_polygon_file = os.path.join("./input_data", "pop_polygons.csv")
+# 人口ポリゴンデータディレクトリ
+pop_polygon_dir = os.path.join("./input_data", "pop_polygons")
 
 # 集落データファイル
 villages_file = os.path.join("./input_data", "villages.csv")

@@ -11,6 +11,7 @@ from library.pop_polygon_dao import PopPolygonDAO
 # import library.common_function as cf
 import library.make_input_functions as mif
 from library.point_container import PointContainer
+from library.setting import RegionSetting
 
 
 def main():
@@ -40,8 +41,11 @@ def main():
     dao = PopPointDAO(fp.pop_point_file)
     dao.make_pop_point_data(all_points)
 
+    # dao = PopPointDAO(fp.pop_point_file)
+    # all_points = dao.read_pop_point_data()
+
     # 人口ポリゴンデータの作成
-    make_mesh_polygon_data(fp.raw_mesh_json_polygon_dir, all_points, fp.pop_polygon_file)
+    make_mesh_polygon_data(fp.raw_mesh_json_polygon_dir, all_points, fp.pop_polygon_dir)
 
 
 def read_pop_data(raw_mesh_json_dir, raw_pop_dir):
@@ -87,24 +91,32 @@ def read_pop_data(raw_mesh_json_dir, raw_pop_dir):
     return all_points
 
 
-def make_mesh_polygon_data(raw_mesh_json_polygon_dir, all_points, pop_polygon_file):
+def make_mesh_polygon_data(raw_mesh_json_polygon_dir, all_points, pop_polygon_dir):
     """
     メッシュポリゴンのデータリストを返す
     :param raw_mesh_json_polygon_dir:
     :param all_points:
-    :param pop_polygon_file
+    :param pop_polygon_dir
     :return:
     """
     print("メッシュポリゴンデータ作成")
-    polygon_dao = PopPolygonDAO(pop_polygon_file)
-    polygon_dao.clear_pop_polygon_data()
+
+    # 書き出しファイルを都道府県ごとに初期化
+    for pref in RegionSetting.get_all_prefs():
+        polygon_dao = PopPolygonDAO(pop_polygon_dir + "/" + pref + ".csv")
+        polygon_dao.clear_pop_polygon_data()
+    # polygon_dao = PopPolygonDAO(pop_polygon_file)
+    # polygon_dao.clear_pop_polygon_data()
 
     # 1次メッシュ区分ごとに処理しファイルに追記していく
     mesh_files = glob.glob(os.path.join(raw_mesh_json_polygon_dir, "*.txt"))
     matched_points = 0  # ポリゴンとマッチしたポイントの数
     for mesh_file in tqdm(mesh_files):
 
-        all_polygons_in_pmesh = []
+        # 都道府県ごとのポリゴンリストを初期化
+        all_polygons_in_pmesh = {}
+        for pref in RegionSetting.get_all_prefs():
+            all_polygons_in_pmesh[pref] = []
 
         # メッシュデータ読み込み
         mpd = JsonMeshPolygonDataReader(mesh_file)
@@ -129,9 +141,10 @@ def make_mesh_polygon_data(raw_mesh_json_polygon_dir, all_points, pop_polygon_fi
                     polygon.pref = point.pref
                     polygon.city = point.city
                     polygon.district = point.district
+                    polygon.is_island = point.is_island
 
-                    # ポリゴンをリストに追加
-                    all_polygons_in_pmesh.append(polygon)
+                    # ポリゴンを都道府県ごとにリストに追加
+                    all_polygons_in_pmesh[polygon.pref].append(polygon)
 
                     # マッチしたポイントをカウント
                     matched_points += 1
@@ -141,7 +154,12 @@ def make_mesh_polygon_data(raw_mesh_json_polygon_dir, all_points, pop_polygon_fi
             if searched_polygons >= len(all_polygons_in_pmesh_including_zero):
                 break
 
-        polygon_dao.add_pop_polygon_data(all_polygons_in_pmesh)
+        # 都道府県ごとに書き出し
+        for pref in RegionSetting.get_all_prefs():
+            polygon_dao = PopPolygonDAO(pop_polygon_dir + "/" + pref + ".csv")
+            polygon_dao.add_pop_polygon_data(all_polygons_in_pmesh[pref])
+
+        # polygon_dao.add_pop_polygon_data(all_polygons_in_pmesh)
 
 
 def register_address(all_points, region_points):
