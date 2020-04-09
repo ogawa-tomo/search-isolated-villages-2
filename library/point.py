@@ -1,5 +1,6 @@
 from settings.constants import *
 from library import common_function as cf
+import os
 
 
 class Point(object):
@@ -283,5 +284,15 @@ class Village(object):
 
     def get_google_map_url(self):
         url = cf.get_google_map_url(self.latitude, self.longitude)
+        return url
+
+    def get_mesh_map_get_url(self, map_file):
+        """
+        メッシュ地図をgetパラメータで取得するURLを発行する
+        :param map_file:
+        :return:
+        """
+        # date = int(os.stat(map_file).st_mtime)
+        url = "/mesh_map?lat=" + str(self.latitude) + "&lon=" + str(self.longitude)+ "&zoom=" + "14" + "&map_file=" + map_file
         return url
 

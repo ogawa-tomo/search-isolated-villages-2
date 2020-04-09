@@ -36,7 +36,7 @@ def main(s):
     output_map.add_polygons(polygons)
 
     # 結果
-    result = Result(villages, s, OUTPUT_HTML_NUM, map_file)
+    result = Result(villages, s, map_file)
 
     return result
 
@@ -154,9 +154,23 @@ class Result(object):
     """
     結果を記録するクラス
     """
-    def __init__(self, sorted_villages, setting, num, map_file):
+    def __init__(self, sorted_villages, setting, map_file):
         self.sorted_villages = sorted_villages
         self.setting = setting
         self.region = setting.region
-        self.num = num
+        self.num = OUTPUT_HTML_NUM
         self.map_file = map_file
+        self.output_map_num = OUTPUT_MAP_NUM
+
+    def get_mesh_map_get_url(self):
+
+        # 地図の中心点
+        lat_list = []
+        lon_list = []
+        for v in self.sorted_villages:
+            lat_list.append(v.latitude)
+            lon_list.append(v.longitude)
+        lat = (min(lat_list) + max(lat_list)) / 2
+        lon = (min(lon_list) + max(lon_list)) / 2
+        url = "/mesh_map?lat=" + str(lat) + "&lon=" + str(lon) + "&zoom=" + "10" + self.map_file
+        return url

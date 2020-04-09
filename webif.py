@@ -4,6 +4,7 @@ import time
 import search_village_main
 import search_faculty_main
 from settings.constants import *
+from library import common_function as cf
 
 app = Flask(__name__)
 title = "秘境集落探索ツール"
@@ -54,6 +55,24 @@ def post():
         return render_template("index.html", result=result, setting=setting)
     else:
         return redirect(url_for('index'))
+
+
+@app.route("/mesh_map")
+def get_mesh_map():
+    """
+    メッシュマップの中心とズームを編集して返す
+    :return:
+    """
+    lat = request.args.get("lat")
+    lon = request.args.get("lon")
+    zoom = request.args.get("zoom")
+    map_file = request.args.get("map_file")
+
+    # マップファイルの中心を編集
+    cf.modify_map(lat, lon, zoom, map_file)
+    q = int(os.stat(map_file).st_mtime)  # キャッシュをクリアして再読み込みするためのパラメータ
+
+    return redirect(map_file + "?q=" + str(q))
 
 
 @app.route("/<faculty>")

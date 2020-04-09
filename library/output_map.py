@@ -32,12 +32,13 @@ class OutputMap(object):
         lon = (min(lon_list) + max(lon_list)) / 2
 
         copyright_osm = '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        copyright_stamen = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>,' \
-                           ' under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. ' \
-                           'Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, ' \
-                           'under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+        # copyright_stamen = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>,' \
+        #                    ' under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. ' \
+        #                    'Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, ' \
+        #                    'under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
 
-        self.map = folium.Map(location=[lat, lon], tiles="Stamen Terrain", attr=copyright_stamen)
+        # self.map = folium.Map(location=[lat, lon], tiles="Stamen Terrain", attr=copyright_stamen)
+        self.map = folium.Map(location=[lat, lon], tiles="cartodbpositron")
         # map_.add_tile_layer("OpenStreetMap", attr=copyright_osm)
         # folium.LayerControl().add_to(self.map)
 
@@ -57,7 +58,7 @@ class OutputMap(object):
             name = p.name
         else:
             raise Exception
-        desc = "".join([str(rank), "位：", name])
+        desc = "".join([str(rank), "位：<br>", name])
 
         # lat_lon = ", ".join([str(p.latitude_round), str(p.longitude_round)])
         # popup = " ".join([desc, lat_lon])
@@ -69,7 +70,8 @@ class OutputMap(object):
         url = p.get_google_map_url()
         a_tag = "<a href=\"" + url + "\" target=_blank>" + lat_lon + "</a>"
         # popup = " ".join([desc, a_tag])
-        popup = "<br>".join([desc, a_tag])
+        population = str(p.population) + "人"
+        popup = "<br>".join([desc, a_tag, population])
 
         marker = folium.Marker([p.latitude, p.longitude], popup=popup,
                                icon=folium.Icon(icon="home", prefix="fa"))
@@ -84,8 +86,8 @@ class OutputMap(object):
         # ポリゴンのgeojsonを取得
         dao = PopPolygonDAO("hoge")  # pathは関係ない
         geojson_data = dao.get_polygon_geojson_data(polygons)
-        with open(self.geojson_path, "w", encoding="utf8") as f:
-            f.write(geojson_data)
+        # with open(self.geojson_path, "w", encoding="utf8") as f:
+        #     f.write(geojson_data)
 
         # ポリゴンのpandasデータフレームを作る
         with open(self.csv_path, "w", encoding="utf8") as f:
@@ -104,7 +106,7 @@ class OutputMap(object):
             columns=["key_code", "population"],
             key_on="feature.properties.KEY_CODE",
             fill_color="OrRd",
-            threshold_scale=[0, 50, 100, 150, 200, 10000],
+            threshold_scale=[0, 25, 50, 75, 100, 125, 150, 10000],
             fill_opacity=0.7,
             line_opacity=0.2,
         ).add_to(self.map)

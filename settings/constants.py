@@ -30,7 +30,7 @@ POP_PARAM = 1
 DIST_PARAM = 2
 
 # マップ出力の最大点数
-OUTPUT_MAP_NUM = 100
+OUTPUT_MAP_NUM = 1000
 
 # 結果のページに出す集落数
 OUTPUT_HTML_NUM = 1000

@@ -45,3 +45,35 @@ class TooBigVillageException(Exception):
     大きすぎる集落を抽出したときに返す例外クラス
     """
     pass
+
+
+def modify_map(lat, lon, zoom, map_file):
+    """
+    マップファイルの中心とズームを編集
+    :param lat:
+    :param lon:
+    :param zoom:
+    :param map_file:
+    :return:
+    """
+    # マップ読み込み
+    with open(map_file, "r", encoding="utf8") as f:
+        lines = f.readlines()
+
+    # 新データ作り
+    new_lines = []
+    for i, line in enumerate(lines):
+        if line.lstrip()[:6] == "center":
+            # centerを編集
+            new_line = "center: [" + str(lat) + ", " + str(lon) + "],"
+        elif line.lstrip()[:4] == "zoom":
+            new_line = "zoom: " + str(zoom) + ","
+        else:
+            new_line = line
+        new_lines.append(new_line)
+
+    # 新データに置き換え
+    with open(map_file, "w", encoding="utf8") as f:
+        f.write("\n".join(new_lines))
+        # f.write("hoge")
+

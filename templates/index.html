@@ -236,7 +236,7 @@
 {% if result %}
     <h2 id="result">探索結果</h2>
     <br>
-    <a href="{{ result.map_file }}" target="_blank">マップ表示（上位100件まで）</a>
+    <a href="{{ result.map_file }}" target="_blank">マップ表示（上位{{ result.output_map_num }}件まで）</a>
     <br><br>
     <table class="table table-responsive">
         <tr>
@@ -245,6 +245,7 @@
             <th>市町村</th>
             <th>地区</th>
             <th>Google Map</th>
+            <th>Mesh Map</th>
             <th>人口</th>
             <th>範囲</th>
             <!--<th>海岸距離(km)</th>-->
@@ -260,6 +261,9 @@
                 <td>{{ v.district }}</td>
                 <td>
                     <a href="{{ v.get_google_map_url() }}" target="_blank">{{ v.latitude_round }},{{ v.longitude_round }}</a>
+                </td>
+                <td>
+                    <a href="{{ v.get_mesh_map_get_url(result.map_file) }}" target="_blank">{{ v.latitude_round }},{{ v.longitude_round }}</a>
                 </td>
                 <td>{{ v.population }}<font size="-1">人</font></td>
                 <td>{{ v.size  }}<font size="-1">メッシュ</font></td>
