@@ -68,13 +68,14 @@ class OutputMap(object):
 
         lat_lon = ",".join([str(p.latitude_round), str(p.longitude_round)])
         url = p.get_google_map_url()
-        a_tag = "<a href=\"" + url + "\" target=_blank>" + lat_lon + "</a>"
+        a_tag = "<a href=\"" + url + "\" target=_blank>Google_Map(" + lat_lon + ")</a>"
         # popup = " ".join([desc, a_tag])
         population = str(p.population) + "人"
         popup = "<br>".join([desc, a_tag, population])
 
-        marker = folium.Marker([p.latitude, p.longitude], popup=popup,
-                               icon=folium.Icon(icon="home", prefix="fa"))
+        # marker = folium.Marker([p.latitude, p.longitude], popup=popup,
+        #                        icon=folium.Icon(icon="home", prefix="fa"))
+        marker = folium.Marker([p.latitude, p.longitude], popup=popup)
         return marker
 
     def add_polygons(self, polygons):

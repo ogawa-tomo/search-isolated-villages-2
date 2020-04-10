@@ -29,11 +29,10 @@ def main(s):
     # # ポリゴンデータを条件に従って抽出
     # polygons = extract_objects(polygons, s)
 
-    # 設定に従ってポリゴンを抽出
-    polygons = read_polygons(fp.pop_polygon_dir, s)
-
-    # ポリゴンをマップに追加
-    output_map.add_polygons(polygons)
+    # 抽出条件が都道府県のときのみ、設定に従ってポリゴンを抽出
+    if RegionSetting.is_pref(s.region):
+        polygons = read_polygons(fp.pop_polygon_dir, s)
+        output_map.add_polygons(polygons)
 
     # 結果
     result = Result(villages, s, map_file)
@@ -161,6 +160,12 @@ class Result(object):
         self.num = OUTPUT_HTML_NUM
         self.map_file = map_file
         self.output_map_num = OUTPUT_MAP_NUM
+
+        # 都道府県判定（メッシュ地図を表示するかの判断のため
+        if RegionSetting.is_pref(setting.region):
+            self.is_pref = True
+        else:
+            self.is_pref = False
 
     def get_mesh_map_get_url(self):
 
