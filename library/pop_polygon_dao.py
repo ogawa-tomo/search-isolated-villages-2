@@ -1,6 +1,5 @@
 import csv
 from library.point import *
-from tqdm import tqdm
 import json
 
 
@@ -80,11 +79,11 @@ class PopPolygonDAO(object):
         """
 
         pop_polygons = []
-        print("人口ポリゴンを読み込み中")
+        # print("人口ポリゴンを読み込み中")
 
         with open(self.path, "r", encoding="utf8") as f:
             reader = csv.reader(f)
-            for i, line in tqdm(enumerate(reader)):
+            for i, line in enumerate(reader):
 
                 if i == 0:
                     continue

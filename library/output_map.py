@@ -16,7 +16,7 @@ class OutputMap(object):
         self.csv_path = path.replace(".html", "csv")
         self.map = None
 
-    def output_map(self, points, num):
+    def output_map(self, points, num, pref=None):
 
         # 集落なしなら表示なし
         if len(points) == 0:
@@ -43,22 +43,31 @@ class OutputMap(object):
         # folium.LayerControl().add_to(self.map)
 
         for i, p in enumerate(points[:num]):
-            marker = self.get_marker(p, i + 1)
+            marker = self.get_marker(p, i + 1, pref=pref)
             marker.add_to(self.map)
 
-        if not os.path.isdir(fp.output_dir):
-            os.makedirs(fp.output_dir)
         self.map.save(self.html_path)
 
     @staticmethod
-    def get_marker(p, rank):
+    def get_marker(p, rank, pref=None):
+        """
+        マーカーを作る
+        :param p:
+        :param rank:
+        :param pref: 都道府県指定（指定された場合、「～県〇位」のように記述）
+        :return:
+        """
         if type(p) is Village:
             name = "".join([p.pref, p.city, p.district])
         elif type(p) is FacultyPoint:
             name = p.name
         else:
             raise Exception
-        desc = "".join([str(rank), "位：<br>", name])
+
+        if pref is None:
+            desc = "".join([str(rank), "位：<br>", name])
+        else:
+            desc = "".join([pref, str(rank), "位：<br>", name])
 
         # lat_lon = ", ".join([str(p.latitude_round), str(p.longitude_round)])
         # popup = " ".join([desc, lat_lon])
@@ -97,6 +106,7 @@ class OutputMap(object):
             for p in polygons:
                 writer.writerow([p.key_code, p.population])
         polygon_df = pd.read_csv(self.csv_path)
+        os.remove(self.csv_path)
         polygon_df["key_code"] = polygon_df["key_code"].astype("str")
 
         # コロプレス図をつくる

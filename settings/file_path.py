@@ -35,6 +35,9 @@ pop_polygon_dir = os.path.join("./input_data", "pop_polygons")
 # 集落データファイル
 villages_file = os.path.join("./input_data", "villages.csv")
 
+# メッシュ図を
+mesh_map_dir = os.path.join("./static", "mesh_map")
+
 # # 学校生データファイル
 # elementary_schools_shp_dir = os.path.join("./raw_data", "elementary_school_shp")
 #
