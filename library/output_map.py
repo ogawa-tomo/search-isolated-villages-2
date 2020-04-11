@@ -46,6 +46,8 @@ class OutputMap(object):
             marker = self.get_marker(p, i + 1, pref=pref)
             marker.add_to(self.map)
 
+        if not os.path.isdir(fp.output_dir):
+            os.makedirs(fp.output_dir)
         self.map.save(self.html_path)
 
     @staticmethod
