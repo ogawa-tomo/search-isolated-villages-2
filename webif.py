@@ -70,12 +70,11 @@ def get_mesh_map():
     map_file = request.args.get("map_file")
 
     # マップファイルの中心を編集
-    new_map_file = os.path.join(fp.output_dir, "map_" + str(time.time()).replace(".", "") + ".html")
-    cf.create_modified_map(lat, lon, zoom, map_file, new_map_file)
-    new_map_file = new_map_file.replace("\\", "/")  # バックスラッシュをスラッシュに置換
-    q = int(os.stat(new_map_file).st_mtime)  # キャッシュをクリアして再読み込みするためのパラメータ
+    cf.modify_map(lat, lon, zoom, map_file)
+    map_file = map_file.replace("\\", "/")  # バックスラッシュをスラッシュに置換
+    q = int(os.stat(map_file).st_mtime)  # キャッシュをクリアして再読み込みするためのパラメータ
 
-    return redirect(new_map_file + "?q=" + str(q))
+    return redirect(map_file + "?q=" + str(q))
 
 
 @app.route("/<faculty>")

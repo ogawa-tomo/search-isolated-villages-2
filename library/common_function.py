@@ -48,14 +48,13 @@ class TooBigVillageException(Exception):
     pass
 
 
-def create_modified_map(lat, lon, zoom, map_file, new_map_file):
+def modify_map(lat, lon, zoom, map_file):
     """
     マップファイルの中心とズームを編集して新たにマップを作る
     :param lat:
     :param lon:
     :param zoom:
     :param map_file:
-    :param new_map_file:
     :return:
     """
     
@@ -75,9 +74,6 @@ def create_modified_map(lat, lon, zoom, map_file, new_map_file):
             new_line = line
         new_lines.append(new_line)
 
-    # 新データに置き換え
-    print(os.getcwd())
-    new_map_file_path_list = new_map_file.lstrip("./").split("/")
-    new_map_file = os.path.join(*new_map_file_path_list)  # ファイル名に"/"があるとエラー
-    with open(new_map_file, "w", encoding="utf8") as f:
+    # 書き出し
+    with open(map_file, "w", encoding="utf8") as f:
         f.write("\n".join(new_lines))
