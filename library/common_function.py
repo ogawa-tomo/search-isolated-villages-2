@@ -76,5 +76,7 @@ def create_modified_map(lat, lon, zoom, map_file, new_map_file):
         new_lines.append(new_line)
 
     # 新データに置き換え
+    new_map_file_path_list = new_map_file.lstrip("./").split("\\")
+    new_map_file = os.path.join(*new_map_file_path_list)  # ファイル名に"/"があるとエラー
     with open(new_map_file, "w", encoding="utf8") as f:
         f.write("\n".join(new_lines))
