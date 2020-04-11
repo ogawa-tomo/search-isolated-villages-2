@@ -48,13 +48,14 @@ class TooBigVillageException(Exception):
     pass
 
 
-def modify_map(lat, lon, zoom, map_file):
+def create_modified_map(lat, lon, zoom, map_file, new_map_file):
     """
     マップファイルの中心とズームを編集して新たにマップを作る
     :param lat:
     :param lon:
     :param zoom:
     :param map_file:
+    :param new_map_file:
     :return:
     """
     
@@ -75,5 +76,5 @@ def modify_map(lat, lon, zoom, map_file):
         new_lines.append(new_line)
 
     # 書き出し
-    with open(map_file, "w", encoding="utf8") as f:
+    with open(new_map_file, "w", encoding="utf8") as f:
         f.write("\n".join(new_lines))

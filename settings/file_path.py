@@ -124,7 +124,7 @@ def get_faculty_csv_file(faculty_type):
 correct_faculty_file = os.path.join("./settings", "correct_faculty.csv")
 
 # アウトプットフォルダ
-output_dir = os.path.join("./static", "output")
+output_dir = os.path.join("./tmp")
 
 # マップ出力
 # output_map_file = os.path.join("./output", "map_" + str(time.time()).replace(".", "") + ".html")
