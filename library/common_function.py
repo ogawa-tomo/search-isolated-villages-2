@@ -1,5 +1,6 @@
 import math
 from settings.constants import *
+import time
 
 
 def get_distance(x1, y1, x2, y2):
@@ -47,15 +48,17 @@ class TooBigVillageException(Exception):
     pass
 
 
-def modify_map(lat, lon, zoom, map_file):
+def create_modified_map(lat, lon, zoom, map_file, new_map_file):
     """
-    マップファイルの中心とズームを編集
+    マップファイルの中心とズームを編集して新たにマップを作る
     :param lat:
     :param lon:
     :param zoom:
     :param map_file:
+    :param new_map_file:
     :return:
     """
+    
     # マップ読み込み
     with open(map_file, "r", encoding="utf8") as f:
         lines = f.readlines()
@@ -73,7 +76,5 @@ def modify_map(lat, lon, zoom, map_file):
         new_lines.append(new_line)
 
     # 新データに置き換え
-    with open(map_file, "w", encoding="utf8") as f:
+    with open(new_map_file, "w", encoding="utf8") as f:
         f.write("\n".join(new_lines))
-        # f.write("hoge")
-
