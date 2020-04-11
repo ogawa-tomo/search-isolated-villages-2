@@ -38,7 +38,7 @@ class OutputMap(object):
         #                    'under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
 
         # self.map = folium.Map(location=[lat, lon], tiles="Stamen Terrain", attr=copyright_stamen)
-        self.map = folium.Map(location=[lat, lon], tiles="cartodbpositron")
+        self.map = folium.Map(location=[lat, lon], tiles="cartodbpositron", control_scale=True)
         # map_.add_tile_layer("OpenStreetMap", attr=copyright_osm)
         # folium.LayerControl().add_to(self.map)
 
