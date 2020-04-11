@@ -18,9 +18,14 @@ def main(s):
     villages = extract_villages(villages, s)
 
     # マップ出力
-    map_file = os.path.join(fp.output_dir, "map_" + str(time.time()).replace(".", "") + ".html")
-    output_map = OutputMap(map_file)
-    output_map.output_map(villages, OUTPUT_MAP_NUM)
+    if RegionSetting.is_pref(s.region):
+        # 都道府県の場合は、既に出力してある都道府県別のhtmlファイル（人口分布つき）
+        map_file = os.path.join(fp.mesh_map_dir, s.region + ".html")
+    else:
+        # 都道府県でない場合は、その場でmapを作る（人口分布なし）
+        map_file = os.path.join(fp.output_dir, "map_" + str(time.time()).replace(".", "") + ".html")
+        output_map = OutputMap(map_file)
+        output_map.output_map(villages, OUTPUT_MAP_NUM)
 
     # ポリゴン人口データを読み込み
     # dao = PopPolygonDAO(fp.pop_polygon_file)
@@ -30,9 +35,9 @@ def main(s):
     # polygons = extract_objects(polygons, s)
 
     # 抽出条件が都道府県のときのみ、設定に従ってポリゴンを抽出
-    if RegionSetting.is_pref(s.region):
-        polygons = read_polygons(fp.pop_polygon_dir, s)
-        output_map.add_polygons(polygons)
+    # if RegionSetting.is_pref(s.region):
+    #     polygons = read_polygons(fp.pop_polygon_dir, s)
+    #     output_map.add_polygons(polygons)
 
     # 結果
     result = Result(villages, s, map_file)
@@ -177,5 +182,5 @@ class Result(object):
             lon_list.append(v.longitude)
         lat = (min(lat_list) + max(lat_list)) / 2
         lon = (min(lon_list) + max(lon_list)) / 2
-        url = "/mesh_map?lat=" + str(lat) + "&lon=" + str(lon) + "&zoom=" + "10" + self.map_file
+        url = "/mesh_map?lat=" + str(lat) + "&lon=" + str(lon) + "&zoom=" + "10&map_file=" + self.map_file
         return url

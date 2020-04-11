@@ -70,6 +70,7 @@ def get_mesh_map():
 
     # マップファイルの中心を編集
     cf.modify_map(lat, lon, zoom, map_file)
+    map_file = map_file.replace("\\", "/")  # バックスラッシュをスラッシュに置換
     q = int(os.stat(map_file).st_mtime)  # キャッシュをクリアして再読み込みするためのパラメータ
 
     return redirect(map_file + "?q=" + str(q))
