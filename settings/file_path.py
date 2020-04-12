@@ -35,7 +35,7 @@ pop_polygon_dir = os.path.join("./input_data", "pop_polygons")
 # 集落データファイル
 villages_file = os.path.join("./input_data", "villages.csv")
 
-# メッシュ図を
+# メッシュ図格納ディレクトリ
 mesh_map_dir = os.path.join("./static", "mesh_map")
 
 # # 学校生データファイル
@@ -118,6 +118,15 @@ def get_faculty_csv_file(faculty_type):
     :return:
     """
     return os.path.join("./input_data", faculty_type + ".csv")
+
+
+def get_faculty_mesh_map_dir(faculty_type):
+    """
+    施設の人口メッシュ図格納ディレクトリ
+    :param faculty_type:
+    :return:
+    """
+    return os.path.join("./static", "mesh_map_" + faculty_type)
 
 
 # 施設修正データファイル

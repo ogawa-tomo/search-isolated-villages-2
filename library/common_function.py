@@ -78,3 +78,17 @@ def create_modified_map(lat, lon, zoom, map_file, new_map_file):
     # 書き出し
     with open(new_map_file, "w", encoding="utf8") as f:
         f.write("\n".join(new_lines))
+
+
+def get_mesh_map_get_url(lat, lon, zoom, map_file):
+    """
+    (lat,lon)を中心にしzoomを修正したメッシュ地図をgetパラメータで取得するURLを発行する
+    （webif.pyで定義したGET関数を利用）
+    :param lat:
+    :param lon:
+    :param zoom:
+    :param map_file:
+    :return:
+    """
+    return "/mesh_map?lat=" + str(lat) + "&lon=" + str(lon) + "&zoom=" + str(zoom) + "&map_file=" + map_file
+

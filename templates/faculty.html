@@ -200,8 +200,8 @@
                 {% if setting %}
                     {{ setting.island_setting }}
                 {% else %}
-                    <label><input type="radio" name="island_setting" value="離島を含まない" checked>離島を含まない</label>
-                    <label><input type="radio" name="island_setting" value="離島を含む">離島を含む</label>
+                    <label><input type="radio" name="island_setting" value="離島を含む" checked>離島を含む</label>
+                    <label><input type="radio" name="island_setting" value="離島を含まない">離島を含まない</label>
                     <label><input type="radio" name="island_setting" value="離島のみ">離島のみ</label>
                 {% endif %}
             </td>
@@ -227,7 +227,11 @@
 {% if result %}
 <h2 id="result">探索結果</h2>
     <br>
-        <a href="../{{ result.map_file }}" target="_blank">マップ表示（上位100件まで）</a>
+    <a href="{{ result.get_mesh_map_get_url() }}" target="_blank">マップ表示（上位100件まで）</a><br>
+    <font size="-1">
+        ※上位{{ result.output_map_num }}件まで<br>
+        ※都道府県単位の探索時のみ人口分布を表示
+    </font>
     <br><br>
     <table class="table table-responsive">
         <tr>
@@ -236,7 +240,7 @@
             <th>都道府県</th>
             <th>市町村</th>
             <th width="200">地区</th>
-            <th>Google Map</th>
+            <th>地図</th>
             <th>都会度</th>
         </tr>
         {% for f in result.faculties[:result.num] %}
@@ -247,7 +251,11 @@
                 <td>{{ f.city }}</td>
                 <td>{{ f.district }}</td>
                 <td>
-                    <a href="{{ f.get_google_map_url() }}" target="_blank">{{ f.latitude_round }},{{ f.longitude_round }}</a>
+                    <a href="{{ f.get_google_map_url() }}" target="_blank">Google Map</a>
+                    {% if result.is_pref %}
+                        <!-- 都道府県のときだけ、人口分布図を表示-->
+                        <a href="{{ f.get_mesh_map_get_url(result.map_file) }}" target="_blank">人口分布図</a>
+                    {% endif %}
                 </td>
                 <td>{{ f.urban_point_round }}</td>
             </tr>

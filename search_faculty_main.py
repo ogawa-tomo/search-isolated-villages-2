@@ -5,6 +5,7 @@ from library.island_checker import IslandChecker
 from library.setting import RegionSetting
 from library.output_map import OutputMap
 import time
+import library.common_function as cf
 
 
 def main(faculty_setting):
@@ -33,9 +34,14 @@ def main(faculty_setting):
     faculties = extract_faculties(faculty_points, faculty_setting)
 
     # マップ出力
-    map_file = os.path.join(fp.output_dir, "map_" + str(time.time()).replace(".", "") + ".html")
-    output_map = OutputMap(map_file)
-    output_map.output_map(faculties, OUTPUT_MAP_NUM)
+    if RegionSetting.is_pref(faculty_setting.region):
+        # 都道府県の場合は、既に出力してある都道府県別のhtmlファイル（人口分布つき）
+        map_file = os.path.join(fp.get_faculty_mesh_map_dir(faculty_setting.faculty), faculty_setting.region + ".html")
+    else:
+        # 都道府県でない場合は、その場でmapを作る（人口分布なし）
+        map_file = os.path.join(fp.output_dir, "map_" + str(time.time()).replace(".", "") + ".html")
+        output_map = OutputMap(map_file)
+        output_map.output_map(faculties, OUTPUT_MAP_NUM)
 
     # 結果
     result = Result(faculties, faculty_setting, OUTPUT_HTML_NUM, map_file)
@@ -101,3 +107,24 @@ class Result(object):
         self.region = setting.region
         self.num = num
         self.map_file = map_file
+        self.output_map_num = OUTPUT_MAP_NUM
+
+        # 都道府県判定（メッシュ地図を表示するかの判断のため）
+        if RegionSetting.is_pref(setting.region):
+            self.is_pref = True
+        else:
+            self.is_pref = False
+
+    def get_mesh_map_get_url(self):
+
+        # 地図の中心点
+        lat_list = []
+        lon_list = []
+        for f in self.faculties:
+            lat_list.append(f.latitude)
+            lon_list.append(f.longitude)
+        lat = (min(lat_list) + max(lat_list)) / 2
+        lon = (min(lon_list) + max(lon_list)) / 2
+        # url = "/mesh_map?lat=" + str(lat) + "&lon=" + str(lon) + "&zoom=" + "10&map_file=" + self.map_file
+        url = cf.get_mesh_map_get_url(lat, lon, ZOOM_DEFAULT, self.map_file)
+        return url

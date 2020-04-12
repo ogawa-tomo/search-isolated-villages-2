@@ -44,6 +44,10 @@ LAT_LON_ROUND = 5
 # 都会度を丸める数字
 URBAN_POINT_ROUND = 2
 
+# folium地図のズーム値
+ZOOM_DEFAULT = 10
+ZOOM_POINT = 14
+
 ZENKOKU = "全国"
 ELEMENTARY_SCHOOL = "elementary_school"
 POST_OFFICE = "post_office"

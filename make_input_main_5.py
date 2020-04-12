@@ -29,7 +29,6 @@ def main():
 
         # 集落データの読み込み
         villages_in_pref = extract_villages_by_pref(all_villages, pref)
-        villages_in_pref = villages_in_pref
 
         # マップづくり
         map_file = os.path.join(fp.mesh_map_dir, pref + ".html")

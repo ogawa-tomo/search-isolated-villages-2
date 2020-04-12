@@ -27,6 +27,15 @@ class Point(object):
     def __repr__(self):
         return self.key_code
 
+    def get_mesh_map_get_url(self, map_file):
+        """
+        メッシュ地図をgetパラメータで取得するURLを発行する
+        :param map_file:
+        :return:
+        """
+        url = cf.get_mesh_map_get_url(self.latitude, self.longitude, ZOOM_POINT, map_file)
+        return url
+
 
 class FacultyPoint(Point):
 
@@ -293,6 +302,7 @@ class Village(object):
         :return:
         """
         # date = int(os.stat(map_file).st_mtime)
-        url = "/mesh_map?lat=" + str(self.latitude) + "&lon=" + str(self.longitude)+ "&zoom=" + "14" + "&map_file=" + map_file
+        # url = "/mesh_map?lat=" + str(self.latitude) + "&lon=" + str(self.longitude)+ "&zoom=" + "14" + "&map_file=" + map_file
+        url = cf.get_mesh_map_get_url(self.latitude, self.longitude, ZOOM_POINT, map_file)
         return url
 

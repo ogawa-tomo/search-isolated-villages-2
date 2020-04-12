@@ -18,18 +18,19 @@ class OutputMap(object):
 
     def output_map(self, points, num, pref=None):
 
-        # 集落なしなら表示なし
-        if len(points) == 0:
-            return
-
         # 地図の中心点
-        lat_list = []
-        lon_list = []
-        for p in points:
-            lat_list.append(p.latitude)
-            lon_list.append(p.longitude)
-        lat = (min(lat_list) + max(lat_list)) / 2
-        lon = (min(lon_list) + max(lon_list)) / 2
+        if len(points) == 0:
+            # ポイントがないなら日本の中心
+            lat = 35
+            lon = 135
+        else:
+            lat_list = []
+            lon_list = []
+            for p in points:
+                lat_list.append(p.latitude)
+                lon_list.append(p.longitude)
+            lat = (min(lat_list) + max(lat_list)) / 2
+            lon = (min(lon_list) + max(lon_list)) / 2
 
         copyright_osm = '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         # copyright_stamen = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>,' \
@@ -46,8 +47,8 @@ class OutputMap(object):
             marker = self.get_marker(p, i + 1, pref=pref)
             marker.add_to(self.map)
 
-        if not os.path.isdir(fp.output_dir):
-            os.makedirs(fp.output_dir)
+        # if not os.path.isdir(fp.output_dir):
+        #     os.makedirs(fp.output_dir)
         self.map.save(self.html_path)
 
     @staticmethod
@@ -81,8 +82,13 @@ class OutputMap(object):
         url = p.get_google_map_url()
         a_tag = "<a href=\"" + url + "\" target=_blank>Google_Map(" + lat_lon + ")</a>"
         # popup = " ".join([desc, a_tag])
-        population = str(p.population) + "人"
-        popup = "<br>".join([desc, a_tag, population])
+
+        popup = None
+        if type(p) is Village:
+            population = str(p.population) + "人"
+            popup = "<br>".join([desc, a_tag, population])
+        elif type(p) is FacultyPoint:
+            popup = "<br>".join([desc, a_tag])
 
         # marker = folium.Marker([p.latitude, p.longitude], popup=popup,
         #                        icon=folium.Icon(icon="home", prefix="fa"))
