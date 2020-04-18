@@ -152,6 +152,16 @@ class PopMeshPolygon(Point):
         self.is_island = None
 
 
+class R774Point(Point):
+    """
+    R774ポイントクラス
+    """
+    def __init__(self):
+        super().__init__()
+        self.name = ""
+        self.description = ""
+
+
 class Village(object):
     """
     集落クラス（ポイントの集合）

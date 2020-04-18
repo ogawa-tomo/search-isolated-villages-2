@@ -18,7 +18,7 @@ class JsonPointDataReader(object):
         self.raw_data_set = self.get_raw_data_set()
 
     def get_raw_data_set(self):
-        with open(self.file, "r") as f:
+        with open(self.file, "r", encoding="utf8") as f:
             data = f.read()
         data = json.loads(data)
         data = data["features"]
@@ -91,6 +91,34 @@ class JsonMeshPointDataReader(JsonPointDataReader):
 
     def get_points(self):
         return self.points
+
+
+class JsonR774PointDataReader(JsonPointDataReader):
+    """
+    R774のデータを読み込むクラス
+    """
+    def __init__(self, file):
+        super().__init__(file)
+        self.points = []
+        self.read_points()
+
+    def read_points(self):
+
+        for raw_data in self.raw_data_set:
+            p = R774Point()
+            data = JsonR774PointData(raw_data)
+            p.latitude = data.get_latitude()
+            p.longitude = data.get_longitude()
+            p.name = data.get_name()
+            p.description = data.get_description()
+
+            self.points.append(p)
+
+    def get_points(self):
+        return self.points
+
+
+
 
 
 class JsonMeshPolygonDataReader(JsonPointDataReader):
@@ -291,6 +319,15 @@ class JsonRegionPointData(JsonPointData):
             return ""
         else:
             return data
+
+
+class JsonR774PointData(JsonPointData):
+
+    def get_name(self):
+        return self.data["properties"]["name"]
+
+    def get_description(self):
+        return self.data["properties"]["description"].replace("\n", " ")
 
 
 class JsonFacultyData(JsonPointData, metaclass=ABCMeta):

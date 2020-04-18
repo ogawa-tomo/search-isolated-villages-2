@@ -23,7 +23,7 @@ def main():
     region_points = mif.read_region_data(fp.raw_region_json_dir)
 
     # 住所データ読み込み
-    register_address(all_points, region_points)
+    mif.register_address(all_points, region_points)
 
     # 住所をもとに本土の点と離島の点をそれぞれコンテナに登録
     mainland_point_container = PointContainer()
@@ -83,34 +83,6 @@ def read_pop_data(raw_mesh_json_dir, raw_pop_dir):
                     break
 
     return all_points
-
-
-def register_address(all_points, region_points):
-    """
-    ポイントリストに住所を登録する
-    :param all_points:
-    :param region_points:
-    :return:
-    """
-
-    # 各Pointごとに、一番近い小地域ポイントの住所を登録
-    print("住所登録")
-    for point in tqdm(all_points):
-
-        min_dist = 0
-        nearest_region_point = None
-        for i, region_point in enumerate(region_points):
-            dist = point.get_distance(region_point)
-            if i == 0:
-                min_dist = dist
-                nearest_region_point = region_point
-                continue
-            if dist < min_dist:
-                min_dist = dist
-                nearest_region_point = region_point
-        point.pref = nearest_region_point.pref
-        point.city = nearest_region_point.city
-        point.district = nearest_region_point.district
 
 
 def register_neighbors(point_container):

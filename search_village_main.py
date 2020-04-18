@@ -1,5 +1,6 @@
 from library.village_dao import VillageDAO
 from library.pop_polygon_dao import PopPolygonDAO
+from library.r774_point_dao import R774PointDAO
 import settings.file_path as fp
 from library.island_checker import IslandChecker
 from library.setting import RegionSetting
@@ -24,21 +25,17 @@ def main(s):
         map_file = os.path.join(fp.mesh_map_dir, s.region + ".html")
     else:
         # 都道府県でない場合は、その場でmapを作る（人口分布なし）
+
+        # r774データを読み込み、条件に従って抽出
+        r774_dao = R774PointDAO(fp.r774_file)
+        r774_points = r774_dao.read_r774_point_data()
+        r774_points = extract_r774_points(r774_points, s)
+
+        # map作成
         map_file = os.path.join(fp.output_dir, "map_" + str(time.time()).replace(".", "") + ".html")
         output_map = OutputMap(map_file)
         output_map.output_map(villages, OUTPUT_MAP_NUM)
-
-    # ポリゴン人口データを読み込み
-    # dao = PopPolygonDAO(fp.pop_polygon_file)
-    # polygons = dao.read_pop_polygon_data()
-    #
-    # # ポリゴンデータを条件に従って抽出
-    # polygons = extract_objects(polygons, s)
-
-    # 抽出条件が都道府県のときのみ、設定に従ってポリゴンを抽出
-    # if RegionSetting.is_pref(s.region):
-    #     polygons = read_polygons(fp.pop_polygon_dir, s)
-    #     output_map.add_polygons(polygons)
+        output_map.add_r774_points(r774_points)
 
     # 結果
     result = Result(villages, s, map_file)
@@ -124,35 +121,47 @@ def extract_villages(villages, s):
     return extracted_villages
 
 
-def read_polygons(pop_polygon_dir, s):
+def extract_r774_points(r774_points, s):
     """
-    設定で指定された都道府県のポリゴンを抽出する
-    :param pop_polygon_dir:
+    r774ポイントを条件に従って抽出する
+    :param r774_points:
     :param s:
     :return:
     """
 
-    # ポリゴンを抽出する都道府県
-    polygon_prefs = []
-    if s.region == ZENKOKU:
-        # 全部
-        polygon_prefs = RegionSetting.get_all_prefs()
-    elif RegionSetting.is_region(s.region):
-        # 地域指定のとき、地域に含まれる都道府県
-        polygon_prefs = RegionSetting.get_region_prefs(s.region)
-    elif RegionSetting.is_pref(s.region):
-        # 都道府県指定のとき、その都道府県
-        polygon_prefs.append(s.region)
-    else:
-        raise Exception("地域が不正です")
+    extracted_points = []
+    for p in r774_points:
 
-    # 抽出するポリゴン
-    polygons = []
-    for pref in polygon_prefs:
-        dao = PopPolygonDAO(pop_polygon_dir + "/" + pref + ".csv")
-        polygons.extend(dao.read_pop_polygon_data())
+        # 地域チェック
+        if s.region == ZENKOKU:
+            pass
+        elif RegionSetting.is_region(s.region):
+            # 地域指定のとき
+            if RegionSetting.get_region_by_pref(p.pref) != s.region:
+                continue
+        elif RegionSetting.is_pref(s.region):
+            # 都道府県指定のとき
+            if p.pref != s.region:
+                continue
+        else:
+            raise Exception("地域が不正です")
 
-    return polygons
+        # キーワードチェック
+        if s.key_words != "":
+            key_words = s.key_words.split()
+            address = p.pref + p.city + p.district + p.name
+            key_word_in_address = True
+            for key_word in key_words:
+                if key_word not in address:
+                    # 住所に含まれていないキーワードが1つでもあればFalse
+                    key_word_in_address = False
+                    break
+            if not key_word_in_address:
+                continue
+
+        extracted_points.append(p)
+
+    return extracted_points
 
 
 class Result(object):

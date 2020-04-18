@@ -38,6 +38,12 @@ villages_file = os.path.join("./input_data", "villages.csv")
 # メッシュ図格納ディレクトリ
 mesh_map_dir = os.path.join("./static", "mesh_map")
 
+# r774生jsonデータファイル
+r774_raw_json_file = os.path.join("./raw_data", "r774_geojson", "r774__________________.geojson")
+
+# r774データファイル
+r774_file = os.path.join("./input_data", "r774_points.csv")
+
 # # 学校生データファイル
 # elementary_schools_shp_dir = os.path.join("./raw_data", "elementary_school_shp")
 #

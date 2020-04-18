@@ -132,17 +132,37 @@ class OutputMap(object):
 
         self.map.save(self.html_path)
 
+    def add_r774_points(self, r774_points):
+        """
+        R774のポイントを追加する
+        :param r774_points:
+        :return:
+        """
 
+        for p in r774_points:
 
+            # 説明URLをつくる
+            descriptions = p.description.split(" ")
+            descriptions_url = ""
+            for d in descriptions:
+                desc_url = "<a href=\"" + d + "\" target=\"_blank\">" + d + "</a><br>"
+                descriptions_url += desc_url
 
+            # マーカーのポップアップをつくる
+            r774_twitter = "https://twitter.com/kendou774"
+            r774_osm = "http://umap.openstreetmap.fr/ja/map/r774_368811#5/36.297/139.680"
+            muramoto_twitter = "https://twitter.com/muramototomoya"
+            popup = "<br>".join([
+                "<b>" + p.name + "</b>",
+                "",
+                descriptions_url,
+                "出典：",
+                "<a href=\"" + r774_osm + "\" target=\"_blank\">R774@まとめ屋 さんの訪問先まとめマップ</a>",
+                "R774@まとめ屋 さん <a href=\"" + r774_twitter + "\" target=\"_blank\">@kendou774</a>",
+                "muramoto さん <a href=\"" + muramoto_twitter + "\" target=\"_blank\">@muramototomoya</a>"
+            ])
 
+            marker = folium.Marker([p.latitude, p.longitude], popup=popup, icon=folium.Icon(color='red', icon='info-sign'))
+            marker.add_to(self.map)
 
-
-
-
-
-
-
-
-
-
+        self.map.save(self.html_path)
