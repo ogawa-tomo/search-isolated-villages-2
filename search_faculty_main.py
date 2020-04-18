@@ -1,4 +1,5 @@
 from library.faculty_dao import FacultyDAO
+from library.r774_point_dao import R774PointDAO
 import settings.file_path as fp
 from settings.constants import *
 from library.island_checker import IslandChecker
@@ -11,20 +12,6 @@ import library.common_function as cf
 def main(faculty_setting):
 
     input_file = fp.get_faculty_csv_file(faculty_setting.faculty)
-    # if faculty_setting.faculty == ELEMENTARY_SCHOOL:
-    #     input_file = fp.elementary_schools_file
-    # elif faculty_setting.faculty == POST_OFFICE:
-    #     input_file = fp.post_office_file
-    # elif faculty_setting.faculty == NEW_TOWN:
-    #     input_file = fp.new_town_file
-    # elif faculty_setting.faculty == MICHINOEKI:
-    #     input_file = fp.michinoeki_file
-    # elif faculty_setting.faculty == STATION:
-    #     input_file = fp.station_file
-    # elif faculty_setting.faculty == ABANDONED_STATION:
-    #     input_file = fp.abandoned_station_file
-    # else:
-    #     raise Exception("施設タイプ名が不正です")
 
     # 施設データを読み込み
     dao = FacultyDAO(input_file)
@@ -39,9 +26,17 @@ def main(faculty_setting):
         map_file = os.path.join(fp.get_faculty_mesh_map_dir(faculty_setting.faculty), faculty_setting.region + ".html")
     else:
         # 都道府県でない場合は、その場でmapを作る（人口分布なし）
+
+        # r774データを読み込み、条件に従って抽出
+        r774_dao = R774PointDAO(fp.r774_file)
+        r774_points = r774_dao.read_r774_point_data()
+        r774_points = extract_r774_points(r774_points, faculty_setting)
+
+        # map作成
         map_file = os.path.join(fp.output_dir, "map_" + str(time.time()).replace(".", "") + ".html")
         output_map = OutputMap(map_file)
         output_map.output_map(faculties, OUTPUT_MAP_NUM)
+        output_map.add_r774_points(r774_points)
 
     # 結果
     result = Result(faculties, faculty_setting, OUTPUT_HTML_NUM, map_file)
@@ -95,6 +90,49 @@ def extract_faculties(faculty_points, fs):
         extracted_faculties.append(f)
 
     return extracted_faculties
+
+
+def extract_r774_points(r774_points, s):
+    """
+    r774ポイントを条件に従って抽出する
+    :param r774_points:
+    :param s:
+    :return:
+    """
+
+    extracted_points = []
+    for p in r774_points:
+
+        # 地域チェック
+        if s.region == ZENKOKU:
+            pass
+        elif RegionSetting.is_region(s.region):
+            # 地域指定のとき
+            if RegionSetting.get_region_by_pref(p.pref) != s.region:
+                continue
+        elif RegionSetting.is_pref(s.region):
+            # 都道府県指定のとき
+            if p.pref != s.region:
+                continue
+        else:
+            raise Exception("地域が不正です")
+
+        # キーワードチェック
+        if s.key_words != "":
+            key_words = s.key_words.split()
+            address = p.pref + p.city + p.district + p.name
+            key_word_in_address = True
+            for key_word in key_words:
+                if key_word not in address:
+                    # 住所に含まれていないキーワードが1つでもあればFalse
+                    key_word_in_address = False
+                    break
+            if not key_word_in_address:
+                continue
+
+        extracted_points.append(p)
+
+    return extracted_points
 
 
 class Result(object):
