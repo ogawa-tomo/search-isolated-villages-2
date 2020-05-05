@@ -1,0 +1,242 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<meta name="twitter:card" content="summary" />
+<!--<meta name="twitter:site" content="@ユーザー名" /> /*②*/-->
+<!--<meta property="og:url" content="記事のURL" /> /*③*/-->
+<meta property="og:title" content="秘境集落おみくじ" />
+<meta property="og:description" content="秘境集落のおみくじです。" />
+<meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/village.png" />
+
+<title>秘境集落占い</title>
+
+<h1>秘境集落占い</h1>
+<br>
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-url="https://search-isolated-villages-2.herokuapp.com/uranai" data-text="秘境集落探索占い" data-size="large">Tweet</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<br>
+今日のラッキー秘境集落を占います。<br>
+
+<div class="dropdown">
+<!--    <a class="btn btn-default dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+    <button class="btn btn-light btn-sm dropdown-toggle border-dark" type="button" data-toggle="dropdown">
+        その他の秘境探索ツールを選択
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="/post_office">秘境郵便局探索ツール</a>
+        <a class="dropdown-item" href="/elementary_school">秘境小学校探索ツール</a>
+        <a class="dropdown-item" href="/station">秘境駅探索ツール</a>
+        <a class="dropdown-item" href="/abandoned_station">秘境廃駅探索ツール</a>
+        <a class="dropdown-item" href="/michinoeki">秘境道の駅探索ツール</a>
+        <a class="dropdown-item" href="/new_town">秘境ニュータウン探索ツール</a>
+        <a class="dropdown-item" href="/research_institute">秘境研究機関探索ツール</a>
+    </div>
+</div>
+
+<img src="/static/village.png" width="350">
+<br><br>
+
+<!--<form action="/result" method="post">-->
+<form action="/uranai/result" method="post">
+    <table class="table table-responsive">
+<!--        <tr>-->
+<!--            <th>探索条件</th>-->
+<!--            <th>設定値</th>-->
+<!--        </tr>-->
+        <tr>
+            <td>対象地域</td>
+            <td>
+                <select name="region" id="region" required>
+<!--                        <option value="" selected disabled hidden>地域を選択</option>-->
+                    <option value="全国">全国</option>
+                    <optgroup label="地域">
+                        <option value="北海道">北海道</option>
+                        <option value="東北">東北</option>
+                        <option value="関東">関東</option>
+                        <option value="北陸">北陸</option>
+                        <option value="中部">中部</option>
+                        <option value="近畿">近畿</option>
+                        <option value="中国">中国</option>
+                        <option value="四国">四国</option>
+                        <option value="九州">九州</option>
+                        <option value="沖縄">沖縄</option>
+                    </optgroup>
+                    <optgroup label="都道府県">
+                        <option value="北海道">北海道</option>
+                        <option value="青森県">青森県</option>
+                        <option value="岩手県">岩手県</option>
+                        <option value="宮城県">宮城県</option>
+                        <option value="秋田県">秋田県</option>
+                        <option value="山形県">山形県</option>
+                        <option value="福島県">福島県</option>
+                        <option value="茨城県">茨城県</option>
+                        <option value="栃木県">栃木県</option>
+                        <option value="群馬県">群馬県</option>
+                        <option value="埼玉県">埼玉県</option>
+                        <option value="千葉県">千葉県</option>
+                        <option value="東京都">東京都</option>
+                        <option value="神奈川県">神奈川県</option>
+                        <option value="新潟県">新潟県</option>
+                        <option value="富山県">富山県</option>
+                        <option value="石川県">石川県</option>
+                        <option value="福井県">福井県</option>
+                        <option value="山梨県">山梨県</option>
+                        <option value="長野県">長野県</option>
+                        <option value="岐阜県">岐阜県</option>
+                        <option value="静岡県">静岡県</option>
+                        <option value="愛知県">愛知県</option>
+                        <option value="三重県">三重県</option>
+                        <option value="滋賀県">滋賀県</option>
+                        <option value="京都府">京都府</option>
+                        <option value="大阪府">大阪府</option>
+                        <option value="兵庫県">兵庫県</option>
+                        <option value="奈良県">奈良県</option>
+                        <option value="和歌山県">和歌山県</option>
+                        <option value="鳥取県">鳥取県</option>
+                        <option value="島根県">島根県</option>
+                        <option value="岡山県">岡山県</option>
+                        <option value="広島県">広島県</option>
+                        <option value="山口県">山口県</option>
+                        <option value="徳島県">徳島県</option>
+                        <option value="香川県">香川県</option>
+                        <option value="愛媛県">愛媛県</option>
+                        <option value="高知県">高知県</option>
+                        <option value="福岡県">福岡県</option>
+                        <option value="佐賀県">佐賀県</option>
+                        <option value="長崎県">長崎県</option>
+                        <option value="熊本県">熊本県</option>
+                        <option value="大分県">大分県</option>
+                        <option value="宮崎県">宮崎県</option>
+                        <option value="鹿児島県">鹿児島県</option>
+                        <option value="沖縄県">沖縄県</option>
+                    </optgroup>
+                </select>
+            </td>
+        </tr>
+    </table>
+        <!--<button type="submit" class="btn btn-primary btn-lg">探索</button>-->
+        <button type="submit" class="btn btn-primary">占う</button>
+<!--        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#Modal">探索</button>-->
+        <br>
+</form>
+<br>
+
+{% if result %}
+
+<!--ダミーボタン-->
+<div hidden>
+<button type="button" class="btn btn-secondary btn-sm" id="modalbtn" data-toggle="modal" data-target="#Modal">
+    表示
+</button>
+</div>
+
+
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
+<!--<div class="modal in" id="Modal" tabindex="-1" role="dialog" aria-labelledby="Modal" style="display: block; padding-left: 0px;">-->
+<!--<div class="modal show" id="Modal" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true" style="display: block;">-->
+  <!--以下modal-dialogのCSSの部分で modal-lgやmodal-smを追加するとモーダルのサイズを変更することができる-->
+<!--  <div class="modal-dialog modal-lg" role="document">-->
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+<!--    <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--      <div class="modal-dialog" role="document">-->
+    <div class="modal-content">
+        <div class="modal-body">
+            <center>
+            今日のラッキー秘境集落は…
+            </center>
+            <div class="uranai_box mx-auto" style="width: 80%;">
+                <center>
+                    <font size="+2">
+                        <b>{{ result.village.pref }}&nbsp;{{ result.village.city }}&nbsp;{{ result.village.district}}</b>
+                    </font>
+                </center>
+                <br>
+                <div class="mx-auto" style="width: 60%">
+                    <table class="table table-responsive">
+                        <tr>
+                            <th>人口</th>
+                            <td>{{ result.village.population }}<font size="-1">人</font></td>
+                        </tr>
+                        <tr>
+                            <th>地図</th>
+                            <td>
+                                <a href="{{ result.village.get_google_map_url() }}" target="_blank">Google Map</a>
+                                <a href="{{ result.village.get_mesh_map_get_url(result.map_file) }}" target="_blank">人口分布図</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>都会度</th>
+                            <td>{{ result.village.urban_point_round }}</td>
+                        </tr>
+                        <tr>
+                            <th>秘境度順位</th>
+                            <td>{{ result.idx }}<font size="-1">位</font>/{{ result.num }}<font size="-1">集落</font> </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <center>
+            <a
+                    href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                    class="twitter-share-button"
+                    data-url="https://search-isolated-villages-2.herokuapp.com/uranai"
+                    data-text="今日のラッキー秘境集落は…
+{{ result.village.pref }} {{ result.village.city }} {{ result.village.district }}
+{{ result.village.get_google_map_url() }}
+"
+
+                    data-size="large">Tweet</a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </center>
+        </div>
+    </div>
+    </div>
+</div>
+
+<script>
+window.onload = function(){
+    document.getElementById("modalbtn").click();
+}
+</script>
+
+
+
+<!--<div class="omikuji_box" style="width: 500px;">-->
+<!--    今日のラッキー秘境集落は…<br><br>-->
+<!--    <center>-->
+<!--        <font size="+2">-->
+<!--            <b>{{ result.village.pref }}&nbsp;{{ result.village.city }}&nbsp;{{ result.village.district}}</b>-->
+<!--        </font>-->
+<!--    </center>-->
+<!--    <br>-->
+<!--    <div class="mx-auto" style="width: 60%">-->
+<!--        <table class="table table-responsive">-->
+<!--            <tr>-->
+<!--                <th>人口</th>-->
+<!--                <td>{{ result.village.population }}<font size="-1">人</font></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <th>地図</th>-->
+<!--                <td>-->
+<!--                    <a href="{{ result.village.get_google_map_url() }}" target="_blank">Google Map</a>-->
+<!--                    <a href="{{ result.village.get_mesh_map_get_url(result.map_file) }}" target="_blank">人口分布図</a>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <th>都会度</th>-->
+<!--                <td>{{ result.village.urban_point_round }}</td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </div>-->
+
+<!--</div>-->
+
+{% endif %}
+
+
+    <h2>ソースコード</h2>
+        <a href="https://github.com/ogawa-tomo/search-isolated-villages-2.git" target="_blank">https://github.com/ogawa-tomo/search-isolated-villages-2.git</a>
+        <br><br>
+    <h2>作者</h2>
+    Twitter: <a href="https://twitter.com/otomo6sm" target="_blank">@otomo6sm</a>
+{% endblock %}

@@ -3,6 +3,7 @@ from library.setting import Setting, FacultySetting
 import time
 import search_village_main
 import search_faculty_main
+import uranai_main
 from settings.constants import *
 from library import common_function as cf
 import settings.file_path as fp
@@ -103,6 +104,18 @@ def result_faculty(faculty):
     fs = FacultySetting(region, faculty, island_setting, key_words)
     result = search_faculty_main.main(fs)
     return render_template("faculty.html", faculty=faculty, setting=fs, faculty_ja=get_faculty_ja(faculty), result=result)
+
+
+@app.route("/uranai")
+def uranai():
+    return render_template("uranai.html")
+
+
+@app.route("/uranai/result", methods=["GET", "POST"])
+def result_uranai():
+    region = request.form["region"]
+    result = uranai_main.main(region)
+    return render_template("uranai.html", result=result)
 
 
 if __name__ == "__main__":
