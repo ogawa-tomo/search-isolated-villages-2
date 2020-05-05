@@ -4,6 +4,7 @@ import time
 import search_village_main
 import search_faculty_main
 import uranai_main
+import uranai_faculty_main
 from settings.constants import *
 from library import common_function as cf
 import settings.file_path as fp
@@ -116,6 +117,19 @@ def result_uranai():
     region = request.form["region"]
     result = uranai_main.main(region)
     return render_template("uranai.html", result=result)
+
+
+@app.route("/<faculty>/uranai")
+def uranai_faculty(faculty):
+    return render_template("uranai_faculty.html", faculty=faculty, faculty_ja=get_faculty_ja(faculty))
+
+
+@app.route("/<faculty>/uranai/result", methods=["GET", "POST"])
+def uranai_faculty_result(faculty):
+    faculty = faculty
+    region = request.form["region"]
+    result = uranai_faculty_main.main(faculty, region)
+    return render_template("uranai_faculty.html", faculty=faculty, result=result, faculty_ja=get_faculty_ja(faculty))
 
 
 if __name__ == "__main__":

@@ -4,41 +4,115 @@
 <meta name="twitter:card" content="summary" />
 <!--<meta name="twitter:site" content="@ユーザー名" /> /*②*/-->
 <!--<meta property="og:url" content="記事のURL" /> /*③*/-->
-<meta property="og:title" content="秘境集落占い" />
-<meta property="og:description" content="今日のラッキー秘境集落を占います。" />
-<meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/village.png" />
+<meta property="og:title" content="秘境{{ faculty_ja }}占い" />
+<meta property="og:description" content="今日のラッキー秘境{{ faculty_ja }}を占います。" />
+{% if faculty == "post_office" %}
+    <meta property="og:image" content="/static/post_office.png" />
+{% elif faculty == "elementary_school" %}
+    <meta property="og:image" content="/static/school.png" />
+{% elif faculty == "new_town" %}
+    <meta property="og:image" content="/static/new_town.png" />
+{% elif faculty == "michinoeki" %}
+    <meta property="og:image" content="/static/michinoeki.png" />
+{% elif faculty == "station" %}
+    <meta property="og:image" content="/static/station.png" />
+{% elif faculty == "abandoned_station" %}
+    <meta property="og:image" content="/static/abandoned_station.jpg" />
+{% elif faculty == "research_institute" %}
+    <meta property="og:image" content="/static/research_institute.png" />
+{% endif %}
 
-<title>秘境集落占い</title>
+<title>秘境{{ faculty_ja }}占い</title>
 
-<h1>秘境集落占い</h1>
+<h1>秘境{{ faculty_ja }}占い</h1>
 <br>
-<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-url="https://search-isolated-villages-2.herokuapp.com/uranai" data-text="秘境集落探索占い" data-size="large">Tweet</a>
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-url="https://search-isolated-villages-2.herokuapp.com/{{ faculty }}" data-text="秘境{{ faculty_ja }}占い" data-size="large">Tweet</a>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <br>
-今日のラッキー秘境集落を占います。<br>
-<a href="/">秘境集落探索ツール</a><br>
+今日のラッキー秘境{{ faculty_ja }}を占います。<br>
+・<a href="/{{ faculty }}">秘境{{ faculty_ja }}探索ツール</a><br>
 
 <div class="dropdown">
 <!--    <a class="btn btn-default dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
     <button class="btn btn-light btn-sm dropdown-toggle border-dark" type="button" data-toggle="dropdown">
-        その他の秘境探索ツールを選択
+        その他の秘境占いへ移動
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="/post_office">秘境郵便局探索ツール</a>
-        <a class="dropdown-item" href="/elementary_school">秘境小学校探索ツール</a>
-        <a class="dropdown-item" href="/station">秘境駅探索ツール</a>
-        <a class="dropdown-item" href="/abandoned_station">秘境廃駅探索ツール</a>
-        <a class="dropdown-item" href="/michinoeki">秘境道の駅探索ツール</a>
-        <a class="dropdown-item" href="/new_town">秘境ニュータウン探索ツール</a>
-        <a class="dropdown-item" href="/research_institute">秘境研究機関探索ツール</a>
+        <a class="dropdown-item" href="/uranai">秘境集落占い</a>
+        {% if faculty == "post_office" %}
+            <a class="dropdown-item" href="/elementary_school/uranai">秘境小学校占い</a>
+            <a class="dropdown-item" href="/station/uranai">秘境駅占い</a>
+            <a class="dropdown-item" href="/abandoned_station/uranai">秘境廃駅占い</a>
+            <a class="dropdown-item" href="/michinoeki/uranai">秘境道の駅占い</a>
+            <a class="dropdown-item" href="/new_town/uranai">秘境ニュータウン占い</a>
+            <a class="dropdown-item" href="/research_institute/uranai">秘境研究機関占い</a>
+        {% elif faculty == "elementary_school" %}
+            <a class="dropdown-item" href="/post_office/uranai">秘境郵便局占い</a>
+            <a class="dropdown-item" href="/station/uranai">秘境駅占い</a>
+            <a class="dropdown-item" href="/abandoned_station/uranai">秘境廃駅占い</a>
+            <a class="dropdown-item" href="/michinoeki/uranai">秘境道の駅占い</a>
+            <a class="dropdown-item" href="/new_town/uranai">秘境ニュータウン占い</a>
+            <a class="dropdown-item" href="/research_institute/uranai">秘境研究機関占い</a>
+        {% elif faculty == "station" %}
+            <a class="dropdown-item" href="/post_office/uranai">秘境郵便局占い</a>
+            <a class="dropdown-item" href="/elementary_school/uranai">秘境小学校占い</a>
+            <a class="dropdown-item" href="/abandoned_station/uranai">秘境廃駅占い</a>
+            <a class="dropdown-item" href="/michinoeki/uranai">秘境道の駅占い</a>
+            <a class="dropdown-item" href="/new_town/uranai">秘境ニュータウン占い</a>
+            <a class="dropdown-item" href="/research_institute/uranai">秘境研究機関占い</a>
+        {% elif faculty == "abandoned_station" %}
+            <a class="dropdown-item" href="/post_office/uranai">秘境郵便局占い</a>
+            <a class="dropdown-item" href="/elementary_school/uranai">秘境小学校占い</a>
+            <a class="dropdown-item" href="/station/uranai">秘境駅占い</a>
+            <a class="dropdown-item" href="/michinoeki/uranai">秘境道の駅占い</a>
+            <a class="dropdown-item" href="/new_town/uranai">秘境ニュータウン占い</a>
+            <a class="dropdown-item" href="/research_institute/uranai">秘境研究機関占い</a>
+        {% elif faculty == "michinoeki" %}
+            <a class="dropdown-item" href="/post_office/uranai">秘境郵便局占い</a>
+            <a class="dropdown-item" href="/elementary_school/uranai">秘境小学校占い</a>
+            <a class="dropdown-item" href="/station/uranai">秘境駅占い</a>
+            <a class="dropdown-item" href="/abandoned_station/uranai">秘境廃駅占い</a>
+            <a class="dropdown-item" href="/new_town/uranai">秘境ニュータウン占い</a>
+            <a class="dropdown-item" href="/research_institute/uranai">秘境研究機関占い</a>
+        {% elif faculty == "new_town" %}
+            <a class="dropdown-item" href="/post_office/uranai">秘境郵便局占い</a>
+            <a class="dropdown-item" href="/elementary_school/uranai">秘境小学校占い</a>
+            <a class="dropdown-item" href="/station/uranai">秘境駅占い</a>
+            <a class="dropdown-item" href="/abandoned_station/uranai">秘境廃駅占い</a>
+            <a class="dropdown-item" href="/michinoeki/uranai">秘境道の駅占い</a>
+            <a class="dropdown-item" href="/research_institute/uranai">秘境研究機関占い</a>
+        {% elif faculty == "research_institute" %}
+            <a class="dropdown-item" href="/post_office/uranai">秘境郵便局占い</a>
+            <a class="dropdown-item" href="/elementary_school/uranai">秘境小学校占い</a>
+            <a class="dropdown-item" href="/station/uranai">秘境駅占い</a>
+            <a class="dropdown-item" href="/abandoned_station/uranai">秘境廃駅占い</a>
+            <a class="dropdown-item" href="/michinoeki/uranai">秘境道の駅占い</a>
+            <a class="dropdown-item" href="/new_town/uranai">秘境ニュータウン占い</a>
+        {% endif %}
     </div>
 </div>
-
-<img src="/static/village.png" width="350">
+{% if faculty == "post_office" %}
+    <img src="/static/post_office.png" width="250" style="margin-left: 30px">
+{% elif faculty == "elementary_school" %}
+    <img src="/static/school.png" width="350">
+{% elif faculty == "station" %}
+    <img src="/static/station.png" width="350">
+{% elif faculty == "abandoned_station" %}
+    <br>
+    <img src="/static/abandoned_station.jpg" width="400">
+    <br>
+{% elif faculty == "michinoeki" %}
+    <img src="/static/michinoeki.png" width="350">
+{% elif faculty == "new_town" %}
+    <img src="/static/new_town.png" width="350">
+{% elif faculty == "research_institute" %}
+    <br>
+    <img src="/static/research_institute.png" width="350">
+{% endif %}
 <br><br>
 
 <!--<form action="/result" method="post">-->
-<form action="/uranai/result" method="post">
+<form action="/{{ faculty }}/uranai/result" method="post">
     <table class="table table-responsive">
 <!--        <tr>-->
 <!--            <th>探索条件</th>-->
@@ -143,36 +217,35 @@
     <div class="modal-content">
         <div class="modal-body">
             <center>
-            今日のラッキー秘境集落は…
+            今日のラッキー秘境{{ faculty_ja }}は…
             </center>
             <div class="uranai_box mx-auto" style="width: 80%;">
                 <center>
                     <font size="+2">
-                        <b>{{ result.village.pref }}&nbsp;{{ result.village.city }}&nbsp;{{ result.village.district}}</b>
+                        <b>{{ result.faculty.name }}</b>
                     </font>
                 </center>
                 <br>
                 <div class="mx-auto" style="width: 60%">
                     <table class="table table-responsive">
                         <tr>
-                            <th>人口</th>
-                            <td>{{ result.village.population }}<font size="-1">人</font></td>
+                            <th>所在地</th>
+                            <td>{{ result.faculty.pref }}&nbsp;{{ result.faculty.city }}</td>
                         </tr>
                         <tr>
                             <th>地図</th>
                             <td>
-                                <a href="{{ result.village.get_google_map_url() }}" target="_blank">Google Map</a>
-                                <a href="{{ result.village.get_mesh_map_get_url(result.map_file) }}" target="_blank">人口分布図</a>
+                                <a href="{{ result.faculty.get_google_map_url() }}" target="_blank">Google Map</a>
+                                <a href="{{ result.faculty.get_mesh_map_get_url(result.map_file) }}" target="_blank">人口分布図</a>
                             </td>
                         </tr>
                         <tr>
                             <th>都会度</th>
-                            <td>{{ result.village.urban_point_round }}</td>
+                            <td>{{ result.faculty.urban_point_round }}</td>
                         </tr>
                         <tr>
                             <th>秘境度順位</th>
-<!--                            <td>{{ result.idx }}<font size="-1">位</font>/{{ result.num }}<font size="-1">集落</font> </td>-->
-                            <td>{{ result.idx }}位/{{ result.num }}集落</td>
+                            <td>{{ result.idx }}位/{{ result.num }}{{ faculty_ja }}</td>
                         </tr>
                     </table>
                 </div>
@@ -181,15 +254,16 @@
             <a
                     href="https://twitter.com/share?ref_src=twsrc%5Etfw"
                     class="twitter-share-button"
-                    data-url="https://search-isolated-villages-2.herokuapp.com/uranai"
-                    data-text="今日のラッキー秘境集落は…
-{{ result.village.pref }} {{ result.village.city }} {{ result.village.district }}
-{{ result.village.get_google_map_url() }}
+                    data-url="https://search-isolated-villages-2.herokuapp.com/{{ faculty }}/uranai"
+                    data-text="今日のラッキー秘境{{ faculty_ja }}は…
+{{ result.faculty.name }}
+{{ result.faculty.get_google_map_url() }}
 "
 
                     data-size="large">Tweet</a>
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </center>
+            <br>
         </div>
     </div>
     </div>
@@ -202,40 +276,10 @@ window.onload = function(){
 </script>
 
 
-
-<!--<div class="omikuji_box" style="width: 500px;">-->
-<!--    今日のラッキー秘境集落は…<br><br>-->
-<!--    <center>-->
-<!--        <font size="+2">-->
-<!--            <b>{{ result.village.pref }}&nbsp;{{ result.village.city }}&nbsp;{{ result.village.district}}</b>-->
-<!--        </font>-->
-<!--    </center>-->
-<!--    <br>-->
-<!--    <div class="mx-auto" style="width: 60%">-->
-<!--        <table class="table table-responsive">-->
-<!--            <tr>-->
-<!--                <th>人口</th>-->
-<!--                <td>{{ result.village.population }}<font size="-1">人</font></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <th>地図</th>-->
-<!--                <td>-->
-<!--                    <a href="{{ result.village.get_google_map_url() }}" target="_blank">Google Map</a>-->
-<!--                    <a href="{{ result.village.get_mesh_map_get_url(result.map_file) }}" target="_blank">人口分布図</a>-->
-<!--                </td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <th>都会度</th>-->
-<!--                <td>{{ result.village.urban_point_round }}</td>-->
-<!--            </tr>-->
-<!--        </table>-->
-<!--    </div>-->
-
-<!--</div>-->
-
 {% endif %}
 
 
+    <br><br>
     <h2>ソースコード</h2>
         <a href="https://github.com/ogawa-tomo/search-isolated-villages-2.git" target="_blank">https://github.com/ogawa-tomo/search-isolated-villages-2.git</a>
         <br><br>

@@ -16,11 +16,12 @@
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <br>
 秘境集落を探索し、秘境度を人口分布データをもとに評価して地域別にランキングで出力します。<br>
+・<a href="/uranai">秘境集落占い</a><br>
 
 <div class="dropdown">
 <!--    <a class="btn btn-default dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
     <button class="btn btn-light btn-sm dropdown-toggle border-dark" type="button" data-toggle="dropdown">
-        その他の秘境探索ツールを選択
+        その他の秘境探索ツールへ移動
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
         <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/post_office">秘境郵便局探索ツール</a>
@@ -49,19 +50,6 @@
                 {% if setting %}
                     {{ setting.region }}
                 {% else %}
-                    <!--<select name="region" id="region">-->
-                        <!--<option value="" selected disabled hidden>地域を選択</option>-->
-                        <!--<option value="zenkoku">全国</option>-->
-                        <!--<option value="hokkaido">北海道</option>-->
-                        <!--<option value="tohoku">東北</option>-->
-                        <!--<option value="kanto">関東</option>-->
-                        <!--<option value="hokuriku">北陸</option>-->
-                        <!--<option value="chubu">中部</option>-->
-                        <!--<option value="kinki">近畿</option>-->
-                        <!--<option value="chugoku">中国</option>-->
-                        <!--<option value="shikoku">四国</option>-->
-                        <!--<option value="kyushu">九州</option>-->
-                    <!--</select>-->
                     <select name="region" id="region" required>
                         <option value="" selected disabled hidden>地域を選択</option>
                             <option value="全国">全国</option>
