@@ -9,19 +9,19 @@
 <!--<meta property="og:description" content="秘境{{ faculty_ja }}を探索し、秘境度が高い順にランキングで出力します。" />-->
 <meta property="og:description" content="{{ faculty_ja }}の秘境度を人口分布データをもとに評価し、地域別にランキングで出力します。" />
 {% if faculty == "post_office" %}
-    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/post_office.png" />
+    <meta property="og:image" content="/static/post_office.png" />
 {% elif faculty == "elementary_school" %}
-    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/school.png" />
+    <meta property="og:image" content="/static/school.png" />
 {% elif faculty == "new_town" %}
-    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/new_town.png" />
+    <meta property="og:image" content="/static/new_town.png" />
 {% elif faculty == "michinoeki" %}
-    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/michinoeki.png" />
+    <meta property="og:image" content="/static/michinoeki.png" />
 {% elif faculty == "station" %}
-    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/station.png" />
+    <meta property="og:image" content="/static/station.png" />
 {% elif faculty == "abandoned_station" %}
-    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/abandoned_station.jpg" />
+    <meta property="og:image" content="/static/abandoned_station.jpg" />
 {% elif faculty == "research_institute" %}
-    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/research_institute.png" />
+    <meta property="og:image" content="/static/research_institute.png" />
 {% endif %}
 
 <title>秘境{{ faculty_ja }}探索ツール</title>
@@ -39,56 +39,56 @@
         その他の秘境探索ツールへ移動
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com">秘境集落探索ツール</a>
+        <a class="dropdown-item" href="">秘境集落探索ツール</a>
         {% if faculty == "post_office" %}
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/elementary_school">秘境小学校探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/station">秘境駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/abandoned_station">秘境廃駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/michinoeki">秘境道の駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/new_town">秘境ニュータウン探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/research_institute">秘境研究機関探索ツール</a>
+            <a class="dropdown-item" href="/elementary_school">秘境小学校探索ツール</a>
+            <a class="dropdown-item" href="/station">秘境駅探索ツール</a>
+            <a class="dropdown-item" href="/abandoned_station">秘境廃駅探索ツール</a>
+            <a class="dropdown-item" href="/michinoeki">秘境道の駅探索ツール</a>
+            <a class="dropdown-item" href="/new_town">秘境ニュータウン探索ツール</a>
+            <a class="dropdown-item" href="/research_institute">秘境研究機関探索ツール</a>
         {% elif faculty == "elementary_school" %}
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/post_office">秘境郵便局探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/station">秘境駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/abandoned_station">秘境廃駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/michinoeki">秘境道の駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/new_town">秘境ニュータウン探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/research_institute">秘境研究機関探索ツール</a>
+            <a class="dropdown-item" href="/post_office">秘境郵便局探索ツール</a>
+            <a class="dropdown-item" href="/station">秘境駅探索ツール</a>
+            <a class="dropdown-item" href="/abandoned_station">秘境廃駅探索ツール</a>
+            <a class="dropdown-item" href="/michinoeki">秘境道の駅探索ツール</a>
+            <a class="dropdown-item" href="/new_town">秘境ニュータウン探索ツール</a>
+            <a class="dropdown-item" href="/research_institute">秘境研究機関探索ツール</a>
         {% elif faculty == "station" %}
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/post_office">秘境郵便局探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/elementary_school">秘境小学校探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/abandoned_station">秘境廃駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/michinoeki">秘境道の駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/new_town">秘境ニュータウン探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/research_institute">秘境研究機関探索ツール</a>
+            <a class="dropdown-item" href="/post_office">秘境郵便局探索ツール</a>
+            <a class="dropdown-item" href="/elementary_school">秘境小学校探索ツール</a>
+            <a class="dropdown-item" href="/abandoned_station">秘境廃駅探索ツール</a>
+            <a class="dropdown-item" href="/michinoeki">秘境道の駅探索ツール</a>
+            <a class="dropdown-item" href="/new_town">秘境ニュータウン探索ツール</a>
+            <a class="dropdown-item" href="/research_institute">秘境研究機関探索ツール</a>
         {% elif faculty == "abandoned_station" %}
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/post_office">秘境郵便局探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/elementary_school">秘境小学校探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/station">秘境駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/michinoeki">秘境道の駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/new_town">秘境ニュータウン探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/research_institute">秘境研究機関探索ツール</a>
+            <a class="dropdown-item" href="/post_office">秘境郵便局探索ツール</a>
+            <a class="dropdown-item" href="/elementary_school">秘境小学校探索ツール</a>
+            <a class="dropdown-item" href="/station">秘境駅探索ツール</a>
+            <a class="dropdown-item" href="/michinoeki">秘境道の駅探索ツール</a>
+            <a class="dropdown-item" href="/new_town">秘境ニュータウン探索ツール</a>
+            <a class="dropdown-item" href="/research_institute">秘境研究機関探索ツール</a>
         {% elif faculty == "michinoeki" %}
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/post_office">秘境郵便局探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/elementary_school">秘境小学校探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/station">秘境駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/abandoned_station">秘境廃駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/new_town">秘境ニュータウン探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/research_institute">秘境研究機関探索ツール</a>
+            <a class="dropdown-item" href="/post_office">秘境郵便局探索ツール</a>
+            <a class="dropdown-item" href="/elementary_school">秘境小学校探索ツール</a>
+            <a class="dropdown-item" href="/station">秘境駅探索ツール</a>
+            <a class="dropdown-item" href="/abandoned_station">秘境廃駅探索ツール</a>
+            <a class="dropdown-item" href="/new_town">秘境ニュータウン探索ツール</a>
+            <a class="dropdown-item" href="/research_institute">秘境研究機関探索ツール</a>
         {% elif faculty == "new_town" %}
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/post_office">秘境郵便局探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/elementary_school">秘境小学校探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/station">秘境駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/abandoned_station">秘境廃駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/michinoeki">秘境道の駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/research_institute">秘境研究機関探索ツール</a>
+            <a class="dropdown-item" href="/post_office">秘境郵便局探索ツール</a>
+            <a class="dropdown-item" href="/elementary_school">秘境小学校探索ツール</a>
+            <a class="dropdown-item" href="/station">秘境駅探索ツール</a>
+            <a class="dropdown-item" href="/abandoned_station">秘境廃駅探索ツール</a>
+            <a class="dropdown-item" href="/michinoeki">秘境道の駅探索ツール</a>
+            <a class="dropdown-item" href="/research_institute">秘境研究機関探索ツール</a>
         {% elif faculty == "research_institute" %}
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/post_office">秘境郵便局探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/elementary_school">秘境小学校探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/station">秘境駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/abandoned_station">秘境廃駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/michinoeki">秘境道の駅探索ツール</a>
-            <a class="dropdown-item" href="https://search-isolated-villages-2.herokuapp.com/new_town">秘境ニュータウン探索ツール</a>
+            <a class="dropdown-item" href="/post_office">秘境郵便局探索ツール</a>
+            <a class="dropdown-item" href="/elementary_school">秘境小学校探索ツール</a>
+            <a class="dropdown-item" href="/station">秘境駅探索ツール</a>
+            <a class="dropdown-item" href="/abandoned_station">秘境廃駅探索ツール</a>
+            <a class="dropdown-item" href="/michinoeki">秘境道の駅探索ツール</a>
+            <a class="dropdown-item" href="/new_town">秘境ニュータウン探索ツール</a>
         {% endif %}
     </div>
 </div>

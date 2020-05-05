@@ -114,8 +114,7 @@ def uranai():
 
 @app.route("/uranai/result", methods=["GET", "POST"])
 def result_uranai():
-    region = request.form["region"]
-    result = uranai_main.main(region)
+    result = uranai_main.main()
     return render_template("uranai.html", result=result)
 
 
@@ -127,8 +126,7 @@ def uranai_faculty(faculty):
 @app.route("/<faculty>/uranai/result", methods=["GET", "POST"])
 def uranai_faculty_result(faculty):
     faculty = faculty
-    region = request.form["region"]
-    result = uranai_faculty_main.main(faculty, region)
+    result = uranai_faculty_main.main(faculty)
     return render_template("uranai_faculty.html", faculty=faculty, result=result, faculty_ja=get_faculty_ja(faculty))
 
 

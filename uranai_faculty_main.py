@@ -5,7 +5,7 @@ import random
 from library.faculty_dao import FacultyDAO
 
 
-def main(faculty_type, region):
+def main(faculty_type):
 
     input_file = fp.get_faculty_csv_file(faculty_type)
 
@@ -14,7 +14,7 @@ def main(faculty_type, region):
     faculty_points = dao.read_faculty_point_data()
 
     # 集落データを抽出
-    faculties = extract_faculties(faculty_points, region)
+    faculties = extract_faculties(faculty_points)
 
     num = len(faculties)
     print(str(num) + "施設")
@@ -26,29 +26,15 @@ def main(faculty_type, region):
     # マップ出力
     map_file = os.path.join(fp.get_faculty_mesh_map_dir(faculty_type), faculty.pref + ".html")
 
-    result = Result(region, faculty, map_file, num, idx)
+    result = Result(faculty, map_file, num, idx)
 
     return result
 
 
-def extract_faculties(faculties, region):
+def extract_faculties(faculties):
 
     extracted_faculties = []
     for f in faculties:
-
-        # 地域チェック
-        if region == ZENKOKU:
-            pass
-        elif RegionSetting.is_region(region):
-            # 地域指定のとき
-            if RegionSetting.get_region_by_pref(f.pref) != region:
-                continue
-        elif RegionSetting.is_pref(region):
-            # 都道府県指定のとき
-            if f.pref != region:
-                continue
-        else:
-            raise Exception("地域が不正です")
 
         # 都会度10000以下
         if f.urban_point < 10000:
@@ -59,8 +45,7 @@ def extract_faculties(faculties, region):
 
 class Result(object):
 
-    def __init__(self, region, faculty, map_file, num, idx):
-        self.region = region
+    def __init__(self, faculty, map_file, num, idx):
         self.faculty = faculty
         self.map_file = map_file
         self.num = num

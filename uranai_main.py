@@ -5,14 +5,14 @@ from library.setting import RegionSetting
 import random
 
 
-def main(region):
+def main():
 
     # 集落データを読み込み
     dao = VillageDAO(fp.villages_file)
     villages = dao.read_village_data()
 
     # 集落データを抽出
-    villages = extract_villages(villages, region)
+    villages = extract_villages(villages)
 
     num = len(villages)
     print(str(num) + "集落")
@@ -24,29 +24,15 @@ def main(region):
     # マップ出力
     map_file = os.path.join(fp.mesh_map_dir, village.pref + ".html")
 
-    result = Result(region, village, map_file, num, idx)
+    result = Result(village, map_file, num, idx)
 
     return result
 
 
-def extract_villages(villages, region):
+def extract_villages(villages):
 
     extracted_villages = []
     for v in villages:
-
-        # 地域チェック
-        if region == ZENKOKU:
-            pass
-        elif RegionSetting.is_region(region):
-            # 地域指定のとき
-            if RegionSetting.get_region_by_pref(v.pref) != region:
-                continue
-        elif RegionSetting.is_pref(region):
-            # 都道府県指定のとき
-            if v.pref != region:
-                continue
-        else:
-            raise Exception("地域が不正です")
 
         # 50人以下かつ都会度30000以下
         # または
@@ -55,13 +41,13 @@ def extract_villages(villages, region):
         c2 = v.population <= 500 and v.size <= 10 and v.urban_point < 10000
         if c1 or c2:
             extracted_villages.append(v)
+
     return extracted_villages
 
 
 class Result(object):
 
-    def __init__(self, region, village, map_file, num, idx):
-        self.region = region
+    def __init__(self, village, map_file, num, idx):
         self.village = village
         self.map_file = map_file
         self.num = num
