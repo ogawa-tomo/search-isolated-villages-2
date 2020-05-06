@@ -9,19 +9,19 @@
 <!--<meta property="og:description" content="秘境{{ faculty_ja }}を探索し、秘境度が高い順にランキングで出力します。" />-->
 <meta property="og:description" content="{{ faculty_ja }}の秘境度を人口分布データをもとに評価し、地域別にランキングで出力します。" />
 {% if faculty == "post_office" %}
-    <meta property="og:image" content="/static/post_office.png" />
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/post_office.png" />
 {% elif faculty == "elementary_school" %}
-    <meta property="og:image" content="/static/school.png" />
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/school.png" />
 {% elif faculty == "new_town" %}
-    <meta property="og:image" content="/static/new_town.png" />
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/new_town.png" />
 {% elif faculty == "michinoeki" %}
-    <meta property="og:image" content="/static/michinoeki.png" />
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/michinoeki.png" />
 {% elif faculty == "station" %}
-    <meta property="og:image" content="/static/station.png" />
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/station.png" />
 {% elif faculty == "abandoned_station" %}
-    <meta property="og:image" content="/static/abandoned_station.jpg" />
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/abandoned_station.jpg" />
 {% elif faculty == "research_institute" %}
-    <meta property="og:image" content="/static/research_institute.png" />
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/research_institute.png" />
 {% endif %}
 
 <title>秘境{{ faculty_ja }}探索ツール</title>
@@ -39,7 +39,7 @@
         その他の秘境探索ツールへ移動
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="">秘境集落探索ツール</a>
+        <a class="dropdown-item" href="/">秘境集落探索ツール</a>
         {% if faculty == "post_office" %}
             <a class="dropdown-item" href="/elementary_school">秘境小学校探索ツール</a>
             <a class="dropdown-item" href="/station">秘境駅探索ツール</a>
@@ -330,7 +330,7 @@
     <br><br>
     つまり、より近くにより多くの人口があれば都会であり、その逆であれば秘境である。<br>
     <font size="-1">
-        ※計算セグメントを北海道・本州・四国・九州・沖縄の5つにわけ、集落の都会度はセグメント内のメッシュのみを用いて評価する。<br>
+        ※計算セグメントを北海道・本州・四国・九州・沖縄の5つにわけ、施設の都会度はセグメント内のメッシュのみを用いて評価する。<br>
         ※本土の都会度計算に離島のメッシュは含めず、離島の都会度計算には本土のメッシュを含んでいる
     </font>
     <br><br>

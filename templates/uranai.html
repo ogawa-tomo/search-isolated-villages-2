@@ -39,7 +39,7 @@
 
 <!--<form action="/result" method="post">-->
 <form action="/uranai/result" method="post">
-    <button type="submit" class="btn btn-primary">占う</button>
+    <button type="submit" class="btn btn-primary btn-lg">占う</button>
     <br>
 </form>
 <br>
@@ -101,17 +101,17 @@
                 </div>
             </div>
             <center>
-            <a
-                    href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-                    class="twitter-share-button"
-                    data-url="https://search-isolated-villages-2.herokuapp.com/uranai"
-                    data-text="今日のラッキー秘境集落は…
-{{ result.village.pref }} {{ result.village.city }} {{ result.village.district }}
-{{ result.village.get_google_map_url() }}
-"
-
-                    data-size="large">Tweet</a>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <input type="button" class="btn btn-primary" value="結果をツイートする" onclick="ShowSubWindow();">
+<!--            <a-->
+<!--                    href="https://twitter.com/share?ref_src=twsrc%5Etfw"-->
+<!--                    class="twitter-share-button"-->
+<!--                    data-url="https://search-isolated-villages-2.herokuapp.com/uranai"-->
+<!--                    data-text="今日のラッキー秘境集落は…-->
+<!--{{ result.village.pref }} {{ result.village.city }} {{ result.village.district }}-->
+<!--{{ result.village.get_google_map_url() }}"-->
+<!--                    data-size="large"-->
+<!--            >Tweet</a>-->
+<!--            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>-->
             </center>
         </div>
     </div>
@@ -119,9 +119,27 @@
 </div>
 
 <script>
+
+function ShowSubWindow() {
+   // サブウインドウの設定
+   var subw = 600;   // サブウインドウの横幅
+   var subh = 400;   // サブウインドウの高さ
+   var gmap = "{{ result.village.get_google_map_url() }}"
+   var subp = "http://twitter.com/share?url=https://search-isolated-villages-2.herokuapp.com/uranai&hashtags=秘境集落占い,秘境集落探索ツール&text=今日のラッキー秘境集落は…%0a{{ result.village.pref }} {{ result.village.city }} {{ result.village.district }}%0a{{ result.village.get_google_map_url() }}%0a" + gmap;   // 表示するページ(URL)
+   var subn = "twitter";   // サブウインドウの名称
+   // 表示座標の計算
+   var subx = ( screen.availWidth  - subw ) / 2;   // X座標
+   var suby = ( screen.availHeight - subh ) / 2;   // Y座標
+   // サブウインドウのオプション文字列を作る
+   var SubWinOpt = "width=" + subw + ",height=" + subh + ",top=" + suby + ",left=" + subx;
+   // サブウインドウを表示
+   window.open(subp, subn, SubWinOpt);
+   return false;
+};
+
 window.onload = function(){
     document.getElementById("modalbtn").click();
-}
+};
 </script>
 
 

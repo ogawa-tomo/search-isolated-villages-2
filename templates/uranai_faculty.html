@@ -7,26 +7,26 @@
 <meta property="og:title" content="秘境{{ faculty_ja }}占い" />
 <meta property="og:description" content="今日のラッキー秘境{{ faculty_ja }}を占います。" />
 {% if faculty == "post_office" %}
-    <meta property="og:image" content="/static/post_office.png" />
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/post_office.png" />
 {% elif faculty == "elementary_school" %}
-    <meta property="og:image" content="/static/school.png" />
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/school.png" />
 {% elif faculty == "new_town" %}
-    <meta property="og:image" content="/static/new_town.png" />
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/new_town.png" />
 {% elif faculty == "michinoeki" %}
-    <meta property="og:image" content="/static/michinoeki.png" />
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/michinoeki.png" />
 {% elif faculty == "station" %}
-    <meta property="og:image" content="/static/station.png" />
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/station.png" />
 {% elif faculty == "abandoned_station" %}
-    <meta property="og:image" content="/static/abandoned_station.jpg" />
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/abandoned_station.jpg" />
 {% elif faculty == "research_institute" %}
-    <meta property="og:image" content="/static/research_institute.png" />
+    <meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/research_institute.png" />
 {% endif %}
 
 <title>秘境{{ faculty_ja }}占い</title>
 
 <h1>秘境{{ faculty_ja }}占い</h1>
 <br>
-<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-url="https://search-isolated-villages-2.herokuapp.com/{{ faculty }}" data-text="秘境{{ faculty_ja }}占い" data-size="large">Tweet</a>
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-url="https://search-isolated-villages-2.herokuapp.com/{{ faculty }}/uranai" data-text="秘境{{ faculty_ja }}占い" data-size="large">Tweet</a>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <br>
 今日のラッキー秘境{{ faculty_ja }}を占います。<br>
@@ -173,17 +173,20 @@
                 </div>
             </div>
             <center>
-            <a
-                    href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-                    class="twitter-share-button"
-                    data-url="https://search-isolated-villages-2.herokuapp.com/{{ faculty }}/uranai"
-                    data-text="今日のラッキー秘境{{ faculty_ja }}は…
-{{ result.faculty.name }}
-{{ result.faculty.get_google_map_url() }}
-"
+                <input type="button" class="btn btn-primary" value="結果をツイートする" onclick="ShowSubWindow();">
+<!--                <input type="button" class="btn btn-primary twitter-share-button" data-url="https://search-isolated-villages-2.herokuapp.com/{{ faculty }}/uranai" value="結果をツイートする" onclick="ShowSubWindow();">-->
+<!--                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="btn btn-primary twitter-share-button" data-url="https://search-isolated-villages-2.herokuapp.com/{{ faculty }}/uranai" data-text="今日のラッキー秘境{{ faculty_ja }}は…" data-size="large">Tweet</a>-->
+<!--            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>-->
 
-                    data-size="large">Tweet</a>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<!--            <a-->
+<!--                    href="https://twitter.com/share?ref_src=twsrc%5Etfw"-->
+<!--                    class="twitter-share-button"-->
+<!--                    data-url="https://search-isolated-villages-2.herokuapp.com/{{ faculty }}/uranai"-->
+<!--                    data-text="今日のラッキー秘境{{ faculty_ja }}は…-->
+<!--{{ result.faculty.name }}-->
+<!--{{ result.faculty.get_google_map_url() }}"-->
+<!--                    data-size="large">Tweet</a>-->
+<!--            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>-->
             </center>
             <br>
         </div>
@@ -192,6 +195,23 @@
 </div>
 
 <script>
+function ShowSubWindow() {
+   // サブウインドウの設定
+   var subw = 600;   // サブウインドウの横幅
+   var subh = 400;   // サブウインドウの高さ
+   var gmap = "{{ result.faculty.get_google_map_url() }}"
+   var subp = "http://twitter.com/share?url=https://search-isolated-villages-2.herokuapp.com/{{ faculty }}/uranai&hashtags=秘境{{ faculty_ja }}占い,秘境{{ faculty_ja }}探索ツール&text=今日のラッキー秘境{{ faculty_ja }}は…%0a{{ result.faculty.name }}%0a" + gmap;   // 表示するページ(URL)
+   var subn = "twitter";   // サブウインドウの名称
+   // 表示座標の計算
+   var subx = ( screen.availWidth  - subw ) / 2;   // X座標
+   var suby = ( screen.availHeight - subh ) / 2;   // Y座標
+   // サブウインドウのオプション文字列を作る
+   var SubWinOpt = "width=" + subw + ",height=" + subh + ",top=" + suby + ",left=" + subx;
+   // サブウインドウを表示
+   window.open(subp, subn, SubWinOpt);
+   return false;
+};
+
 window.onload = function(){
     document.getElementById("modalbtn").click();
 }
