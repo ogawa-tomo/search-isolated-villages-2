@@ -4,12 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-folium = "==0.7.0"
-gunicorn = "==19.9.0"
+folium = "*"
+gunicorn = "*"
 tqdm = "*"
 pandas = "*"
-Flask = "==1.0"
-Jinja2 = "==2.10.1"
+Flask = "*"
+Jinja2 = "*"
 geopandas = "*"
 
 [dev-packages]
