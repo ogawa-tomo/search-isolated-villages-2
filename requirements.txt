@@ -1,5 +1,4 @@
 Flask
-folium
 gunicorn
 Jinja2
 tqdm
