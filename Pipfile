@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+folium = "==0.7.0"
+gunicorn = "==19.9.0"
+tqdm = "*"
+pandas = "*"
+Flask = "==1.0"
+Jinja2 = "==2.10.1"
+geopandas = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"

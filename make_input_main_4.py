@@ -9,7 +9,7 @@ import settings.file_path as fp
 
 def main():
     """
-    人口ポリゴンデータのcsvを都道府県別に作成
+    人口ポリゴンデータのcsvを都道府県別に作成（人口メッシュ地図表示のため）
     :return:
     """
 

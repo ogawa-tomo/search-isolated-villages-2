@@ -9,6 +9,12 @@ from make_input_main_2 import PointContainer
 # import library.common_function as cf
 import library.make_input_functions as mif
 
+"""
+人口ポイントデータの隣接関係から集落を抽出する
+集落の都会度を計算する
+集落のcsvデータを吐き出す
+"""
+
 def main():
 
     # 人口データ読み込み

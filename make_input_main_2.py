@@ -14,6 +14,14 @@ from library.point_container import PointContainer
 from library.setting import RegionSetting
 
 
+"""
+人口ポイントと小地域ポイントのjsonデータを読み込む
+小地域ポイントデータをもとに、人口ポイントデータに住所を付与する
+人口ポイントデータに隣接関係を付与する
+人口ポイントデータをcsvに吐き出す
+"""
+
+
 def main():
 
     # ポイント・人口データ読み込み

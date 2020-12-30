@@ -5,6 +5,12 @@ import settings.file_path as fp
 import os
 from tqdm import tqdm
 
+"""
+estatのページから以下のデータをダウンロードし、raw_dataフォルダに格納する
+・メッシュのファイル
+・人工データ
+・小地域のshpファイル
+"""
 
 print("メッシュのshpファイルをダウンロード")
 for mesh_num in tqdm(PRIMARY_MESH_NUMS):

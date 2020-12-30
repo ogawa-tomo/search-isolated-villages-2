@@ -13,7 +13,7 @@ class PopRawDataReader(object):
 
     def read_data(self):
 
-        with open(self.path, "r") as f:
+        with open(self.path, "r", encoding="shift-jis") as f:
             reader = csv.reader(f)
             for i, line in enumerate(reader):
 

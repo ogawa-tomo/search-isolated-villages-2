@@ -131,4 +131,4 @@ def uranai_faculty_result(faculty):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
