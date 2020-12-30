@@ -19,9 +19,11 @@
 * R774@まとめ屋さんの訪問先まとめマップデータ<http://umap.openstreetmap.fr/ja/map/r774_368811#5/36.297/139.680>
 
 ## ローカル環境での実行方法
-1. requirements.txtに記述したpython実行環境を用意
-2. webif.pyを実行
+1. 仮想環境を構築 ```pipenv install```
+2. webサーバを起動 ```pipenv run python webif.py```
 3. localhost:5000にアクセス
+
+※Windows環境だとうまくいかないことがあるので、その場合は下記のDocker環境で実行する
 
 ## Docker環境での実行方法
 1. コンテナ起動 ```docker-compose up -d```
