@@ -9,6 +9,7 @@ geopandas = "*"
 tqdm = "*"
 pandas = "*"
 folium = "*"
+cython = "*"
 
 [dev-packages]
 
