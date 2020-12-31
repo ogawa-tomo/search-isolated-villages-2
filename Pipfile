@@ -5,11 +5,10 @@ name = "pypi"
 
 [packages]
 flask = "*"
-geopandas = "*"
-tqdm = "*"
-pandas = "*"
 folium = "*"
-cython = "*"
+pandas = "*"
+tqdm = "*"
+geopandas = "*"
 
 [dev-packages]
 
