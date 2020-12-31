@@ -8,7 +8,6 @@ flask = "*"
 folium = "*"
 pandas = "*"
 tqdm = "*"
-geopandas = "*"
 
 [dev-packages]
 
