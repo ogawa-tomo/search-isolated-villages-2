@@ -8,6 +8,7 @@ flask = "*"
 folium = "*"
 pandas = "*"
 tqdm = "*"
+gunicorn = "*"
 
 [dev-packages]
 
