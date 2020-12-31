@@ -4,15 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-folium = "*"
-gunicorn = "*"
+flask = "*"
+geopandas = "*"
 tqdm = "*"
 pandas = "*"
-Flask = "*"
-Jinja2 = "*"
-geopandas = "*"
+folium = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.6"
+python_version = "3.9"
