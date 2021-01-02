@@ -118,62 +118,33 @@
                 {% endif %}
             </td>
         </tr>
-        <!--<tr>-->
-            <!--<td>メッシュ人口下限</td>-->
-            <!--<td>-->
-                <!--{% if setting %}-->
-                    <!--{{ setting.point_pop_lower_limit }}-->
-                <!--{% else %}-->
-                    <!--<input type="text" name="point_pop_lower_limit" id="point_pop_lower_limit" size="3" value="1">-->
-                <!--{% endif %}-->
-            <!--</td>-->
-        <!--</tr>-->
+        
         <tr>
-            <td>集落人口下限</td>
+            <td>集落人口</td>
             <td>
                 {% if setting %}
-                    {{ setting.village_pop_lower_limit }}人
+                    {{ setting.village_pop_lower_limit }}<font size="-1">人以上</font>
+                    {{ setting.village_pop_upper_limit }}<font size="-1">人以下</font>
                 {% else %}
-                    <input type="number" name="village_pop_lower_limit" id="village_pop_lower_limit" style="width: 5em" value="1" min="1" required>人
+                    <input type="number" name="village_pop_lower_limit" id="village_pop_lower_limit" style="width: 3em" value="1" min="1" required><font size="-1">人</font> ~
+                    <input type="number" name="village_pop_upper_limit" id="village_pop_upper_limit" style="width: 5em" value="10000" min="1" required><font size="-1">人</font>
                 {% endif %}
             </td>
         </tr>
         <tr>
-            <td>集落人口上限</td>
-            <td>
-                {% if setting %}
-                    {{ setting.village_pop_upper_limit }}人
-                {% else %}
-                    <input type="number" name="village_pop_upper_limit" id="village_pop_upper_limit" style="width: 5em" value="10000" min="1" required>人
-                {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <td>集落面積下限</td>
-            <td>
-                {% if setting %}
-                    {{ setting.village_size_lower_limit }}メッシュ
-                {% else %}
-                    <input type="number" name="village_size_lower_limit" id="village_size_lower_limit" style="width: 5em" value="1" min="1" max="100" required>メッシュ<sup>*1</sup>
-                {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                集落面積上限
+            <td>集落面積
                 {% if setting %}
                 {% else %}
-                    <sup>*2</sup>
+                    <sup>*1</sup>
                 {% endif %}
             </td>
             <td>
                 {% if setting %}
-                    {{ setting.village_size_upper_limit }}メッシュ
+                    {{ setting.village_size_lower_limit }}<font size="-1">メッシュ以上</font>
+                    {{ setting.village_size_upper_limit }}<font size="-1">メッシュ以下</font>
                 {% else %}
-                    <input type="number" name="village_size_upper_limit" id="village_size_upper_limit" style="width: 5em" size="3" value="100" min="1" max="100" required>メッシュ<sup>*1</sup>
-                    <!--<font size="-1">-->
-                        <!--※最大値は100-->
-                    <!--</font>-->
+                    <input type="number" name="village_size_lower_limit" id="village_size_lower_limit" style="width: 3em" value="1" min="1" max="100" required><font size="-1">メッシュ</font> ~
+                    <input type="number" name="village_size_upper_limit" id="village_size_upper_limit" style="width: 3em" size="3" value="100" min="1" max="100" required><font size="-1">メッシュ<sup>*2</sup></font>
                 {% endif %}
             </td>
         </tr>
@@ -213,7 +184,7 @@
         <br><br>
         <font size="-1">
             *1: 1メッシュはおよそ250m四方<br>
-            *2: 集落面積上限の最大値は100メッシュ<br>
+            *2: 集落面積の上限は100メッシュ<br>
             *3: 本土と橋で繋がっていない島を離島とする
         </font>
         <br>
