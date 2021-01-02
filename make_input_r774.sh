@@ -1,3 +1,4 @@
+#!/bin/bash
 
 pypy make_input_main_5.py
 pipenv run python make_input_main_6.py
