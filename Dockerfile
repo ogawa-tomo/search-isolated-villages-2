@@ -6,7 +6,7 @@ RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv && \
     echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc && \
     echo 'eval "$(pyenv init -)"' >> ~/.bashrc && \
     . ~/.bashrc  && \
-    pyenv install 3.6.4
+    pyenv install 3.9.1
 
 WORKDIR /src
 
