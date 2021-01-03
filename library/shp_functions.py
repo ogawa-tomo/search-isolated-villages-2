@@ -15,8 +15,14 @@ def extract_zip(directory):
     """
     files = glob.glob(os.path.join(directory, "*.zip"))
     for file in tqdm(files):
-        with zipfile.ZipFile(file, "r") as f:
-            f.extractall(directory)
+        try:
+            with zipfile.ZipFile(file, "r") as f:
+                f.extractall(directory)
+        except OSError as e:
+            # linuxの設定によりzipファイルがzip bombとみなされて展開できないことがある。その場合、windowsで展開してからコピーする
+            print(e)
+            print(type(e))
+            print("zipファイルの展開に失敗しました")
 
 
 def shp_dir_to_json_dir(shp_dir, json_dir):
