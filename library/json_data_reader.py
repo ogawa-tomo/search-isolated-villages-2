@@ -378,16 +378,20 @@ class JsonMichinoekiData(JsonFacultyData):
 class JsonStationData(JsonFacultyData):
 
     def get_name(self):
-        return self.data["properties"]["N02_003"] + " " + self.data["properties"]["N02_005"] + "駅"
+        # return self.data["properties"]["N02_003"] + " " + self.data["properties"]["N02_005"] + "駅"
+        return self.data["properties"]["路線名"] + " " + self.data["properties"]["駅名"] + "駅"
 
 
 class JsonAbandonedStationData(JsonFacultyData):
 
     def get_name(self):
         # {"name": [路線名] [駅名]駅, "abandoned_year_1": [廃止年-1], "id": [id]}
-        name = {"name": self.data["properties"]["N05_002"] + " " + self.data["properties"]["N05_011"] + "駅",
-                "abandoned_year_1": self.data["properties"]["N05_005e"],
-                "id": self.data["properties"]["N05_006"]}
+        # name = {"name": self.data["properties"]["N05_002"] + " " + self.data["properties"]["N05_011"] + "駅",
+        #         "abandoned_year_1": self.data["properties"]["N05_005e"],
+        #         "id": self.data["properties"]["N05_006"]}
+        name = {"name": self.data["properties"]["路線名"] + " " + self.data["properties"]["駅名"] + "駅",
+                "abandoned_year_1": self.data["properties"]["設置終了"],
+                "id": self.data["properties"]["関係ID"]}
 
         return name
 
