@@ -20,10 +20,10 @@ def main():
 
     if faculty_type == STATION:
         print("geojsonを読み込み")
-        merged_data = gpd.read_file(os.path.join(input_dir, "N02-18_Station.geojson"), driver="GeoJson")
+        merged_data = gpd.read_file(os.path.join(input_dir, "N02-19_Station.geojson"), driver="GeoJson")
     elif faculty_type == ABANDONED_STATION:
         print("geojsonを読み込み")
-        merged_data = gpd.read_file(os.path.join(input_dir, "N05-18_Station2.geojson"), driver="GeoJson")
+        merged_data = gpd.read_file(os.path.join(input_dir, "N05-19_Station2.geojson"), driver="GeoJson")
     elif faculty_type == RESEARCH_INSTITUTE:
         print("shpファイルを読み込んで結合")
         merged_data = sf.merge_shp(input_dir, encoding="shift_jis")
