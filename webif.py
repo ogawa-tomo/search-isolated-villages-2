@@ -130,5 +130,14 @@ def uranai_faculty_result(faculty):
     return render_template("uranai_faculty.html", faculty=faculty, result=result, faculty_ja=get_faculty_ja(faculty))
 
 
+@app.route("/about")
+def about():
+    """
+    秘境集落探索ツール
+    :return:
+    """
+    return render_template("about.html")
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

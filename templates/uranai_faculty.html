@@ -30,10 +30,9 @@
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <br>
 今日のラッキー秘境{{ faculty_ja }}を占います。<br>
-・<a href="/{{ faculty }}">秘境{{ faculty_ja }}探索ツール</a><br>
+<!-- ・<a href="/{{ faculty }}">秘境{{ faculty_ja }}探索ツール</a><br>
 
 <div class="dropdown">
-<!--    <a class="btn btn-default dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
     <button class="btn btn-light btn-sm dropdown-toggle border-dark" type="button" data-toggle="dropdown">
         その他の秘境占いへ移動
     </button>
@@ -90,7 +89,7 @@
             <a class="dropdown-item" href="/new_town/uranai">秘境ニュータウン占い</a>
         {% endif %}
     </div>
-</div>
+</div> -->
 {% if faculty == "post_office" %}
     <img src="/static/post_office.png" width="250" style="margin-left: 30px">
 {% elif faculty == "elementary_school" %}
@@ -221,10 +220,10 @@ window.onload = function(){
 {% endif %}
 
 
-    <br><br>
+    <!-- <br><br>
     <h2>ソースコード</h2>
         <a href="https://github.com/ogawa-tomo/search-isolated-villages-2.git" target="_blank">https://github.com/ogawa-tomo/search-isolated-villages-2.git</a>
         <br><br>
     <h2>作者</h2>
-    Twitter: <a href="https://twitter.com/otomo6sm" target="_blank">@otomo6sm</a>
+    Twitter: <a href="https://twitter.com/otomo6sm" target="_blank">@otomo6sm</a> -->
 {% endblock %}

@@ -22,11 +22,11 @@
     <!-- おみくじ用CSS   -->
     <link rel="stylesheet" type="text/css" href="/static/style.css">
 
-    <style type="text/css">
+    <!-- <style type="text/css">
         a{
             text-decoration:underline;
         }
-    </style>
+    </style> -->
 
     <!-- Multiple Select -->
     <!--<link rel="stylesheet" href="https://unpkg.com/multiple-select@1.3.1/dist/multiple-select.min.css">-->
@@ -45,10 +45,67 @@
 <!--<body class="modal-open">-->
 <body>
 
+
+    <div class="container">
+    <nav class="navbar navbar-expand-md navbar-light bg-light" style="border-bottom: 1px solid #bfbfbf">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- <font size="+1"> -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">秘境集落探索ツール</a>
+            </li>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  秘境施設探索ツール
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="/post_office">秘境郵便局探索ツール</a>
+                  <a class="dropdown-item" href="/elementary_school">秘境小学校探索ツール</a>
+                  <a class="dropdown-item" href="/station">秘境駅探索ツール</a>
+                  <a class="dropdown-item" href="/abandoned_station">秘境廃駅探索ツール</a>
+                  <a class="dropdown-item" href="/michinoeki">秘境道の駅探索ツール</a>
+                  <a class="dropdown-item" href="/new_town">秘境ニュータウン探索ツール</a>
+                  <a class="dropdown-item" href="/research_institute">秘境研究機関探索ツール</a>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/uranai">秘境集落占い</a>
+            </li>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+                  秘境施設占い
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="/post_office/uranai">秘境郵便局占い</a>
+                  <a class="dropdown-item" href="/elementary_school/uranai">秘境小学校占い</a>
+                  <a class="dropdown-item" href="/station/uranai">秘境駅占い</a>
+                  <a class="dropdown-item" href="/abandoned_station/uranai">秘境廃駅占い</a>
+                  <a class="dropdown-item" href="/michinoeki/uranai">秘境道の駅占い</a>
+                  <a class="dropdown-item" href="/new_town/uranai">秘境ニュータウン占い</a>
+                  <a class="dropdown-item" href="/research_institute/uranai">秘境研究機関占い</a>
+                </div>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/about">このツールについて</a>
+            </li>
+          </ul>
+        </div>
+        <!-- </font> -->
+    </nav>
+    </div>
+
     <!--<div class="m-3 p-3">-->
     <!--<div class="mx-auto mt-3 pt-3 mb-3 pb-3" style="width: 1000px;">-->
     <!--<div class="panel-default">-->
-    <div class="mx-auto m-3 p-3" style="width: 1100px;">
+
+    <!-- <div class="mx-auto m-3 p-3" style="width: 1100px;"> -->
+    <div class="container">
+        <br>
+
+
     <!--<div class="container-fluid mx-auto m-3 p-3">-->
         <!--<div class = "row">-->
             <!--<div class="col-auto">-->
