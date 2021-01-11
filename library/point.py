@@ -12,6 +12,7 @@ class Point(object):
         self.city = ""
         self.district = ""
         # self.len_district = 0
+        self.urban_point = 0
 
     def get_distance(self, p):
         """

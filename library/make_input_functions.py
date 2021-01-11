@@ -4,6 +4,8 @@ from tqdm import tqdm
 from library.island_checker import IslandChecker
 import settings.file_path as fp
 from library.json_data_reader import JsonRegionPointDataReader
+from library.json_data_reader import JsonPointDataReader
+import json
 
 
 def read_region_data(raw_region_json_dir):

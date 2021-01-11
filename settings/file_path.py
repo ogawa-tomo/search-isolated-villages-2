@@ -29,6 +29,9 @@ island_data_file = os.path.join("./settings", "islands.csv")
 # 隣接点つき人口データファイル
 pop_point_file = os.path.join("./input_data", "pop_points.csv")
 
+# 都会度対決のための人口データファイル
+pop_point_file_for_tokaido_taiketsu = os.path.join("./input_data", "pop_points_for_tokaido_taiketsu.csv")
+
 # 人口ポリゴンデータディレクトリ
 pop_polygon_dir = os.path.join("./input_data", "pop_polygons")
 

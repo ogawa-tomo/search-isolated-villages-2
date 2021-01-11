@@ -8,6 +8,7 @@ import uranai_faculty_main
 from settings.constants import *
 from library import common_function as cf
 import settings.file_path as fp
+import tokaido_taiketsu_main
 
 app = Flask(__name__)
 title = "秘境集落探索ツール"
@@ -128,6 +129,27 @@ def uranai_faculty_result(faculty):
     faculty = faculty
     result = uranai_faculty_main.main(faculty)
     return render_template("uranai_faculty.html", faculty=faculty, result=result, faculty_ja=get_faculty_ja(faculty))
+
+
+@app.route("/tokaido_taiketsu")
+def tokaido_taiketsu():
+    return render_template("tokaido_taiketsu.html")
+
+
+@app.route("/tokaido_taiketsu/result", methods=["GET", "POST"])
+def tokaido_taiketsu_result():
+    point1_name = request.form["point1_name"]
+    point1_latlon = request.form["point1_latlon"].split(",")
+    point1_lat = float(point1_latlon[0].strip())
+    point1_lon = float(point1_latlon[1].strip())
+    point2_name = request.form["point2_name"]
+    point2_latlon = request.form["point2_latlon"].split(",")
+    point2_lat = float(point2_latlon[0].strip())
+    point2_lon = float(point2_latlon[1].strip())
+    result = tokaido_taiketsu_main.main(point1_name, point1_lat, point1_lon, point2_name, point2_lat, point2_lon)
+
+
+    return render_template("tokaido_taiketsu.html", result=result)
 
 
 @app.route("/about")

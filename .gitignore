@@ -112,6 +112,7 @@ input_data/
 !new_towns.csv
 !michinoeki.csv
 !station.csv
+!pop_points_for_tokaido_taiketsu.csv
 
 .idea/
 

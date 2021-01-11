@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<meta name="twitter:card" content="summary" />
+<!--<meta name="twitter:site" content="@ユーザー名" /> /*②*/-->
+<!--<meta property="og:url" content="記事のURL" /> /*③*/-->
+<meta property="og:title" content="都会度対決ツール" />
+<meta property="og:description" content="任意の2地点の都会度を人口分布データをもとに評価し、どちらがより都会であるかを客観的に判定します。" />
+
+<meta property="og:image" content="https://search-isolated-villages-2.herokuapp.com/static/tokaido_taiketsu.png" />
+
+<title>都会度対決ツール</title>
+
+<h1>都会度対決ツール</h1>
+<br>
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-url="https://search-isolated-villages-2.herokuapp.com/tokaido_taiketsu" data-text="都会度対決ツール" data-size="large">Tweet</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<br>
+
+任意の2地点の都会度を人口分布データをもとに評価し、どちらがより都会であるかを客観的に判定します。<br>
+
+<img src="/static/tokaido_taiketsu.png" width="350">
+
+<form action="/tokaido_taiketsu/result" method="post">
+    <table class="table table-responsive">
+        <tr>
+            <th></th>
+            <th>地点名</th>
+            <th>緯度経度</th>
+        </tr>
+        <tr>
+            <td>地点1</td>
+            <td>
+                <input type="text" name="point1_name" id="point1_name" size="25" value="" placeholder="Aくんの家">
+            </td>
+            <td>
+                <input type="text" name="point1_latlon" id="point1_latlon" size="25" value="" placeholder="35.0000, 135.0000">
+            </td>
+        </tr>
+        <tr>
+            <td>地点2</td>
+            <td>
+                <input type="text" name="point2_name" id="point2_name" size="25" value="" placeholder="Bくんの家">
+            </td>
+            <td>
+                <input type="text" name="point2_latlon" id="point2_latlon" size="25" value="" placeholder="35.0000, 135.0000">
+            </td>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-primary">判定</button>
+    <br><br>
+    <font size="-1">
+        ※都会度の算出方法について、詳しくは<a href="/about">こちら</a>。<br>
+        ※人口が存在しない地点を指定するとエラーになる。
+    </font>
+    <br>
+
+</form>
+
+{% if result %}
+
+<!--ダミーボタン-->
+<div hidden>
+    <button type="button" class="btn btn-secondary btn-sm" id="modalbtn" data-toggle="modal" data-target="#Modal">
+        表示
+    </button>
+</div>
+    
+    
+    <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="uranai_box mx-auto" style="width: 80%;">
+                    <div class="mx-auto" style="width: 70%">
+                        <!-- <div class="mx-auto" style="width: 80%"> -->
+                        <table class="table table-responsive">
+                            <tr>
+                                <th>地点名</th>
+                                <th>緯度経度</th>
+                                <th>都会度</th>
+                            </tr>
+                            <tr>
+                                <td>{{ result.point1_name }}</td>
+                                <td>{{ result.point1_latlon }}</td>
+                                <td>{{ result.point1_tokaido }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ result.point2_name }}</td>
+                                <td>{{ result.point2_latlon }}</td>
+                                <td>{{ result.point2_tokaido }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <center>
+                        {{ result.point1_name }}と{{ result.point2_name }}を比較したとき、より都会なのは……<br><br>
+                        <font size="+2">
+                            <b>{{ result.winner }}</b>
+                        </font>
+                    </center>
+                </div>
+                <!-- <center>
+                    <input type="button" class="btn btn-primary" value="結果をツイートする" onclick="ShowSubWindow();">
+                </center> -->
+                <br>
+            </div>
+        </div>
+        </div>
+    </div>
+
+<script>
+window.onload = function(){
+    document.getElementById("modalbtn").click();
+}
+</script>
+    
+    
+    {% endif %}
+
+    {% endblock %}

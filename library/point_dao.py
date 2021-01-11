@@ -1,7 +1,11 @@
 import csv
 from library.point import *
 from tqdm import tqdm
-
+import library.common_function as cf
+from library.setting import RegionSetting
+from library.island_checker import IslandChecker
+import settings.file_path as fp
+from settings.constants import *
 
 class PopPointDAO(object):
 
@@ -133,3 +137,76 @@ class PopPointDAO(object):
             else:
                 neighbor_ids += "-" + str(n.id)
         return neighbor_ids
+
+
+class PopPointDAOForTokaidoTaiketsu(object):
+
+    def __init__(self, path):
+        self.path = path
+        self.columns = [
+            "key",
+            "latitude",
+            "longitude",
+            "urban_point"
+        ]
+        # self.id_idx = self.columns.index("id")
+        self.key_idx = self.columns.index("key")
+        # self.neighbors_idx = self.columns.index("neighbors")
+        # self.pref_idx = self.columns.index("pref")
+        # self.city_idx = self.columns.index("city")
+        # self.district_idx = self.columns.index("district")
+        # self.pop_idx = self.columns.index("population")
+        self.lat_idx = self.columns.index("latitude")
+        self.lon_idx = self.columns.index("longitude")
+        # self.coast_idx = self.columns.index("coast")
+        # self.coast_distance_idx = self.columns.index("coast_distance")
+        self.urban_point_idx = self.columns.index("urban_point")
+        # self.is_village_point_idx = self.columns.index("is_village_point")
+
+    def make_pop_point_data(self, pop_points):
+        """
+        人口点データをcsvに書き込む
+        :param pop_points:
+        :return:
+        """
+        with open(self.path, "w", encoding="utf8") as f:
+            writer = csv.writer(f, lineterminator="\n")
+
+            # ヘッダ
+            writer.writerow(self.columns)
+
+            # データ
+            for p in pop_points:
+
+                row = []
+                for _ in range(len(self.columns)):
+                    row.append(None)
+
+                row[self.key_idx] = p.key_code
+                row[self.lat_idx] = p.latitude
+                row[self.lon_idx] = p.longitude
+                row[self.urban_point_idx] = p.urban_point
+
+                writer.writerow(row)
+    
+    def get_tokaido(self, lat, lon):
+
+        with open(self.path, "r", encoding="utf8") as f:
+            reader = csv.reader(f)
+            for i, line in tqdm(enumerate(reader)):
+
+                if i == 0:
+                    continue
+                p_lat = float(line[self.lat_idx])
+                p_lon = float(line[self.lon_idx])
+
+                dx = abs(lon - p_lon)
+                dy = abs(lat - p_lat)
+
+                if dx < IS_IN_MESH_THRESHOLD_LON and dy < IS_IN_MESH_THRESHOLD_LAT:
+                    return float(line[self.urban_point_idx])
+        
+        raise Exception
+
+
+
