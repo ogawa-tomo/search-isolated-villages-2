@@ -12,7 +12,8 @@ pypy make_input_main_4.py
 pypy make_input_main_5.py
 pipenv run python make_input_main_6.py
 
-pypy make_input_tokaido_taiketsu.py
+pypy make_input_urban_points_for_pop_points_1.py
+pipenv run python make_input_urban_points_for_pop_points_2.py
 
 for faculty in elementary_school post_office new_town michinoeki station abandoned_station research_institute
 do

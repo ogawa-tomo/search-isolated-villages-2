@@ -113,6 +113,7 @@ input_data/
 !michinoeki.csv
 !station.csv
 !pop_points_for_tokaido_taiketsu.csv
+!pop_points_for_maximum_urban_points.csv
 
 .idea/
 
