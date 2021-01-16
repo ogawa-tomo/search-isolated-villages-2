@@ -215,7 +215,7 @@
 
 
         </tr>
-        {% for v in result.sorted_villages[:result.num] %}
+        {% for v in result.objects[:result.num] %}
             <tr>
                 <td>{{ loop.index }}<font size="-1">位</font></td>
                 <td>{{ v.pref }}</td>

@@ -1,5 +1,5 @@
 import folium
-from library.point import Village, FacultyPoint
+from library.point import Village, FacultyPoint, PopPoint
 import os
 import settings.file_path as fp
 from library.pop_polygon_dao import PopPolygonDAO
@@ -60,7 +60,7 @@ class OutputMap(object):
         :param pref: 都道府県指定（指定された場合、「～県〇位」のように記述）
         :return:
         """
-        if type(p) is Village:
+        if type(p) is Village or type(p) is PopPoint:
             name = "".join([p.pref, p.city, p.district])
         elif type(p) is FacultyPoint:
             name = p.name
@@ -87,7 +87,7 @@ class OutputMap(object):
         if type(p) is Village:
             population = str(p.population) + "人"
             popup = "<br>".join([desc, a_tag, population])
-        elif type(p) is FacultyPoint:
+        elif type(p) is FacultyPoint or type(p) is PopPoint:
             popup = "<br>".join([desc, a_tag])
 
         # marker = folium.Marker([p.latitude, p.longitude], popup=popup,

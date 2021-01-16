@@ -245,7 +245,7 @@
             <th>地図</th>
             <th>都会度</th>
         </tr>
-        {% for f in result.faculties[:result.num] %}
+        {% for f in result.objects[:result.num] %}
             <tr>
                 <td>{{ loop.index }}<font size="-1">位</font></td>
                 <td>{{ f.name }}</td>

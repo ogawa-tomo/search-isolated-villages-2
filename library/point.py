@@ -12,7 +12,7 @@ class Point(object):
         self.city = ""
         self.district = ""
         # self.len_district = 0
-        self.urban_point = 0
+        # self.urban_point = 0
 
     def get_distance(self, p):
         """
@@ -92,8 +92,15 @@ class PopPoint(Point):
         self.neighbor_ids = ""
         self.is_island = None
         # self.coast_distance = 0
-        # self.urban_point = 0
+        self.urban_point = 0
         # self.is_village_point = True
+
+        self.longitude_round = None
+        self.latitude_round = None
+        self.urban_point_round = None
+    
+    def __lt__(self, other):
+        return self.urban_point < other.urban_point
 
     def add_neighbor(self, p):
         self.neighbors.append(p)

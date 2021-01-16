@@ -21,10 +21,10 @@ class PopPointDAO(object):
             "population",
             "latitude",
             "longitude",
-            "is_island"
+            "is_island",
             # "coast",
             # "coast_distance",
-            # "urban_point",
+            "urban_point"
             # "is_village_point"
         ]
         self.id_idx = self.columns.index("id")
@@ -39,7 +39,7 @@ class PopPointDAO(object):
         self.is_island_idx = self.columns.index("is_island")
         # self.coast_idx = self.columns.index("coast")
         # self.coast_distance_idx = self.columns.index("coast_distance")
-        # self.urban_point_idx = self.columns.index("urban_point")
+        self.urban_point_idx = self.columns.index("urban_point")
         # self.is_village_point_idx = self.columns.index("is_village_point")
 
     def make_pop_point_data(self, pop_points):
@@ -73,12 +73,12 @@ class PopPointDAO(object):
                 row[self.is_island_idx] = p.is_island
                 # row[self.coast_idx] = p.coast
                 # row[self.coast_distance_idx] = p.coast_distance
-                # row[self.urban_point_idx] = p.urban_point
+                row[self.urban_point_idx] = p.urban_point
                 # row[self.is_village_point_idx] = p.is_village_point
 
                 writer.writerow(row)
 
-    def read_pop_point_data(self):
+    def read_pop_point_data(self, read_neighbors=True):
         """
         人口点入力データを読み込み、点クラスのリストを返す
         :return:
@@ -97,6 +97,7 @@ class PopPointDAO(object):
                 # 人口Pointを作る
                 p = PopPoint()
 
+                p.id = int(line[self.id_idx])
                 p.key_code = line[self.key_idx]
                 if line[self.neighbors_idx] != "":
                     p.neighbor_ids = [int(k) for k in line[self.neighbors_idx].split("-")]
@@ -112,14 +113,21 @@ class PopPointDAO(object):
                     p.is_island = True
                 else:
                     p.is_island = False
+                p.urban_point = float(line[self.urban_point_idx])
+
+                # html出力用
+                p.latitude_round = round(p.latitude, LAT_LON_ROUND)
+                p.longitude_round = round(p.longitude, LAT_LON_ROUND)
+                p.urban_point_round = round(p.urban_point, URBAN_POINT_ROUND)
 
                 # リストに登録
                 pop_points.append(p)
 
         # 隣接点を登録（all_pop_pointsがID順に並んでいることを前提にしている）
-        for p in pop_points:
-            for idx in p.neighbor_ids:
-                p.add_neighbor(pop_points[idx])
+        if read_neighbors:
+            for p in pop_points:
+                for idx in p.neighbor_ids:
+                    p.add_neighbor(pop_points[idx])
 
         return pop_points
 

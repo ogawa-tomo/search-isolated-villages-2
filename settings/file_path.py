@@ -32,6 +32,9 @@ pop_point_file = os.path.join("./input_data", "pop_points.csv")
 # 都会度対決のための人口データファイル
 pop_point_file_for_tokaido_taiketsu = os.path.join("./input_data", "pop_points_for_tokaido_taiketsu.csv")
 
+# 都会度極大点探索ツール用に極大点のみを集めた人口データファイル
+pop_point_file_for_maximum_urban_points = os.path.join("./input_data", "pop_points_for_maximum_urban_points.csv")
+
 # 人口ポリゴンデータディレクトリ
 pop_polygon_dir = os.path.join("./input_data", "pop_polygons")
 
@@ -46,6 +49,9 @@ r774_raw_json_file = os.path.join("./raw_data", "r774_geojson", "r774___________
 
 # r774データファイル
 r774_file = os.path.join("./input_data", "r774_points.csv")
+
+# 都会度極大点地図データ格納ディレクトリ
+max_urban_points_map_dir = os.path.join("./static", "max_urban_points_map")
 
 # # 学校生データファイル
 # elementary_schools_shp_dir = os.path.join("./raw_data", "elementary_school_shp")

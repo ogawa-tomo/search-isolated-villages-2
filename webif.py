@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
-from library.setting import Setting, FacultySetting
+from library.setting import Setting, FacultySetting, VillageSetting
 import time
 import search_village_main
 import search_faculty_main
+import search_max_urban_points_main
 import uranai_main
 import uranai_faculty_main
 from settings.constants import *
@@ -41,7 +42,7 @@ def post():
         island_setting = request.form["island_setting"]
         key_words = request.form["key_words"]
 
-        setting = Setting(
+        setting = VillageSetting(
             region,
             village_pop_lower_limit,
             village_pop_upper_limit,
@@ -150,6 +151,21 @@ def tokaido_taiketsu_result():
 
 
     return render_template("tokaido_taiketsu.html", result=result)
+
+
+@app.route("/max_tokaido")
+def max_tokaido():
+    return render_template("max_urban_point.html")
+
+
+@app.route("/max_tokaido/result", methods=["GET", "POST"])
+def max_tokaido_result():
+    region = request.form["region"]
+    island_setting = request.form["island_setting"]
+    key_words = request.form["key_words"]
+    s = Setting(region, island_setting, key_words)
+    result = search_max_urban_points_main.main(s)
+    return render_template("max_urban_point.html", setting=s, result=result)
 
 
 @app.route("/about")
