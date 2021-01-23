@@ -222,7 +222,7 @@
                 <td>{{ v.city }}</td>
                 <td>{{ v.district }}</td>
                 <td>
-                    <a href="{{ v.get_google_map_url() }}" target="_blank">Google Map</a>
+                    <a href="{{ v.get_google_map_url() }}" target="_blank">Googleマップ</a>
                     {% if result.is_pref %}
                         <!-- 都道府県のときだけ、人口分布図を表示-->
                         <a href="{{ v.get_mesh_map_get_url(result.map_file) }}" target="_blank">人口分布図</a>
