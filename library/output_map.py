@@ -80,7 +80,7 @@ class OutputMap(object):
 
         lat_lon = ",".join([str(p.latitude_round), str(p.longitude_round)])
         url = p.get_google_map_url()
-        a_tag = "<a href=\"" + url + "\" target=_blank>Google_Map(" + lat_lon + ")</a>"
+        a_tag = "<a href=\"" + url + "\" target=_blank>Googleマップ（" + lat_lon + "）</a>"
         # popup = " ".join([desc, a_tag])
 
         popup = None
