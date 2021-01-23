@@ -168,10 +168,7 @@
                 <td>{{ p.district }}</td>
                 <td>
                     <a href="{{ p.get_google_map_url() }}" target="_blank">Googleマップ</a>
-                    {% if result.is_pref %}
-                        <!-- 都道府県のときだけ、人口分布図を表示-->
-                        <a href="{{ p.get_mesh_map_get_url(result.map_file) }}" target="_blank">地点分布図</a>
-                    {% endif %}
+                    <a href="{{ p.get_mesh_map_get_url(result.map_file) }}" target="_blank">地点分布図</a>
                 </td>
                 <td>{{ p.urban_point_round }}</td>
 
