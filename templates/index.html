@@ -194,11 +194,11 @@
 {% if result %}
     <h2 id="result">探索結果</h2>
     <br>
-    <a href="{{ result.get_mesh_map_get_url() }}" target="_blank">マップ表示</a><br>
+    <a href="{{ result.get_mesh_map_get_url() }}" target="_blank">集落分布図</a><br>
     <font size="-1">
         ※上位{{ result.output_map_num }}件まで<br>
-        ※都道府県単位の探索時のみ人口分布を表示<br>
-        ※都道府県単位の探索時、マップに表示する順位は離島を含む集落全体の順位
+        ※都道府県単位の探索時、人口分布を合わせて表示<br>
+        ※都道府県単位の探索時、表示する順位は離島を含む集落全体の順位
     </font>
     <br><br>
     <table class="table table-responsive">
@@ -224,7 +224,7 @@
                 <td>{{ v.district }}</td>
                 <td>
                     <a href="{{ v.get_google_map_url() }}" target="_blank">Googleマップ</a>
-                    <a href="{{ v.get_mesh_map_get_url(result.map_file) }}" target="_blank">人口分布図</a>
+                    <a href="{{ v.get_mesh_map_get_url(result.map_file) }}" target="_blank">集落分布図</a>
                 </td>
                 <td>{{ v.population }}<font size="-1">人</font></td>
                 <td>{{ v.size  }}<font size="-1">メッシュ</font></td>

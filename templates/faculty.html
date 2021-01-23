@@ -227,10 +227,10 @@
 {% if result %}
 <h2 id="result">探索結果</h2>
     <br>
-    <a href="{{ result.get_mesh_map_get_url() }}" target="_blank">マップ表示</a><br>
+    <a href="{{ result.get_mesh_map_get_url() }}" target="_blank">施設分布図</a><br>
     <font size="-1">
         ※上位{{ result.output_map_num }}件まで<br>
-        ※都道府県単位の探索時のみ人口分布を表示<br>
+        ※都道府県単位の探索時、人口分布を合わせて表示<br>
         ※都道府県単位の探索時、マップに表示する順位は離島を含む施設全体の順位
     </font>
     <br><br>
@@ -256,7 +256,7 @@
                 <td>{{ f.district }}</td> -->
                 <td>
                     <a href="{{ f.get_google_map_url() }}" target="_blank">Googleマップ</a>
-                    <a href="{{ f.get_mesh_map_get_url(result.map_file) }}" target="_blank">人口分布図</a>
+                    <a href="{{ f.get_mesh_map_get_url(result.map_file) }}" target="_blank">施設分布図</a>
                 </td>
                 <td>{{ f.urban_point_round }}</td>
             </tr>
