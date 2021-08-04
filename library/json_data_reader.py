@@ -197,6 +197,10 @@ class JsonFacultyPointDataReader(JsonPointDataReader):
         if self.data_class == JsonAbandonedStationData:
             print("廃駅の重複を削除")
             self.abandoned_station_deduplication()
+        
+        if self.data_class == JsonHotSpringData:
+            print("温泉の重複を削除")
+            self.hot_spring_deduplication()
 
     def get_points(self):
         return self.points
@@ -245,6 +249,25 @@ class JsonFacultyPointDataReader(JsonPointDataReader):
         new_points = list(new_points)
 
         self.points = new_points
+    
+    def hot_spring_deduplication(self):
+        """
+        温泉の重複を削除するメソッド
+        :return:
+        """
+        new_points = set()  # 追加する温泉
+        added_hot_spring_names = set()
+        for p in tqdm(self.points):
+
+            if p.name in added_hot_spring_names:
+                continue
+            added_hot_spring_names.add(p.name)
+            new_points.add(p)
+
+        new_points = list(new_points)
+
+        self.points = new_points
+
 
     @staticmethod
     def is_same_station(s1, s2):
@@ -406,6 +429,26 @@ class JsonResearchInstituteData(JsonFacultyData):
 
     def get_name(self):
         return self.data["properties"]["P16_001"]
+
+
+class JsonHotSpringData(JsonFacultyData):
+
+    # def __init__(self, data):
+    #     super().__init__(data)
+    #     print(self.data["properties"]["Name"])
+    #     if "温泉" not in self.data["properties"]["Name"]:
+    #         # 温泉のみを抽出
+    #         raise NotTargetFacultyException
+    
+    def get_name(self):
+        hot_spring_like_phrases = ["泉",  "湯", "浴場", "荘", "ホテル", "宿舎", "センター", "館"]
+        name1 = self.data["properties"]["Name"]
+        name2 = self.data["properties"]["descriptio"].split("<br/>")[4].split("：")[1]
+        for name in [name1, name2]:
+            for phrase in hot_spring_like_phrases:
+                if phrase in name:
+                    return name
+        return name1
 
 
 class NotTargetFacultyException(Exception):

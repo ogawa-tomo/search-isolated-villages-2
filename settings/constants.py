@@ -56,6 +56,7 @@ MICHINOEKI = "michinoeki"
 STATION = "station"
 ABANDONED_STATION = "abandoned_station"
 RESEARCH_INSTITUTE = "research_institute"
+HOT_SPRING = "hot_spring"
 
 
 def get_faculty_ja(faculty):
@@ -73,6 +74,8 @@ def get_faculty_ja(faculty):
         return "廃駅"
     elif faculty == RESEARCH_INSTITUTE:
         return "研究機関"
+    elif faculty == HOT_SPRING:
+        return "温泉"
 
 
 # 離島設定
