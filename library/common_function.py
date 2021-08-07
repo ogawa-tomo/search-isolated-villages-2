@@ -17,12 +17,14 @@ def get_distance(x1, y1, x2, y2):
     # dist = math.sqrt(dx ** 2 + dy ** 2)
 
     # 地球が真球と仮定して計算　https://komoriss.com/calculate-distance-between-two-points-from-latitude-and-longitude/
+    if x1 == x2 and y1 == y2:
+        return 0
     lon1 = x1 * math.pi / 180
     lat1 = y1 * math.pi / 180
     lon2 = x2 * math.pi / 180
     lat2 = y2 * math.pi / 180
     dist = 6371 * math.acos(math.cos(lat1) * math.cos(lat2) * math.cos(lon2 - lon1) + math.sin(lat1) * math.sin(lat2))
-
+    
     return dist
 
 

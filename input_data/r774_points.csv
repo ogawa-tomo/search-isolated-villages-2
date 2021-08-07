@@ -1,7 +1,14 @@
 pref,city,district,latitude,longitude,name,description
-静岡県,天竜区,水窪町山住河内浦,35.142371,137.890563,臼が森集落,https://twitter.com/kendou774/status/1074235083190497285
-静岡県,天竜区,水窪町奥領家門谷,35.215262,137.849622,塩沢集落,https://twitter.com/kendou774/status/1266993800355840001
-静岡県,天竜区,水窪町奥領家水窪,35.177334,137.817081,旧・水窪町夏焼集落,https://twitter.com/kendou774/status/1059031714029137921
+静岡県,天竜区,水窪町奥領家水窪,35.177334,137.817081,201811旧・水窪町夏焼集落,https://twitter.com/kendou774/status/1059031714029137921
+静岡県,天竜区,水窪町山住河内浦,35.142371,137.890563,201812臼が森集落,https://twitter.com/kendou774/status/1074235083190497285
+長野県,天龍村,長島,35.282709,137.838593,201903天龍村　長沼,https://twitter.com/kendou774/status/1112209595970142208
+長野県,飯田市,南信濃,35.307946,137.875972,201908名田熊集落,https://twitter.com/kendou774/status/1165234418660700161
+長野県,阿南町,大字大下条東條,35.322094,137.852454,201911万古集落,https://twitter.com/kendou774/status/1192064611022860290
+静岡県,川根本町,東藤川,35.06448,138.170693,201912小猿郷集落,https://twitter.com/kendou774/status/1206059559283908609
+静岡県,天竜区,水窪町奥領家門谷,35.215262,137.849622,202005塩沢集落,https://twitter.com/kendou774/status/1266993800355840001
+静岡県,天竜区,水窪町奥領家長尾,35.215963,137.866466,202006徳久保集落,https://twitter.com/kendou774/status/1269479743616724992
+静岡県,天竜区,佐久間町川合川合,35.092875,137.763834,202104大入集落,https://twitter.com/kendou774/status/1386166526860877828 聞き取り：https://drive.google.com/file/d/1js32eOvR10NXJbiPrH4BaMgB5-MR8q5y/view
+熊本県,五木村,甲,32.42241,130.87178,202107五木村,https://twitter.com/kendou774/status/1416659338425294853 https://drive.google.com/file/d/1vvYkSeY6z8QPQq8_zUKflJX_KwPV75jO/view
 徳島県,つるぎ町,一宇,33.930097,134.07629,九藤中集落,https://twitter.com/kendou774/status/1150660364540841985
 山梨県,早川町,雨畑,35.376069,138.305426,硯島地区,https://twitter.com/kendou774/status/1208608848925167616
 島根県,江津市,松川町長良,34.981223,132.297492,江津市瀬尻集落,https://twitter.com/kendou774/status/1118510850380185600
@@ -9,7 +16,6 @@ pref,city,district,latitude,longitude,name,description
 山梨県,身延町,杉山,35.438558,138.540741,山神社,https://twitter.com/kendou774/status/1066323124696702977
 和歌山県,田辺市,本宮町土河屋,33.888764,135.762767,鹿淵集落,https://twitter.com/kendou774/status/1129998572869414912
 徳島県,つるぎ町,一宇,33.948202,134.056892,十家集落,https://twitter.com/kendou774/status/1056885726489468929
-静岡県,川根本町,東藤川,35.06448,138.170693,小猿郷集落,https://twitter.com/kendou774/status/1206059559283908609
 和歌山県,田辺市,合川,33.684318,135.56983,小麦集落,https://twitter.com/kendou774/status/1282195301583876096
 和歌山県,白浜町,大字小房,33.66739,135.520263,小房集落,https://twitter.com/kendou774/status/1182936315383300096
 和歌山県,白浜町,大字上露,33.652673,135.566547,上露集落,https://twitter.com/kendou774/status/1108701457438507009
@@ -23,25 +29,23 @@ pref,city,district,latitude,longitude,name,description
 高知県,四万十町,小鶴津,33.208495,133.233175,大鶴津・小鶴津集落,https://twitter.com/kendou774/status/1195885201538220032
 徳島県,吉野川市,美郷,33.984737,134.229305,中村山,https://twitter.com/kendou774/status/1234091412502671360
 兵庫県,宍粟市,宇野,35.041908,134.530935,長水山,https://twitter.com/kendou774/status/1167771996672839682
-長野県,天龍村,長島,35.282709,137.838593,天龍村　長沼,https://twitter.com/kendou774/status/1112209595970142208
+徳島県,三好市,,33.917669,133.810987,田丸集落,https://twitter.com/kendou774/status/1345612082712989696 田丸出身のＲさんからの聞き取り https://drive.google.com/file/d/1WNHEHsa_eiL9V5fpAfIgvP9qfIM4po22/view
 高知県,香美市,中津尾,33.663211,133.91362,堂平集落,https://twitter.com/kendou774/status/1317437310569381888 聞き取り資料: https://drive.google.com/file/d/1EHTlRVeOG90uLTNVaDYqCkeG37jEcoVZ/view
-静岡県,天竜区,水窪町奥領家長尾,35.215963,137.866466,徳久保集落,https://twitter.com/kendou774/status/1269479743616724992
 高知県,香美市,別府,33.748322,134.02815,謎の集落,https://twitter.com/kendou774/status/1140158879252090886
 奈良県,十津川村,大字竹筒,33.872429,135.860388,百夜月,https://twitter.com/kendou774/status/1071575444749598720 https://twitter.com/search?f=tweets&q=since%3A2018-08-24%20until%3A2018-08-25%20from%3Akendou774&src=typd https://twitter.com/search?f=tweets&q=-filter%3Areplies%20since%3A2018-08-19%20until%3A2018-08-23%20from%3Akendou774&src=typd
 徳島県,つるぎ町,一宇,33.911348,134.062922,平井集落,https://twitter.com/kendou774/status/1144247780317306880 https://twitter.com/kendou774/status/1138811025069826049
 長野県,飯田市,上村上町,35.364573,137.987745,平畑,https://twitter.com/kendou774/status/1059790838312529920
 長野県,小谷村,大字北小谷,36.840099,137.918243,埋橋集落,https://twitter.com/kendou774/status/1135136400125308929
-長野県,阿南町,大字大下条東條,35.322094,137.852454,万古集落,https://twitter.com/kendou774/status/1192064611022860290
-長野県,飯田市,南信濃,35.307946,137.875972,名田熊集落,https://twitter.com/kendou774/status/1165234418660700161
 愛媛県,西条市,荒川,33.855573,133.19041,李集落,https://twitter.com/kendou774/status/1226401678582136832
+静岡県,天竜区,水窪町奥領家草木,35.254223,137.910926,201912青崩峠トンネル,https://twitter.com/kendou774/status/1206057183420403713
 長野県,飯田市,上村上町,35.39093,137.969109,R256の終点付近,https://twitter.com/kendou774/status/1038041824139431939
 兵庫県,宍粟市,小野,35.120611,134.543209,上ノ波賀線,https://twitter.com/kendou774/status/1065208150305910784
-静岡県,天竜区,水窪町奥領家草木,35.254223,137.910926,青崩峠トンネル,https://twitter.com/kendou774/status/1206057183420403713
 茨城県,石岡市,大塚,36.287474,140.151815,大塚真壁線,https://twitter.com/kendou774/status/1054697266798194690
 東京都,奥多摩町,河内,35.742855,139.035287,東京r206旧道,https://twitter.com/search?f=tweets&q=since%3A2018-08-23%20until%3A2018-08-24%20from%3Akendou774&src=typd
 兵庫県,宍粟市,小野,35.133141,134.535828,兵庫r546,https://twitter.com/kendou774/status/1064508331694292992
 福島県,広野町,,37.201108,140.910516,片倉末続停車場線,https://twitter.com/kendou774/status/1080373550307930113
 福島県,いわき市,大久町大久,37.189109,140.938325,片倉末続停車場線,https://twitter.com/kendou774/status/1058704091407253504
+熊本県,天草市,牛深町天附,32.18226,129.968712,202105 大島,https://twitter.com/kendou774/status/1398846233091796995 聞き取り：https://drive.google.com/file/d/1neAZSkAlIBuBTa78MoKwG3YnRxKltA1q/view
 沖縄県,久米島町,字奥武,26.340614,126.839712,オーハ島,https://twitter.com/kendou774/status/1131559099982680064
 広島県,大崎上島町,東野,34.297359,132.902566,契島,https://twitter.com/kendou774/status/1097063499132329984
 島根県,益田市,土田町,34.835716,131.835809,高島,Twitterまとめ： https://twitter.com/kendou774/status/1256194838531194882 高島の証(島民への聞き取り資料)：  https://drive.google.com/file/d/179GoG3OVqbzuwB7oMmyc0fzDLi5xtHRB/view)
@@ -52,7 +56,8 @@ pref,city,district,latitude,longitude,name,description
 沖縄県,渡嘉敷村,字前島,26.213205,127.446899,前島,https://twitter.com/kendou774/status/1127185606063169536 https://twitter.com/kendou774/status/1189538696350928896
 長崎県,西海市,大串郷,32.996319,129.743214,竹ノ島,https://twitter.com/kendou774/status/1201489768913129474
 愛媛県,今治市,吉海町津島,34.152194,133.001132,津島,https://twitter.com/kendou774/status/1122494047661072386
+山口県,上関町,大字八島,33.728337,132.142525,八島,https://twitter.com/kendou774/status/1370985526283575296
 山口県,萩市,櫃島,34.518332,131.387987,櫃島,https://twitter.com/kendou774/status/1249242065201852416
-長野県,阿南町,大字大下条東條,35.311755,137.848613,為栗駅,https://twitter.com/kendou774/status/1076097458877296646
+長野県,阿南町,大字大下条東條,35.311755,137.848613,20181221為栗駅,https://twitter.com/kendou774/status/1076097458877296646
 岩手県,宮古市,和井内,39.725541,141.69282,押角駅,https://twitter.com/kendou774/status/1079647951406821376
 徳島県,三好市,西山,34.054064,133.823905,坪尻駅,https://twitter.com/kendou774/status/1069912799432781826
