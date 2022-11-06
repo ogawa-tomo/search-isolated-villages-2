@@ -7,7 +7,7 @@ from library.faculty_dao import FacultyDAO
 
 def main(faculty_type):
 
-    input_file = fp.get_faculty_csv_file(faculty_type)
+    input_file = fp.get_faculty_csv_file(faculty_type, DEFAULT_YEAR)
 
     # 施設データを読み込み
     dao = FacultyDAO(input_file)
@@ -24,7 +24,7 @@ def main(faculty_type):
     faculty = faculties[idx]
 
     # マップ出力
-    map_file = os.path.join(fp.get_faculty_mesh_map_dir(faculty_type), faculty.pref + ".html")
+    map_file = os.path.join(fp.get_faculty_mesh_map_dir(faculty_type, DEFAULT_YEAR), faculty.pref + ".html")
 
     result = Result(faculty, map_file, num, idx)
 

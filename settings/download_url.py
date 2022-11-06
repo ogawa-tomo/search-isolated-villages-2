@@ -3,13 +3,19 @@
 MESH_SHP_URL_FORMER = "https://www.e-stat.go.jp/gis/statmap-search/data?dlserveyId=Q&code="
 MESH_SHP_URL_LATTER = "&coordSys=1&format=shape&downloadType=5"
 
-# 人口データファイルのURLの前半・後半（間にはメッシュ番号が入る）
-POP_URL_FORMER = "https://www.e-stat.go.jp/gis/statmap-search/data?statsId=T000876&code="
-POP_URL_LATTER = "&downloadType=2"
+# 人口データファイルのURL
+def pop_url(mesh_num, year):
+    if str(year) == '2015':
+        year_code = '000876'
+    elif str(year) == '2020':
+        year_code = '001102'
+    else:
+        raise Exception('年が不正です')
+    return f"https://www.e-stat.go.jp/gis/statmap-search/data?statsId=T{year_code}&code={mesh_num}&downloadType=2"
 
 # 小地域データファイルのURLの前半・後半（間には都道府県番号が入る）
-REGION_URL_FORMER = "https://www.e-stat.go.jp/gis/statmap-search/data?dlserveyId=A002005212015&code="
-REGION_URL_LATTER = "&coordSys=1&format=shape&downloadType=5"
+def region_url(pref_num, year):
+    return f"https://www.e-stat.go.jp/gis/statmap-search/data?dlserveyId=A00200521{year}&code={pref_num}&coordSys=1&format=shape&downloadType=5&datum=2000"
 
 # 1次メッシュ番号のリスト
 PRIMARY_MESH_NUMS = [

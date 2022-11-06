@@ -11,7 +11,7 @@ import library.common_function as cf
 
 def main(faculty_setting):
 
-    input_file = fp.get_faculty_csv_file(faculty_setting.faculty)
+    input_file = fp.get_faculty_csv_file(faculty_setting.faculty, faculty_setting.year)
 
     # 施設データを読み込み
     dao = FacultyDAO(input_file)

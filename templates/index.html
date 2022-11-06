@@ -44,6 +44,19 @@
             <th>設定値</th>
         </tr>
         <tr>
+          <td>年</td>
+          <td>
+            {% if setting %}
+              {{ setting.year }}
+            {% else %}
+              <select name="year" id="year" required>
+                <option value="2020" selected>2020</option>
+                <option value="2015">2015</option>
+              </select>
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
             <td>地域</td>
             <td>
                 {% if setting %}

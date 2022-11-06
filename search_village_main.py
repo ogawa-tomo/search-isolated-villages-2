@@ -13,7 +13,7 @@ import library.common_function as cf
 def main(s):
 
     # 集落データを読み込み
-    dao = VillageDAO(fp.villages_file)
+    dao = VillageDAO(fp.villages_file(s.year))
     villages = dao.read_village_data()
 
     # 集落データを条件に従って抽出
@@ -23,7 +23,7 @@ def main(s):
     # マップ出力
     if RegionSetting.is_pref(s.region):
         # 都道府県の場合は、既に出力してある都道府県別のhtmlファイル（人口分布つき）
-        map_file = os.path.join(fp.mesh_map_dir, s.region + ".html")
+        map_file = os.path.join(fp.mesh_map_dir(s.year), s.region + ".html")
     else:
         # 都道府県でない場合は、その場でmapを作る（人口分布なし）
 

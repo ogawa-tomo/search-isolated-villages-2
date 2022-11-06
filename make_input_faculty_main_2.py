@@ -10,6 +10,11 @@ from library.island_checker import IslandChecker
 from library.point_container import PointContainer
 import library.make_input_functions as mif
 
+try:
+    year = sys.argv[2]
+except IndexError:
+    raise Exception('第2引数でデータ年を指定してください')
+
 
 def main():
     """
@@ -19,7 +24,7 @@ def main():
 
     faculty_type = sys.argv[1]
     input_file = fp.get_faculty_json_file(faculty_type)
-    output_file = fp.get_faculty_csv_file(faculty_type)
+    output_file = fp.get_faculty_csv_file(faculty_type, year)
     if faculty_type == ELEMENTARY_SCHOOL:
         data_class = JsonElementarySchoolData
     elif faculty_type == POST_OFFICE:
@@ -67,7 +72,7 @@ def main():
     #     raise Exception("施設タイプ名が不正です")
 
     # 人口データ読み込み
-    p_dao = PopPointDAO(fp.pop_point_file)
+    p_dao = PopPointDAO(fp.pop_point_file(year))
     pop_points = p_dao.read_pop_point_data()
 
     # 施設データマネージャクラス
@@ -84,7 +89,7 @@ def main():
     correct_faculty.correct_faculty()
 
     # 小地域データ読み込み
-    region_points = mif.read_region_data(fp.raw_region_json_dir)
+    region_points = mif.read_region_data(fp.raw_region_json_dir(year))
 
     # 住所と人口点を登録
     register_address_and_in_pop_point(faculty_points, pop_points, region_points)

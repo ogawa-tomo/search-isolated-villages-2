@@ -8,7 +8,7 @@ import random
 def main():
 
     # 集落データを読み込み
-    dao = VillageDAO(fp.villages_file)
+    dao = VillageDAO(fp.villages_file(DEFAULT_YEAR))
     villages = dao.read_village_data()
 
     # 集落データを抽出
@@ -22,7 +22,7 @@ def main():
     village = villages[idx]
 
     # マップ出力
-    map_file = os.path.join(fp.mesh_map_dir, village.pref + ".html")
+    map_file = os.path.join(fp.mesh_map_dir(DEFAULT_YEAR), village.pref + ".html")
 
     result = Result(village, map_file, num, idx)
 

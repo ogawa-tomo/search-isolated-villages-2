@@ -8,6 +8,10 @@ from tqdm import tqdm
 from library.output_map import OutputMap
 from settings.constants import *
 
+try:
+    year = sys.argv[2]
+except IndexError:
+    raise Exception('第2引数でデータ年を指定してください')
 
 def main():
     """
@@ -18,7 +22,7 @@ def main():
     faculty_type = sys.argv[1]
 
     # 施設データの読み込み
-    input_file = fp.get_faculty_csv_file(faculty_type)
+    input_file = fp.get_faculty_csv_file(faculty_type, year)
     dao = FacultyDAO(input_file)
     all_faculties = dao.read_faculty_point_data()
 
@@ -41,7 +45,7 @@ def main():
         r774_points_in_pref = extract_points_by_pref(all_r774_points, pref)
 
         # マップづくり
-        map_file = os.path.join(fp.get_faculty_mesh_map_dir(faculty_type), pref + ".html")
+        map_file = os.path.join(fp.get_faculty_mesh_map_dir(faculty_type, year), pref + ".html")
         output_map = OutputMap(map_file)
         output_map.output_map(faculties_inf_pref, OUTPUT_MAP_NUM, pref=pref)
         output_map.add_polygons(polygons_in_pref)

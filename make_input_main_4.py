@@ -6,6 +6,10 @@ from library.point_dao import PopPointDAO
 from library.pop_polygon_dao import PopPolygonDAO
 import settings.file_path as fp
 
+try:
+    year = sys.argv[1]
+except IndexError:
+    raise Exception('引数でデータ年を指定してください')
 
 def main():
     """
@@ -14,11 +18,11 @@ def main():
     """
 
     # 人口データ読み込み
-    dao = PopPointDAO(fp.pop_point_file)
+    dao = PopPointDAO(fp.pop_point_file(year))
     all_points = dao.read_pop_point_data()
 
     # 人口ポリゴンデータの作成
-    make_mesh_polygon_data(fp.raw_mesh_json_polygon_dir, all_points, fp.pop_polygon_dir)
+    make_mesh_polygon_data(fp.raw_mesh_json_polygon_dir, all_points, fp.pop_polygon_dir(year))
 
 
 def make_mesh_polygon_data(raw_mesh_json_polygon_dir, all_points, pop_polygon_dir):

@@ -8,6 +8,10 @@ from tqdm import tqdm
 import library.common_function as cf
 from library.setting import RegionSetting
 
+try:
+    year = sys.argv[1]
+except IndexError:
+    raise Exception('引数でデータ年を指定してください')
 
 def main():
     """
@@ -16,7 +20,7 @@ def main():
     """
 
     # 人口データ読み込み
-    p_dao = PopPointDAO(fp.pop_point_file)
+    p_dao = PopPointDAO(fp.pop_point_file(year))
     pop_points = p_dao.read_pop_point_data()
 
     # 小地域データ読み込み
@@ -38,7 +42,7 @@ def main():
     register_urban_point(island_pop_point_container, all_pop_point_container)
 
     # 都会度対決用のcsv吐き出し
-    dao = PopPointDAOForTokaidoTaiketsu(fp.pop_point_file_for_tokaido_taiketsu)
+    dao = PopPointDAOForTokaidoTaiketsu(fp.pop_point_file_for_tokaido_taiketsu(year))
     dao.make_pop_point_data(pop_points)
 
     # 都会度の極大点を抽出
@@ -48,7 +52,7 @@ def main():
     maximum_urban_points = sorted(maximum_urban_points, reverse=True)
 
     # 都会度の極大点ファイルを書き出し
-    dao = PopPointDAO(fp.pop_point_file_for_maximum_urban_points)
+    dao = PopPointDAO(fp.pop_point_file_for_maximum_urban_points(year))
     dao.make_pop_point_data(maximum_urban_points)
 
 

@@ -21,14 +21,18 @@ from library.setting import RegionSetting
 人口ポイントデータをcsvに吐き出す
 """
 
+try:
+    year = sys.argv[1]
+except IndexError:
+    raise Exception('引数でデータ年を指定してください')
 
 def main():
 
     # ポイント・人口データ読み込み
-    all_points = read_pop_data(fp.raw_mesh_json_dir, fp.raw_pop_dir)
+    all_points = read_pop_data(fp.raw_mesh_json_dir, fp.raw_pop_dir(year))
 
     # 小地域データ読み込み
-    region_points = mif.read_region_data(fp.raw_region_json_dir)
+    region_points = mif.read_region_data(fp.raw_region_json_dir(year))
 
     # 住所データ読み込み
     mif.register_address(all_points, region_points)
@@ -46,7 +50,7 @@ def main():
     register_neighbors(island_point_container)
 
     # 人口データの作成
-    dao = PopPointDAO(fp.pop_point_file)
+    dao = PopPointDAO(fp.pop_point_file(year)) # 九州・沖縄しか読めていない・・・？
     dao.make_pop_point_data(all_points)
 
 
@@ -72,7 +76,11 @@ def read_pop_data(raw_mesh_json_dir, raw_pop_dir):
         first_mesh_code = os.path.basename(mesh_file).lstrip("MESH0").rstrip(".txt")
 
         # 人口データ読み込み
-        pop_file = os.path.join(raw_pop_dir, "tblT000876Q" + first_mesh_code + ".txt")
+        if year == '2015':
+          year_code = "tblT000876Q"
+        elif year == '2020':
+          year_code = "tblT001102Q"
+        pop_file = os.path.join(raw_pop_dir, year_code + first_mesh_code + ".txt")
         try:
             prd = PopRawDataReader(pop_file)
         except FileNotFoundError:

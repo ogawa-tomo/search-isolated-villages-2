@@ -5,9 +5,9 @@ from library.setting import RegionSetting
 from library.point_dao import PopPointDAOForTokaidoTaiketsu
 
 
-def main(point1_name, point1_lat, point1_lon, point2_name, point2_lat, point2_lon):
+def main(year, point1_name, point1_lat, point1_lon, point2_name, point2_lat, point2_lon):
 
-    dao = PopPointDAOForTokaidoTaiketsu(fp.pop_point_file_for_tokaido_taiketsu)
+    dao = PopPointDAOForTokaidoTaiketsu(fp.pop_point_file_for_tokaido_taiketsu(year))
     point1_tokaido = dao.get_tokaido(point1_lat, point1_lon)
     point2_tokaido = dao.get_tokaido(point2_lat, point2_lon)
 

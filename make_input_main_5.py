@@ -5,6 +5,10 @@ import settings.file_path as fp
 from library.r774_point_dao import R774PointDAO
 import library.make_input_functions as mif
 
+try:
+    year = sys.argv[1]
+except IndexError:
+    raise Exception('引数でデータ年を指定してください')
 
 def main():
     """
@@ -13,7 +17,7 @@ def main():
     """
 
     # 小地域データ読み込み
-    region_points = mif.read_region_data(fp.raw_region_json_dir)
+    region_points = mif.read_region_data(fp.raw_region_json_dir(year))
 
     # r774geojsonデータを読み込み
     r774_data_reader = JsonR774PointDataReader(fp.r774_raw_json_file)

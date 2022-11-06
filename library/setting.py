@@ -6,10 +6,12 @@ class Setting(object):
 
     def __init__(
             self,
+            year,
             region,
             island_setting,
             key_words,
     ):
+        self.year = year
         self.region = region
         self.island_setting = island_setting
         self.key_words = key_words
@@ -117,6 +119,7 @@ class VillageSetting(Setting):
 
     def __init__(
             self,
+            year,
             region,
             village_pop_lower_limit,
             village_pop_upper_limit,
@@ -125,7 +128,7 @@ class VillageSetting(Setting):
             island_setting,
             key_words,
     ):
-        super().__init__(region, island_setting, key_words)
+        super().__init__(year, region, island_setting, key_words)
         # self.region = region
         self.village_pop_lower_limit = village_pop_lower_limit
         self.village_pop_upper_limit = village_pop_upper_limit
@@ -158,8 +161,8 @@ class FacultySetting(Setting):
     施設探索の設定クラス
     """
 
-    def __init__(self, region, faculty, island_setting, key_words):
-        super().__init__(region, island_setting, key_words)
+    def __init__(self, year, region, faculty, island_setting, key_words):
+        super().__init__(year, region, island_setting, key_words)
         # self.region = region
         self.faculty = faculty
         # self.island_setting = island_setting

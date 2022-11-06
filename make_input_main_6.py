@@ -8,7 +8,12 @@ from library.output_map import OutputMap
 from settings.constants import *
 import os
 from tqdm import tqdm
+import sys
 
+try:
+    year = sys.argv[1]
+except IndexError:
+    raise Exception('引数でデータ年を指定してください')
 
 def main():
     """
@@ -17,7 +22,7 @@ def main():
     """
 
     # 集落データの読み込み
-    dao = VillageDAO(fp.villages_file)
+    dao = VillageDAO(fp.villages_file(year))
     all_villages = dao.read_village_data()
 
     # r774データの読み込み
@@ -29,7 +34,7 @@ def main():
     for pref in tqdm(RegionSetting.get_all_prefs()):
 
         # ポリゴンデータの読み込み
-        dao = PopPolygonDAO(fp.pop_polygon_dir + "/" + pref + ".csv")
+        dao = PopPolygonDAO(fp.pop_polygon_dir(year) + "/" + pref + ".csv")
         polygons_in_pref = dao.read_pop_polygon_data()
 
         # 集落データの読み込み
@@ -39,7 +44,7 @@ def main():
         r774_points_in_pref = extract_points_by_pref(all_r774_points, pref)
 
         # マップづくり
-        map_file = os.path.join(fp.mesh_map_dir, pref + ".html")
+        map_file = os.path.join(fp.mesh_map_dir(year), pref + ".html")
         output_map = OutputMap(map_file)
         output_map.output_map(villages_in_pref, OUTPUT_MAP_NUM, pref=pref)
         output_map.add_polygons(polygons_in_pref)

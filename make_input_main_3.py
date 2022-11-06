@@ -15,10 +15,15 @@ import library.make_input_functions as mif
 集落のcsvデータを吐き出す
 """
 
+try:
+    year = sys.argv[1]
+except IndexError:
+    raise Exception('引数でデータ年を指定してください')
+
 def main():
 
     # 人口データ読み込み
-    dao = PopPointDAO(fp.pop_point_file)
+    dao = PopPointDAO(fp.pop_point_file(year))
     pop_points = dao.read_pop_point_data()
 
     # 集落データマネージャクラス
@@ -52,7 +57,7 @@ def main():
     villages = sorted(villages)
 
     # 抽出した集落をtxtファイルに保存
-    dao = VillageDAO(fp.villages_file)
+    dao = VillageDAO(fp.villages_file(year))
     dao.make_village_data(villages)
 
 
