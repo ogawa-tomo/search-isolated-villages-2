@@ -58,6 +58,8 @@ ABANDONED_STATION = "abandoned_station"
 RESEARCH_INSTITUTE = "research_institute"
 HOT_SPRING = "hot_spring"
 
+FACULTIES = [ELEMENTARY_SCHOOL, POST_OFFICE, NEW_TOWN, MICHINOEKI, STATION, ABANDONED_STATION, RESEARCH_INSTITUTE, HOT_SPRING]
+
 
 def get_faculty_ja(faculty):
     if faculty == POST_OFFICE:
