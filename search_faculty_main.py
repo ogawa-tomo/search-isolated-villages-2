@@ -24,7 +24,7 @@ def main(faculty_setting):
     # マップ出力
     if RegionSetting.is_pref(faculty_setting.region):
         # 都道府県の場合は、既に出力してある都道府県別のhtmlファイル（人口分布つき）
-        map_file = os.path.join(fp.get_faculty_mesh_map_dir(faculty_setting.faculty), faculty_setting.region + ".html")
+        map_file = os.path.join(fp.get_faculty_mesh_map_dir(faculty_setting.faculty, faculty_setting.year), faculty_setting.region + ".html")
     else:
         # 都道府県でない場合は、その場でmapを作る（人口分布なし）
 
