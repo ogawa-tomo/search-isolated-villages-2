@@ -237,7 +237,9 @@
                 <td>{{ v.district }}</td>
                 <td>
                     <a href="{{ v.get_google_map_url() }}" target="_blank">Googleマップ</a>
-                    <a href="{{ v.get_mesh_map_get_url(result.map_file) }}" target="_blank">集落分布図</a>
+                    {% if setting.year == '2020' %}
+                        <a href="{{ v.get_mesh_map_get_url(result.map_file) }}" target="_blank">集落分布図</a>
+                    {% endif %}
                 </td>
                 <td>{{ v.population }}<font size="-1">人</font></td>
                 <td>{{ v.size  }}<font size="-1">メッシュ</font></td>

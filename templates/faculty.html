@@ -274,7 +274,9 @@
                 <td>{{ f.district }}</td> -->
                 <td>
                     <a href="{{ f.get_google_map_url() }}" target="_blank">Googleマップ</a>
-                    <a href="{{ f.get_mesh_map_get_url(result.map_file) }}" target="_blank">施設分布図</a>
+                    {% if setting.year == '2020' %}
+                        <a href="{{ f.get_mesh_map_get_url(result.map_file) }}" target="_blank">施設分布図</a>
+                    {% endif %}
                 </td>
                 <td>{{ f.urban_point_round }}</td>
             </tr>
