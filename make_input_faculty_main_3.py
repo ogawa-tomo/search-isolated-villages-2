@@ -35,7 +35,7 @@ def main():
     for pref in tqdm(RegionSetting.get_all_prefs()):
 
         # ポリゴンデータの読み込み
-        dao = PopPolygonDAO(fp.pop_polygon_dir + "/" + pref + ".csv")
+        dao = PopPolygonDAO(fp.pop_polygon_dir(year) + "/" + pref + ".csv")
         polygons_in_pref = dao.read_pop_polygon_data()
 
         # 施設データの読み込み

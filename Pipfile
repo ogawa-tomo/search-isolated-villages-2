@@ -9,7 +9,6 @@ folium = "*"
 pandas = "*"
 tqdm = "*"
 gunicorn = "*"
-geopandas = "*"
 
 [dev-packages]
 
