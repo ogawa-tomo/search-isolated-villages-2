@@ -1,8 +1,7 @@
 from settings.constants import *
 from library import common_function as cf
 import os
-import json
-
+import settings.file_path as fp
 
 class Point(object):
     def __init__(self):
@@ -201,7 +200,15 @@ class Village(object):
         self.is_island = None
 
     def to_dict(self):
-        return self.__dict__
+        return {
+            "pref": self.pref,
+            "city": self.city,
+            "district": self.district,
+            "population": self.population,
+            "urban_point": self.urban_point_round,
+            "google_map_url": self.get_google_map_url(),
+            "mesh_map_path": self.get_mesh_map_get_url()
+        }
     
     def make_village(self, mesh_points):
 
@@ -317,14 +324,14 @@ class Village(object):
         url = cf.get_google_map_url(self.latitude, self.longitude)
         return url
 
-    def get_mesh_map_get_url(self, map_file):
+    def get_mesh_map_get_url(self, map_file=None):
         """
         メッシュ地図をgetパラメータで取得するURLを発行する
         :param map_file:
         :return:
         """
-        # date = int(os.stat(map_file).st_mtime)
-        # url = "/mesh_map?lat=" + str(self.latitude) + "&lon=" + str(self.longitude)+ "&zoom=" + "14" + "&map_file=" + map_file
+        if map_file is None:
+            map_file = os.path.join(fp.mesh_map_dir(2020), self.pref + ".html")
         url = cf.get_mesh_map_get_url(self.latitude, self.longitude, ZOOM_POINT, map_file)
         return url
 
