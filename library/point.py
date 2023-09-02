@@ -1,6 +1,7 @@
 from settings.constants import *
 from library import common_function as cf
 import os
+import json
 
 
 class Point(object):
@@ -199,6 +200,9 @@ class Village(object):
         # 離島かどうか
         self.is_island = None
 
+    def to_dict(self):
+        return self.__dict__
+    
     def make_village(self, mesh_points):
 
         # 人口・サイズ

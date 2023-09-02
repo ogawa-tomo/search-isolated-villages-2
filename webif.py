@@ -10,6 +10,8 @@ from settings.constants import *
 from library import common_function as cf
 import settings.file_path as fp
 import tokaido_taiketsu_main
+import json
+from library.village_dao import VillageDAO
 
 app = Flask(__name__)
 title = "秘境集落探索ツール"
@@ -63,6 +65,38 @@ def post():
     else:
         return redirect(url_for('index'))
 
+@app.route("/api/result", methods=["GET"])
+def api_result():
+
+    year = 2020 # request.form["year"]
+    region = request.args.get("region")
+    village_pop_lower_limit = 0 # int(request.form["village_pop_lower_limit"])
+    village_pop_upper_limit = 10000 # int(request.form["village_pop_upper_limit"])
+    village_size_lower_limit = 0 # int(request.form["village_size_lower_limit"])
+    village_size_upper_limit = 100 # int(request.form["village_size_upper_limit"])
+    island_setting = "離島を含まない" # request.form["island_setting"]
+    key_words = "" # request.form["key_words"]
+
+    setting = VillageSetting(
+        year,
+        region,
+        village_pop_lower_limit,
+        village_pop_upper_limit,
+        village_size_lower_limit,
+        village_size_upper_limit,
+        island_setting,
+        key_words
+    )
+
+    # 集落データを読み込み
+    dao = VillageDAO(fp.villages_file(setting.year))
+    villages_data = dao.read_village_data()
+    villages_objects = setting.extract_villages(villages_data)
+    villages_dict_data = []
+    for village in villages_objects:
+        villages_dict_data.append(village.to_dict())
+    
+    return json.dumps(villages_dict_data, ensure_ascii=False)
 
 @app.route("/mesh_map")
 def get_mesh_map():
@@ -85,33 +119,33 @@ def get_mesh_map():
     return redirect(new_map_file + "?q=" + str(q))
 
 
-@app.route("/<faculty>")
-def index_faculty(faculty):
-    """
-    秘境施設探索ツール
-    :param faculty: 施設名
-    :return:
-    """
-    if faculty not in FACULTIES:
-        raise Exception('施設名が不正')
-    return render_template("faculty.html", faculty=faculty, faculty_ja=get_faculty_ja(faculty))
+# @app.route("/<faculty>")
+# def index_faculty(faculty):
+#     """
+#     秘境施設探索ツール
+#     :param faculty: 施設名
+#     :return:
+#     """
+#     if faculty not in FACULTIES:
+#         raise Exception('施設名が不正')
+#     return render_template("faculty.html", faculty=faculty, faculty_ja=get_faculty_ja(faculty))
 
 
-@app.route("/<faculty>/result", methods=["GET", "POST"])
-def result_faculty(faculty):
-    """
-    秘境施設探索ツール結果
-    :param faculty: 施設名
-    :return:
-    """
-    faculty = faculty
-    year = request.form["year"]
-    region = request.form["region"]
-    island_setting = request.form["island_setting"]
-    key_words = request.form["key_words"]
-    fs = FacultySetting(year, region, faculty, island_setting, key_words)
-    result = search_faculty_main.main(fs)
-    return render_template("faculty.html", faculty=faculty, setting=fs, faculty_ja=get_faculty_ja(faculty), result=result)
+# @app.route("/<faculty>/result", methods=["GET", "POST"])
+# def result_faculty(faculty):
+#     """
+#     秘境施設探索ツール結果
+#     :param faculty: 施設名
+#     :return:
+#     """
+#     faculty = faculty
+#     year = request.form["year"]
+#     region = request.form["region"]
+#     island_setting = request.form["island_setting"]
+#     key_words = request.form["key_words"]
+#     fs = FacultySetting(year, region, faculty, island_setting, key_words)
+#     result = search_faculty_main.main(fs)
+#     return render_template("faculty.html", faculty=faculty, setting=fs, faculty_ja=get_faculty_ja(faculty), result=result)
 
 
 @app.route("/uranai")
@@ -182,6 +216,13 @@ def about():
     :return:
     """
     return render_template("about.html")
+
+
+
+
+
+  
+    return render_template("index.html", result=result, setting=setting)
 
 
 if __name__ == "__main__":
