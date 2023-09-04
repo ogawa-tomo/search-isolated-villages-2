@@ -70,8 +70,8 @@ def api_result():
 
     year = 2020 # request.form["year"]
     region = request.args.get("region")
-    village_pop_lower_limit = 0 # int(request.form["village_pop_lower_limit"])
-    village_pop_upper_limit = 10000 # int(request.form["village_pop_upper_limit"])
+    village_pop_lower_limit = int(request.args.get("population_lower_limit"))
+    village_pop_upper_limit = int(request.args.get("population_upper_limit"))
     village_size_lower_limit = 0 # int(request.form["village_size_lower_limit"])
     village_size_upper_limit = 100 # int(request.form["village_size_upper_limit"])
     island_setting = "離島を含まない" # request.form["island_setting"]
