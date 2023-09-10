@@ -74,7 +74,7 @@ def api_result():
     village_pop_upper_limit = int(request.args.get("population_upper_limit"))
     village_size_lower_limit = 0 # int(request.form["village_size_lower_limit"])
     village_size_upper_limit = 100 # int(request.form["village_size_upper_limit"])
-    island_setting = "離島を含まない" # request.form["island_setting"]
+    island_setting = request.args.get("island_setting")
     key_words = "" # request.form["key_words"]
 
     setting = VillageSetting(
