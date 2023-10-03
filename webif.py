@@ -92,11 +92,14 @@ def api_result():
     dao = VillageDAO(fp.villages_file(setting.year))
     villages_data = dao.read_village_data()
     villages_objects = setting.extract_villages(villages_data)
-    villages_dict_data = []
+    response = {
+        "total": len(villages_objects),
+        "villages": []
+    }
     for village in villages_objects:
-        villages_dict_data.append(village.to_dict())
+        response["villages"].append(village.to_dict())
     
-    return json.dumps(villages_dict_data, ensure_ascii=False)
+    return json.dumps(response, ensure_ascii=False)
 
 @app.route("/mesh_map")
 def get_mesh_map():
