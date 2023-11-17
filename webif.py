@@ -76,6 +76,8 @@ def api_result():
     village_size_upper_limit = 100 # int(request.form["village_size_upper_limit"])
     island_setting = request.args.get("island_setting")
     key_words = request.args.get("key_words")
+    offset = int(request.args.get("offset"))
+    limit = int(request.args.get("limit"))
 
     setting = VillageSetting(
         year,
@@ -96,7 +98,8 @@ def api_result():
         "total": len(villages_objects),
         "villages": []
     }
-    for village in villages_objects:
+    limited_villages_objects = villages_objects[offset:offset + limit]
+    for village in limited_villages_objects:
         response["villages"].append(village.to_dict())
     
     return json.dumps(response, ensure_ascii=False)
