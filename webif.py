@@ -76,8 +76,6 @@ def api_result():
     village_size_upper_limit = 100 # int(request.form["village_size_upper_limit"])
     island_setting = request.args.get("island_setting")
     key_words = request.args.get("key_words")
-    # offset = int(request.args.get("offset"))
-    # limit = int(request.args.get("limit"))
     page = int(request.args.get("page"))
 
     setting = VillageSetting(
@@ -91,16 +89,19 @@ def api_result():
         key_words
     )
 
+    per_page = 20
+    offset = per_page * (page - 1)
+    limit = per_page * page
+
     # 集落データを読み込み
     dao = VillageDAO(fp.villages_file(setting.year))
     villages_data = dao.read_village_data()
     villages_objects = setting.extract_villages(villages_data)
     response = {
-        "total": len(villages_objects),
+        "pages": - (-len(villages_objects) // per_page),
+        "per_page": per_page,
         "villages": []
     }
-    offset = 20 * (page - 1)
-    limit = 20 * page
     limited_villages_objects = villages_objects[offset:offset + limit]
     for village in limited_villages_objects:
         response["villages"].append(village.to_dict())
