@@ -91,7 +91,6 @@ def api_result():
 
     per_page = 20
     offset = per_page * (page - 1)
-    limit = per_page * page
 
     # 集落データを読み込み
     dao = VillageDAO(fp.villages_file(setting.year))
@@ -102,7 +101,7 @@ def api_result():
         "per_page": per_page,
         "villages": []
     }
-    limited_villages_objects = villages_objects[offset:offset + limit]
+    limited_villages_objects = villages_objects[offset:offset + per_page]
     for village in limited_villages_objects:
         response["villages"].append(village.to_dict())
     
