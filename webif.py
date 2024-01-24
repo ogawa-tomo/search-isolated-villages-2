@@ -70,12 +70,12 @@ def api_result():
 
     year = 2020 # request.form["year"]
     region = request.args.get("region")
-    village_pop_lower_limit = int(request.args.get("population_lower_limit"))
-    village_pop_upper_limit = int(request.args.get("population_upper_limit"))
+    village_pop_lower_limit = int(request.args.get("populationLowerLimit"))
+    village_pop_upper_limit = int(request.args.get("populationUpperLimit"))
     village_size_lower_limit = 0 # int(request.form["village_size_lower_limit"])
     village_size_upper_limit = 100 # int(request.form["village_size_upper_limit"])
-    island_setting = request.args.get("island_setting")
-    key_words = request.args.get("key_words")
+    island_setting = request.args.get("islandSetting")
+    key_words = request.args.get("keyWords")
     page = int(request.args.get("page"))
 
     setting = VillageSetting(
