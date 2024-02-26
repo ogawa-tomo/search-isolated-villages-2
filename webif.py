@@ -12,6 +12,7 @@ import settings.file_path as fp
 import tokaido_taiketsu_main
 import json
 from library.village_dao import VillageDAO
+from library.faculty_dao import FacultyDAO
 
 app = Flask(__name__)
 title = "秘境集落探索ツール"
@@ -104,6 +105,37 @@ def api_result():
     limited_villages_objects = villages_objects[offset:offset + per_page]
     for village in limited_villages_objects:
         response["villages"].append(village.to_dict())
+    
+    return json.dumps(response, ensure_ascii=False)
+
+@app.route("/api/<faculty>/result", methods=["GET"])
+def api_faculty_result(faculty):
+    year = 2020 # request.form["year"]
+    region = request.args.get("region")
+    island_setting = request.args.get("islandSetting")
+    key_words = request.args.get("keyWords")
+    page = int(request.args.get("page"))
+
+    faculty_setting = FacultySetting(year, region, faculty, island_setting, key_words)
+    input_file = fp.get_faculty_csv_file(faculty_setting.faculty, faculty_setting.year)
+
+    # 施設データを読み込み
+    dao = FacultyDAO(input_file)
+    faculty_points = dao.read_faculty_point_data()
+
+    # 施設を条件に従って抽出
+    faculty_objects = faculty_setting.extract_objects(faculty_points)
+
+    per_page = 20
+    offset = per_page * (page - 1)
+    response = {
+        "pages": - (-len(faculty_objects) // per_page),
+        "per_page": per_page,
+        "faculties": []
+    }
+    limited_faculty_objects = faculty_objects[offset:offset + per_page]
+    for faculty_object in limited_faculty_objects:
+        response["faculties"].append(faculty_object.to_dict())
     
     return json.dumps(response, ensure_ascii=False)
 

@@ -28,12 +28,14 @@ class Point(object):
     def __repr__(self):
         return self.key_code
 
-    def get_mesh_map_get_url(self, map_file):
+    def get_mesh_map_get_url(self, map_file=None):
         """
         メッシュ地図をgetパラメータで取得するURLを発行する
         :param map_file:
         :return:
         """
+        if map_file is None:
+            map_file = os.path.join(fp.mesh_map_dir(2020), self.pref + ".html")
         url = cf.get_mesh_map_get_url(self.latitude, self.longitude, ZOOM_POINT, map_file)
         return url
 
@@ -61,6 +63,17 @@ class FacultyPoint(Point):
 
     def __lt__(self, other):
         return self.urban_point < other.urban_point
+
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "pref": self.pref,
+            "city": self.city,
+            "district": self.district,
+            "urban_point": self.urban_point_round,
+            "google_map_url": self.get_google_map_url(),
+            "mesh_map_path": self.get_mesh_map_get_url()
+        }
 
 
 class RegionPoint(Point):
