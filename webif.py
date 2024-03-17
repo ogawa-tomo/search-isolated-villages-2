@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from flask_cors import CORS
 from library.setting import Setting, FacultySetting, VillageSetting
 import time
 import search_village_main
@@ -15,6 +16,7 @@ from library.village_dao import VillageDAO
 from library.faculty_dao import FacultyDAO
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 title = "秘境集落探索ツール"
 
 
@@ -138,6 +140,17 @@ def api_faculty_result(faculty):
         response["faculties"].append(faculty_object.to_dict())
     
     return json.dumps(response, ensure_ascii=False)
+
+@app.route("/api/fortune/result", methods=["GET"])
+def api_fortune_result():
+    village = uranai_main.api_main()
+    return json.dumps(village.to_dict(), ensure_ascii=False)
+
+@app.route("/api/fortune/<faculty>/result", methods=["GET"])
+def api_fortune_faculty_result(faculty):
+    result = uranai_faculty_main.main(faculty)
+    return json.dumps(result.to_dict(), ensure_ascii=False)
+    
 
 @app.route("/mesh_map")
 def get_mesh_map():

@@ -28,6 +28,22 @@ def main():
 
     return result
 
+def api_main():
+
+    # 集落データを読み込み
+    dao = VillageDAO(fp.villages_file(DEFAULT_YEAR))
+    villages = dao.read_village_data()
+
+    # 集落データを抽出
+    villages = extract_villages(villages)
+
+    num = len(villages)
+
+    # village = random.choice(villages)
+    idx = int(random.random() * num)
+    village = villages[idx]
+
+    return village
 
 def extract_villages(villages):
 

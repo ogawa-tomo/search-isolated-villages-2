@@ -9,6 +9,7 @@ folium = "*"
 pandas = "*"
 tqdm = "*"
 gunicorn = "*"
+flask-cors = "*"
 
 [dev-packages]
 
