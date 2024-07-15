@@ -173,35 +173,6 @@ def get_mesh_map():
     return redirect(new_map_file + "?q=" + str(q))
 
 
-# @app.route("/<faculty>")
-# def index_faculty(faculty):
-#     """
-#     秘境施設探索ツール
-#     :param faculty: 施設名
-#     :return:
-#     """
-#     if faculty not in FACULTIES:
-#         raise Exception('施設名が不正')
-#     return render_template("faculty.html", faculty=faculty, faculty_ja=get_faculty_ja(faculty))
-
-
-# @app.route("/<faculty>/result", methods=["GET", "POST"])
-# def result_faculty(faculty):
-#     """
-#     秘境施設探索ツール結果
-#     :param faculty: 施設名
-#     :return:
-#     """
-#     faculty = faculty
-#     year = request.form["year"]
-#     region = request.form["region"]
-#     island_setting = request.form["island_setting"]
-#     key_words = request.form["key_words"]
-#     fs = FacultySetting(year, region, faculty, island_setting, key_words)
-#     result = search_faculty_main.main(fs)
-#     return render_template("faculty.html", faculty=faculty, setting=fs, faculty_ja=get_faculty_ja(faculty), result=result)
-
-
 @app.route("/uranai")
 def uranai():
     return render_template("uranai.html")
@@ -211,6 +182,34 @@ def uranai():
 def result_uranai():
     result = uranai_main.main()
     return render_template("uranai.html", result=result)
+
+@app.route("/<faculty>")
+def index_faculty(faculty):
+    """
+    秘境施設探索ツール
+    :param faculty: 施設名
+    :return:
+    """
+    if faculty not in FACULTIES:
+        raise Exception('施設名が不正')
+    return render_template("faculty.html", faculty=faculty, faculty_ja=get_faculty_ja(faculty))
+
+
+@app.route("/<faculty>/result", methods=["GET", "POST"])
+def result_faculty(faculty):
+    """
+    秘境施設探索ツール結果
+    :param faculty: 施設名
+    :return:
+    """
+    faculty = faculty
+    year = request.form["year"]
+    region = request.form["region"]
+    island_setting = request.form["island_setting"]
+    key_words = request.form["key_words"]
+    fs = FacultySetting(year, region, faculty, island_setting, key_words)
+    result = search_faculty_main.main(fs)
+    return render_template("faculty.html", faculty=faculty, setting=fs, faculty_ja=get_faculty_ja(faculty), result=result)
 
 
 @app.route("/<faculty>/uranai")
@@ -224,45 +223,6 @@ def uranai_faculty_result(faculty):
     result = uranai_faculty_main.main(faculty)
     return render_template("uranai_faculty.html", faculty=faculty, result=result, faculty_ja=get_faculty_ja(faculty))
 
-
-# @app.route("/tokaido_taiketsu")
-# def tokaido_taiketsu():
-#     return render_template("tokaido_taiketsu.html")
-
-
-# @app.route("/tokaido_taiketsu/result", methods=["GET", "POST"])
-# def tokaido_taiketsu_result():
-#     year = request.form["year"]
-#     point1_name = request.form["point1_name"]
-#     point1_latlon = request.form["point1_latlon"].split(",")
-#     point1_lat = float(point1_latlon[0].strip())
-#     point1_lon = float(point1_latlon[1].strip())
-#     point2_name = request.form["point2_name"]
-#     point2_latlon = request.form["point2_latlon"].split(",")
-#     point2_lat = float(point2_latlon[0].strip())
-#     point2_lon = float(point2_latlon[1].strip())
-#     result = tokaido_taiketsu_main.main(year, point1_name, point1_lat, point1_lon, point2_name, point2_lat, point2_lon)
-
-
-#     return render_template("tokaido_taiketsu.html", result=result)
-
-
-# @app.route("/max_tokaido")
-# def max_tokaido():
-#     return render_template("max_urban_point.html")
-
-
-# @app.route("/max_tokaido/result", methods=["GET", "POST"])
-# def max_tokaido_result():
-#     year = request.form["year"]
-#     region = request.form["region"]
-#     island_setting = request.form["island_setting"]
-#     key_words = request.form["key_words"]
-#     s = Setting(year, region, island_setting, key_words)
-#     result = search_max_urban_points_main.main(s)
-#     return render_template("max_urban_point.html", setting=s, result=result)
-
-
 @app.route("/about")
 def about():
     """
@@ -270,14 +230,6 @@ def about():
     :return:
     """
     return render_template("about.html")
-
-
-
-
-
-  
-    return render_template("index.html", result=result, setting=setting)
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
