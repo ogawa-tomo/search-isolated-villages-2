@@ -78,7 +78,7 @@ def api_result():
     village_size_lower_limit = 0 # int(request.form["village_size_lower_limit"])
     village_size_upper_limit = 100 # int(request.form["village_size_upper_limit"])
     island_setting = request.args.get("islandSetting")
-    key_words = request.args.get("keyWords")
+    key_words = request.args.get("keywords")
     page = int(request.args.get("page"))
 
     setting = VillageSetting(
@@ -115,7 +115,7 @@ def api_faculty_result(faculty):
     year = 2020 # request.form["year"]
     region = request.args.get("region")
     island_setting = request.args.get("islandSetting")
-    key_words = request.args.get("keyWords")
+    key_words = request.args.get("keywords")
     page = int(request.args.get("page"))
 
     faculty_setting = FacultySetting(year, region, faculty, island_setting, key_words)
