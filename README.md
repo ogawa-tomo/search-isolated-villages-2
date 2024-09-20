@@ -27,10 +27,8 @@
 ※Windows環境だとうまくいかないことがあるので、その場合は下記のDocker環境で実行する
 
 ## Docker環境での実行方法
-1. コンテナ起動 ```docker-compose up -d```
-2. コンテナに入る ```docker-compose exec hikyo bash```
-3. コンテナ内でwebサーバを起動 ```pipenv run python webif.py```
-4. localhost:5000にアクセス
+1. コンテナ起動 ```docker-compose up```
+2. localhost:5000にアクセス
 
 ## データの整備方法
 本リポジトリはローカル環境で実行可能なよう整備されたデータが既に用意されているが、データを1から整備するには次の手順で行う。  
