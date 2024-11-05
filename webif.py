@@ -26,7 +26,7 @@ def index():
     秘境集落探索ツール
     :return:
     """
-    return render_template("index.html")
+    return redirect("https://search-isolated-villages.com")
 
 
 @app.route("/result", methods=["GET", "POST"])
