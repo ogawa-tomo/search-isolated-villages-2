@@ -218,6 +218,8 @@ class Village(object):
             "city": self.city,
             "district": self.district,
             "population": self.population,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
             "urban_point": self.urban_point_round,
             "google_map_url": self.get_google_map_url(),
             "mesh_map_path": self.get_mesh_map_get_url()
