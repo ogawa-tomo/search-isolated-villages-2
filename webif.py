@@ -79,7 +79,6 @@ def api_result():
     village_size_upper_limit = 100 # int(request.form["village_size_upper_limit"])
     island_setting = convert_island_setting(request.args.get("islandSetting"))
     key_words = request.args.get("keywords")
-    page = int(request.args.get("page"))
 
     setting = VillageSetting(
         year,
@@ -92,21 +91,13 @@ def api_result():
         key_words
     )
 
-    per_page = 20
-    offset = per_page * (page - 1)
-
     # 集落データを読み込み
     dao = VillageDAO(fp.villages_file(setting.year))
     villages_data = dao.read_village_data()
     villages_objects = setting.extract_villages(villages_data)
     response = {
-        "pages": - (-len(villages_objects) // per_page),
-        "per_page": per_page,
-        "villages": []
+        "villages": [village.to_dict() for village in villages_objects]
     }
-    limited_villages_objects = villages_objects[offset:offset + per_page]
-    for village in limited_villages_objects:
-        response["villages"].append(village.to_dict())
     
     return json.dumps(response, ensure_ascii=False)
 
@@ -116,7 +107,6 @@ def api_faculty_result(faculty):
     region = convert_region_name(request.args.get("area"))
     island_setting = convert_island_setting(request.args.get("islandSetting"))
     key_words = request.args.get("keywords")
-    page = int(request.args.get("page"))
 
     faculty_setting = FacultySetting(year, region, faculty, island_setting, key_words)
     input_file = fp.get_faculty_csv_file(faculty_setting.faculty, faculty_setting.year)
@@ -128,16 +118,9 @@ def api_faculty_result(faculty):
     # 施設を条件に従って抽出
     faculty_objects = faculty_setting.extract_objects(faculty_points)
 
-    per_page = 20
-    offset = per_page * (page - 1)
     response = {
-        "pages": - (-len(faculty_objects) // per_page),
-        "per_page": per_page,
-        "faculties": []
+        "faculties": [faculty.to_dict() for faculty in faculty_objects]
     }
-    limited_faculty_objects = faculty_objects[offset:offset + per_page]
-    for faculty_object in limited_faculty_objects:
-        response["faculties"].append(faculty_object.to_dict())
     
     return json.dumps(response, ensure_ascii=False)
 

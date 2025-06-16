@@ -66,10 +66,13 @@ class FacultyPoint(Point):
 
     def to_dict(self):
         return {
+            "type": "faculty",
             "name": self.name,
             "pref": self.pref,
             "city": self.city,
             "district": self.district,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
             "urban_point": self.urban_point_round,
             "google_map_url": self.get_google_map_url(),
             "mesh_map_path": self.get_mesh_map_get_url()
@@ -214,6 +217,7 @@ class Village(object):
 
     def to_dict(self):
         return {
+            "type": "village",
             "pref": self.pref,
             "city": self.city,
             "district": self.district,
