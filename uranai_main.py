@@ -1,8 +1,10 @@
 from library.village_dao import VillageDAO
 import settings.file_path as fp
 from settings.constants import *
-from library.setting import RegionSetting
+from library.output_map import OutputMap
+import os
 import random
+import time
 
 
 def main():
@@ -22,7 +24,9 @@ def main():
     village = villages[idx]
 
     # マップ出力
-    map_file = os.path.join(fp.mesh_map_dir(DEFAULT_YEAR), village.pref + ".html")
+    map_file = os.path.join(fp.output_dir, "map_" + str(time.time()).replace(".", "") + ".html")
+    output_map = OutputMap(map_file)
+    output_map.output_map([village], 1)
 
     result = Result(village, map_file, num, idx)
 

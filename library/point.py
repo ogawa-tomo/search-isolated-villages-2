@@ -1,7 +1,5 @@
 from settings.constants import *
 from library import common_function as cf
-import os
-import settings.file_path as fp
 
 class Point(object):
     def __init__(self):
@@ -27,17 +25,6 @@ class Point(object):
 
     def __repr__(self):
         return self.key_code
-
-    def get_mesh_map_get_url(self, map_file=None):
-        """
-        メッシュ地図をgetパラメータで取得するURLを発行する
-        :param map_file:
-        :return:
-        """
-        if map_file is None:
-            map_file = os.path.join(fp.mesh_map_dir(2020), self.pref + ".html")
-        url = cf.get_mesh_map_get_url(self.latitude, self.longitude, ZOOM_POINT, map_file)
-        return url
 
 
 class FacultyPoint(Point):
@@ -74,8 +61,7 @@ class FacultyPoint(Point):
             "latitude": self.latitude,
             "longitude": self.longitude,
             "urban_point": self.urban_point_round,
-            "google_map_url": self.get_google_map_url(),
-            "mesh_map_path": self.get_mesh_map_get_url()
+            "google_map_url": self.get_google_map_url()
         }
 
 
@@ -164,18 +150,6 @@ class PopPoint(Point):
         return my_village_points
 
 
-class PopMeshPolygon(Point):
-    """
-    人口メッシュクラス
-    """
-    def __init__(self):
-        super().__init__()
-        self.id = 0
-        self.coordinates = []
-        self.population = 0
-        self.is_island = None
-
-
 class R774Point(Point):
     """
     R774ポイントクラス
@@ -225,10 +199,9 @@ class Village(object):
             "latitude": self.latitude,
             "longitude": self.longitude,
             "urban_point": self.urban_point_round,
-            "google_map_url": self.get_google_map_url(),
-            "mesh_map_path": self.get_mesh_map_get_url()
+            "google_map_url": self.get_google_map_url()
         }
-    
+
     def make_village(self, mesh_points):
 
         # 人口・サイズ
@@ -341,16 +314,5 @@ class Village(object):
 
     def get_google_map_url(self):
         url = cf.get_google_map_url(self.latitude, self.longitude)
-        return url
-
-    def get_mesh_map_get_url(self, map_file=None):
-        """
-        メッシュ地図をgetパラメータで取得するURLを発行する
-        :param map_file:
-        :return:
-        """
-        if map_file is None:
-            map_file = os.path.join(fp.mesh_map_dir(2020), self.pref + ".html")
-        url = cf.get_mesh_map_get_url(self.latitude, self.longitude, ZOOM_POINT, map_file)
         return url
 

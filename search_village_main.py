@@ -1,13 +1,12 @@
 from library.village_dao import VillageDAO
-from library.pop_polygon_dao import PopPolygonDAO
 from library.r774_point_dao import R774PointDAO
 import settings.file_path as fp
 from library.island_checker import IslandChecker
-from library.setting import RegionSetting, Result
+from library.setting import Result
 from library.output_map import OutputMap
 from settings.constants import *
+import os
 import time
-import library.common_function as cf
 
 
 def main(s):
@@ -20,24 +19,17 @@ def main(s):
     # villages = extract_villages(villages, s)
     villages = s.extract_villages(villages)
 
-    # マップ出力
-    if RegionSetting.is_pref(s.region):
-        # 都道府県の場合は、既に出力してある都道府県別のhtmlファイル（人口分布つき）
-        map_file = os.path.join(fp.mesh_map_dir(s.year), s.region + ".html")
-    else:
-        # 都道府県でない場合は、その場でmapを作る（人口分布なし）
+    # r774データを読み込み、条件に従って抽出
+    r774_dao = R774PointDAO(fp.r774_file)
+    r774_points = r774_dao.read_r774_point_data()
+    # r774_points = extract_r774_points(r774_points, s)
+    r774_points = s.extract_r774_points(r774_points)
 
-        # r774データを読み込み、条件に従って抽出
-        r774_dao = R774PointDAO(fp.r774_file)
-        r774_points = r774_dao.read_r774_point_data()
-        # r774_points = extract_r774_points(r774_points, s)
-        r774_points = s.extract_r774_points(r774_points)
-
-        # map作成
-        map_file = os.path.join(fp.output_dir, "map_" + str(time.time()).replace(".", "") + ".html")
-        output_map = OutputMap(map_file)
-        output_map.output_map(villages, OUTPUT_MAP_NUM)
-        output_map.add_r774_points(r774_points)
+    # map作成
+    map_file = os.path.join(fp.output_dir, "map_" + str(time.time()).replace(".", "") + ".html")
+    output_map = OutputMap(map_file)
+    output_map.output_map(villages, OUTPUT_MAP_NUM)
+    output_map.add_r774_points(r774_points)
 
     # 結果
     result = Result(villages, s, map_file)

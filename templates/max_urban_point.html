@@ -150,10 +150,8 @@
 {% if result %}
     <h2 id="result">探索結果</h2>
     <br>
-    <a href="{{ result.get_mesh_map_get_url() }}" target="_blank">地点分布図</a><br>
     <font size="-1">
         ※上位{{ result.output_map_num }}件まで
-        <!-- ※都道府県単位の探索時のみ人口分布を表示 -->
     </font>
     <br><br>
     <table class="table table-responsive">
@@ -177,7 +175,6 @@
                 <td>{{ p.district }}</td>
                 <td>
                     <a href="{{ p.get_google_map_url() }}" target="_blank">Googleマップ</a>
-                    <a href="{{ p.get_mesh_map_get_url(result.map_file) }}" target="_blank">地点分布図</a>
                 </td>
                 <td>{{ p.urban_point_round }}</td>
 

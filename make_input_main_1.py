@@ -25,10 +25,6 @@ def main():
     print("境界データをshpからポイントのjsonに変換")
     sf.shp_dir_to_json_dir(fp.raw_mesh_shp_dir, fp.raw_mesh_json_dir)
 
-    # foliumによる地図表示のため
-    print("境界データをshpからポリゴンのままjsonに変換")
-    sf.shp_dir_to_json_polygon_dir(fp.raw_mesh_shp_dir, fp.raw_mesh_json_polygon_dir)
-
     print("小地域データをshpからjsonに変換")
     sf.shp_dir_to_json_dir(fp.raw_region_shp_dir(year), fp.raw_region_json_dir(year))
 
