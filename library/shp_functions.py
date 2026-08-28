@@ -42,29 +42,6 @@ def shp_dir_to_json_dir(shp_dir, json_dir):
             f.write(json_data)
 
 
-def shp_dir_to_json_polygon_dir(shp_dir, json_polygon_dir):
-    """
-    shp_dirのポリゴンデータをポリゴンのままjsonにしてjson_polygon_dirに吐き出す
-    :param shp_dir:
-    :param json_polygon_dir:
-    :return:
-    """
-
-    # jsonディレクトリ内を削除
-    json_files = glob.glob(os.path.join(json_polygon_dir, "*.txt"))
-    for file in json_files:
-        os.remove(file)
-
-    # shpをjsonに変換して吐く
-    files = glob.glob(os.path.join(shp_dir, "*.shp"))
-    for file in tqdm(files):
-        json_data = gpd.read_file(file).to_json()
-        json_file = os.path.basename(file)
-        json_file = json_file.replace(".shp", ".txt")
-        with open(os.path.join(json_polygon_dir, json_file), "w", encoding="utf8") as f:
-            f.write(json_data)
-
-
 def convert_polygon_shp_to_point_json(shp_file):
     """
     shpファイルをポイントのjsonデータにして返す

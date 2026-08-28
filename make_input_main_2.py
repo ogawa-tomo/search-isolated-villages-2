@@ -7,7 +7,6 @@ from library.island_checker import IslandChecker
 from tqdm import tqdm
 import settings.file_path as fp
 from library.point_dao import PopPointDAO
-from library.pop_polygon_dao import PopPolygonDAO
 # import library.common_function as cf
 import library.make_input_functions as mif
 from library.point_container import PointContainer

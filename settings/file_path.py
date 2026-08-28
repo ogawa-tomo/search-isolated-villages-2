@@ -9,10 +9,6 @@ raw_mesh_shp_dir = os.path.join("./raw_data", "mesh_shp")
 raw_mesh_json_dir = os.path.join("./input_data", "mesh_json")
 # raw_mesh_json_dir = os.path.join("./input_data", "mesh_json_test")
 
-# 境界jsonデータ（メッシュポリゴン）格納ディレクトリ
-raw_mesh_json_polygon_dir = os.path.join("./input_data", "mesh_json_polygon")
-# raw_mesh_json_polygon_dir = os.path.join("./input_data", "mesh_json_polygon_test")
-
 # 小地域shpデータ格納ディレクトリ
 def raw_region_shp_dir(year):
     return os.path.join("./raw_data", "region_shp", str(year))
@@ -41,27 +37,15 @@ def pop_point_file_for_tokaido_taiketsu(year):
 def pop_point_file_for_maximum_urban_points(year):
     return os.path.join("./input_data", "pop_points_for_maximum_urban_points", str(year), "pop_points_for_maximum_urban_points.csv")
 
-# 人口ポリゴンデータディレクトリ
-def pop_polygon_dir(year):
-    return os.path.join("./input_data", "pop_polygons", str(year))
-
 # 集落データファイル
 def villages_file(year):
     return os.path.join("./input_data", "villages", str(year), "villages.csv")
-
-# メッシュ図格納ディレクトリ
-def mesh_map_dir(year):
-    return os.path.join("./static", "mesh_map", str(year))
 
 # r774生jsonデータファイル
 r774_raw_json_file = os.path.join("./raw_data", "r774_geojson", "r774__________________.geojson")
 
 # r774データファイル
 r774_file = os.path.join("./input_data", "r774_points.csv")
-
-# 都会度極大点地図データ格納ディレクトリ
-def max_urban_points_map_dir(year):
-    return os.path.join("./static", "max_urban_points_map", str(year))
 
 # # 学校生データファイル
 # elementary_schools_shp_dir = os.path.join("./raw_data", "elementary_school_shp")
@@ -143,15 +127,6 @@ def get_faculty_csv_file(faculty_type, year):
     :return:
     """
     return os.path.join("./input_data", faculty_type, str(year), faculty_type + ".csv")
-
-
-def get_faculty_mesh_map_dir(faculty_type, year):
-    """
-    施設の人口メッシュ図格納ディレクトリ
-    :param faculty_type:
-    :return:
-    """
-    return os.path.join("./static", "mesh_map_" + faculty_type, str(year))
 
 
 # 施設修正データファイル

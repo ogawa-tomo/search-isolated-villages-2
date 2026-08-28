@@ -1,10 +1,5 @@
 import folium
 from library.point import Village, FacultyPoint, PopPoint
-import os
-import settings.file_path as fp
-from library.pop_polygon_dao import PopPolygonDAO
-import pandas as pd
-import csv
 
 
 class OutputMap(object):
@@ -12,8 +7,6 @@ class OutputMap(object):
     def __init__(self, path):
 
         self.html_path = path
-        self.geojson_path = path.replace(".html", ".geojson")
-        self.csv_path = path.replace(".html", "csv")
         self.map = None
 
     def output_map(self, points, num, pref=None):
@@ -94,43 +87,6 @@ class OutputMap(object):
         #                        icon=folium.Icon(icon="home", prefix="fa"))
         marker = folium.Marker([p.latitude, p.longitude], popup=popup)
         return marker
-
-    def add_polygons(self, polygons):
-        """
-        ポリゴンのコロプレス図を追加する
-        :param polygons:
-        :return:
-        """
-        # ポリゴンのgeojsonを取得
-        dao = PopPolygonDAO("hoge")  # pathは関係ない
-        geojson_data = dao.get_polygon_geojson_data(polygons)
-        # with open(self.geojson_path, "w", encoding="utf8") as f:
-        #     f.write(geojson_data)
-
-        # ポリゴンのpandasデータフレームを作る
-        with open(self.csv_path, "w", encoding="utf8") as f:
-            writer = csv.writer(f, lineterminator="\n")
-            writer.writerow(["key_code", "population"])
-            for p in polygons:
-                writer.writerow([p.key_code, p.population])
-        polygon_df = pd.read_csv(self.csv_path)
-        os.remove(self.csv_path)
-        polygon_df["key_code"] = polygon_df["key_code"].astype("str")
-
-        # コロプレス図をつくる
-        folium.Choropleth(
-            geo_data=geojson_data,
-            name="choropleth",
-            data=polygon_df,
-            columns=["key_code", "population"],
-            key_on="feature.properties.KEY_CODE",
-            fill_color="OrRd",
-            threshold_scale=[0, 25, 50, 75, 100, 125, 150, 10000],
-            fill_opacity=0.7,
-            line_opacity=0.2,
-        ).add_to(self.map)
-
-        self.map.save(self.html_path)
 
     def add_r774_points(self, r774_points):
         """

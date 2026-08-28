@@ -1,6 +1,5 @@
 from settings.regions import *
 from settings.constants import *
-import library.common_function as cf
 
 class Setting(object):
 
@@ -181,26 +180,6 @@ class Result(object):
         self.num = OUTPUT_HTML_NUM
         self.map_file = map_file
         self.output_map_num = OUTPUT_MAP_NUM
-
-        # 都道府県判定（メッシュ地図を表示するかの判断のため）
-        if RegionSetting.is_pref(setting.region):
-            self.is_pref = True
-        else:
-            self.is_pref = False
-
-    def get_mesh_map_get_url(self):
-
-        # 地図の中心点
-        lat_list = []
-        lon_list = []
-        for v in self.objects:
-            lat_list.append(v.latitude)
-            lon_list.append(v.longitude)
-        lat = (min(lat_list) + max(lat_list)) / 2
-        lon = (min(lon_list) + max(lon_list)) / 2
-        # url = "/mesh_map?lat=" + str(lat) + "&lon=" + str(lon) + "&zoom=" + "10&map_file=" + self.map_file
-        url = cf.get_mesh_map_get_url(lat, lon, ZOOM_DEFAULT, self.map_file)
-        return url
 
 
 class RegionSetting(object):

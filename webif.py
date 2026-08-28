@@ -8,7 +8,6 @@ import search_max_urban_points_main
 import uranai_main
 import uranai_faculty_main
 from settings.constants import *
-from library import common_function as cf
 import settings.file_path as fp
 import tokaido_taiketsu_main
 import json
@@ -134,27 +133,6 @@ def api_fortune_faculty_result(faculty):
     result = uranai_faculty_main.main(faculty)
     return json.dumps(result.to_dict(), ensure_ascii=False)
     
-
-@app.route("/mesh_map")
-def get_mesh_map():
-    """
-    メッシュマップの中心とズームを編集して返す
-    :return:
-    """
-    lat = request.args.get("lat")
-    lon = request.args.get("lon")
-    zoom = request.args.get("zoom")
-    map_file = request.args.get("map_file")
-
-    # マップファイルの中心を編集
-    new_map_file = os.path.join(fp.output_dir, "map_" + str(time.time()).replace(".", "") + ".html")
-    print(new_map_file)
-    cf.create_modified_map(lat, lon, zoom, map_file, new_map_file)
-    # new_map_file = new_map_file.replace("\\", "/")  # バックスラッシュをスラッシュに置換
-    q = int(os.stat(new_map_file).st_mtime)  # キャッシュをクリアして再読み込みするためのパラメータ
-
-    return redirect(new_map_file + "?q=" + str(q))
-
 
 @app.route("/uranai")
 def uranai():

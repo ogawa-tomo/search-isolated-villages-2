@@ -3,10 +3,10 @@ from library.r774_point_dao import R774PointDAO
 import settings.file_path as fp
 from settings.constants import *
 from library.island_checker import IslandChecker
-from library.setting import RegionSetting, Result
+from library.setting import Result
 from library.output_map import OutputMap
+import os
 import time
-import library.common_function as cf
 
 
 def main(faculty_setting):
@@ -21,24 +21,17 @@ def main(faculty_setting):
     # faculties = extract_faculties(faculty_points, faculty_setting)
     faculties = faculty_setting.extract_objects(faculty_points)
 
-    # マップ出力
-    if RegionSetting.is_pref(faculty_setting.region):
-        # 都道府県の場合は、既に出力してある都道府県別のhtmlファイル（人口分布つき）
-        map_file = os.path.join(fp.get_faculty_mesh_map_dir(faculty_setting.faculty, faculty_setting.year), faculty_setting.region + ".html")
-    else:
-        # 都道府県でない場合は、その場でmapを作る（人口分布なし）
+    # r774データを読み込み、条件に従って抽出
+    r774_dao = R774PointDAO(fp.r774_file)
+    r774_points = r774_dao.read_r774_point_data()
+    # r774_points = extract_r774_points(r774_points, faculty_setting)
+    r774_points = faculty_setting.extract_r774_points(r774_points)
 
-        # r774データを読み込み、条件に従って抽出
-        r774_dao = R774PointDAO(fp.r774_file)
-        r774_points = r774_dao.read_r774_point_data()
-        # r774_points = extract_r774_points(r774_points, faculty_setting)
-        r774_points = faculty_setting.extract_r774_points(r774_points)
-
-        # map作成
-        map_file = os.path.join(fp.output_dir, "map_" + str(time.time()).replace(".", "") + ".html")
-        output_map = OutputMap(map_file)
-        output_map.output_map(faculties, OUTPUT_MAP_NUM)
-        output_map.add_r774_points(r774_points)
+    # map作成
+    map_file = os.path.join(fp.output_dir, "map_" + str(time.time()).replace(".", "") + ".html")
+    output_map = OutputMap(map_file)
+    output_map.output_map(faculties, OUTPUT_MAP_NUM)
+    output_map.add_r774_points(r774_points)
 
     # 結果
     # result = Result(faculties, faculty_setting, OUTPUT_HTML_NUM, map_file)
